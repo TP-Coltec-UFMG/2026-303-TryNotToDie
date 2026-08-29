@@ -19,6 +19,35 @@ run/main_scene="res://cenas/menu.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Configuracoes="*res://autoload/configuracoes.gd"
+Fases="*res://autoload/fases.gd"
+Progresso="*res://autoload/progresso.gd"
+
+[gui]
+
+theme/custom_font="uid://x15356k2nef"
+
+[input]
+
+Jump={
+"deadzone": 0.2,
+"events": []
+}
+Right={
+"deadzone": 0.2,
+"events": []
+}
+Left={
+"deadzone": 0.2,
+"events": []
+}
+Down={
+"deadzone": 0.2,
+"events": []
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

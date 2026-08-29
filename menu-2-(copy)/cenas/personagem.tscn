@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://c0c77bosdaf3h"]
+
+[ext_resource type="Texture2D" uid="uid://bn61etk8d4vt3" path="res://sprites/isac_spreadsheet.png" id="1_isac"]
+[ext_resource type="Script" uid="uid://cgkjonmlrw48s" path="res://scripts/personagem_jogo.gd" id="2_pers"]
+[ext_resource type="Script" uid="uid://b1dogoia6n3su" path="res://scripts/camera_jogo.gd" id="3_cam"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lenm3"]
+atlas = ExtResource("1_isac")
+region = Rect2(37, 18, 27, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo5gj"]
+atlas = ExtResource("1_isac")
+region = Rect2(64, 18, 27, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j42lt"]
+atlas = ExtResource("1_isac")
+region = Rect2(91, 18, 27, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7pla"]
+atlas = ExtResource("1_isac")
+region = Rect2(118, 18, 27, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_661cc"]
+atlas = ExtResource("1_isac")
+region = Rect2(145, 18, 27, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t320n"]
+atlas = ExtResource("1_isac")
+region = Rect2(172, 18, 27, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b071r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lenm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo5gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j42lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7pla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_661cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t320n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pers0"]
+size = Vector2(41, 99)
+
+[node name="PersonagemPrincipal" type="CharacterBody2D"]
+script = ExtResource("2_pers")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 4096
+texture_filter = 1
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_b071r")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -2.5)
+shape = SubResource("RectangleShape2D_pers0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -90)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = ExtResource("3_cam")

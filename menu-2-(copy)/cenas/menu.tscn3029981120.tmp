@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://btbdwwvi2f82j"]
+[gd_scene load_steps=78 format=3 uid="uid://btbdwwvi2f82j"]
 
 [ext_resource type="Texture2D" uid="uid://q03pla352row" path="res://sprites/pixilart-sprite (1).png" id="1_g1dcb"]
 [ext_resource type="Texture2D" uid="uid://cjjeuc1ldlpes" path="res://sprites/panela_normal.png" id="2_62rvv"]
@@ -10,12 +10,14 @@
 [ext_resource type="Script" uid="uid://cuel662akpeoc" path="res://scripts/botao_sair.gd" id="10_5ov2j"]
 [ext_resource type="Script" uid="uid://pgdfxckl15w5" path="res://scripts/camera_menu.gd" id="11_nivcs"]
 [ext_resource type="Texture2D" uid="uid://b8c63t8n7rmkq" path="res://sprites/background_1.png" id="12_0kbhh"]
-[ext_resource type="Script" uid="uid://g6h4a47j7dsh" path="res://scripts/botao_toggle.gd" id="12_dxv5o"]
+[ext_resource type="Script" uid="uid://ciqxi3f1sfrvf" path="res://cenas/box_bind_dir.gd" id="12_ayrqh"]
+[ext_resource type="Script" uid="uid://dld8j52ni1kel" path="res://scripts/box_bind_esq.gd" id="12_dxv5o"]
+[ext_resource type="Script" uid="uid://b0u0ndfrrn7qq" path="res://scripts/botao_fullscreen.gd" id="12_g1dcb"]
+[ext_resource type="Script" uid="uid://dhouimqjav5aw" path="res://scripts/box_bind_pular.gd" id="12_utwjh"]
 [ext_resource type="Script" uid="uid://dacv4fb5v7imw" path="res://scripts/menu_controller.gd" id="13_jirf3"]
+[ext_resource type="Script" uid="uid://bpqmo6qdd6grc" path="res://scripts/botao_static.gd" id="14_0d0kq"]
 [ext_resource type="Script" uid="uid://kgisaggyli0n" path="res://scripts/tamanho_fonte_slider.gd" id="15_2ed3s"]
-[ext_resource type="Script" uid="uid://51h54d4r0veh" path="res://scripts/bind_row.gd" id="15_g1dcb"]
 [ext_resource type="Script" uid="uid://bsn3k0lj5r3mx" path="res://scripts/botao_retornar.gd" id="16_kg0qb"]
-[ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="17_nuv01"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ouk20"]
 atlas = ExtResource("1_g1dcb")
@@ -392,34 +394,28 @@ animations = [{
 
 [node name="Menu" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-grow_horizontal = 2
 grow_vertical = 2
 
-[node name="pers_menu" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("sprite", "camera_menu")]
+[node name="pers_menu" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("sprite", "camera_menu", "game_configs")]
 texture_filter = 1
 position = Vector2(578, 450.99994)
 scale = Vector2(2.9032378, 2.6833587)
 sprite_frames = SubResource("SpriteFrames_g7jxm")
 animation = &"piscar_olho_panela"
+autoplay = "piscar_olho_panela"
 script = ExtResource("5_we1rt")
 sprite = NodePath(".")
 camera_menu = NodePath("../Camera_Menu")
+game_configs = NodePath("../ConfigManager")
 
 [node name="Container_Botoes_Menu" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -157.0
-offset_top = -119.0
-offset_right = 157.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 0
+offset_left = 427.0
+offset_top = 499.0
+offset_right = 741.0
+offset_bottom = 618.0
 focus_mode = 2
 theme_override_constants/separation = 14
 
@@ -466,30 +462,8 @@ scale = Vector2(12.397057, 12.776315)
 texture = ExtResource("12_0kbhh")
 metadata/_edit_lock_ = true
 
-[node name="Nuvens" type="Node2D" parent="."]
-z_index = -5
-script = ExtResource("17_nuv01")
-escala_min = 2.5
-escala_max = 5.0
-faixa_y = Vector2(40, 380)
-
-[node name="ConfigManager" type="Node" parent="." node_paths=PackedStringArray("container_alpha", "container_beta", "personagem_menu", "pelicula")]
+[node name="ConfigManager" type="Node" parent="."]
 script = ExtResource("13_jirf3")
-container_alpha = NodePath("../Container_Botoes_Menu")
-container_beta = NodePath("../Container_Config")
-personagem_menu = NodePath("../pers_menu")
-pelicula = NodePath("../Pelicula")
-
-[node name="Pelicula" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.45)
 
 [node name="Container_Config" type="VBoxContainer" parent="."]
 visible = false
@@ -509,14 +483,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_g1dcb")
 text = "FULLSCREEN"
-script = ExtResource("12_dxv5o")
-tipo = 1
+script = ExtResource("12_g1dcb")
 
 [node name="BoxBindPular" type="HBoxContainer" parent="Container_Config"]
 layout_mode = 2
 size_flags_horizontal = 4
-script = ExtResource("15_g1dcb")
-nome_acao = "Jump"
+script = ExtResource("12_utwjh")
 
 [node name="LabelAcao" type="Label" parent="Container_Config/BoxBindPular"]
 layout_mode = 2
@@ -528,8 +500,7 @@ size_flags_horizontal = 4
 [node name="BoxBindDir" type="HBoxContainer" parent="Container_Config"]
 layout_mode = 2
 size_flags_horizontal = 4
-script = ExtResource("15_g1dcb")
-nome_acao = "Right"
+script = ExtResource("12_ayrqh")
 
 [node name="LabelAcao" type="Label" parent="Container_Config/BoxBindDir"]
 layout_mode = 2
@@ -540,8 +511,7 @@ layout_mode = 2
 [node name="BoxBindEsq" type="HBoxContainer" parent="Container_Config"]
 layout_mode = 2
 size_flags_horizontal = 4
-script = ExtResource("15_g1dcb")
-nome_acao = "Left"
+script = ExtResource("12_dxv5o")
 
 [node name="LabelAcao" type="Label" parent="Container_Config/BoxBindEsq"]
 layout_mode = 2
@@ -557,7 +527,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_iqepy")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ecwwl")
 text = "REMOVE ANIMATIONS"
-script = ExtResource("12_dxv5o")
+script = ExtResource("14_0d0kq")
 
 [node name="BoxFonte" type="VBoxContainer" parent="Container_Config"]
 layout_mode = 2
@@ -593,5 +563,7 @@ script = ExtResource("16_kg0qb")
 [connection signal="pressed" from="Container_Botoes_Menu/Botao_Jogar" to="Container_Botoes_Menu/Botao_Jogar" method="_on_pressed"]
 [connection signal="pressed" from="Container_Botoes_Menu/Botao_Configuracoes" to="ConfigManager" method="_on_botao_configuracoes_pressed"]
 [connection signal="pressed" from="Container_Botoes_Menu/Botao_Sair" to="Container_Botoes_Menu/Botao_Sair" method="_on_pressed"]
-[connection signal="value_changed" from="Container_Config/BoxFonte/SliderFonte" to="ConfigManager" method="_on_slider_fonte_value_changed"]
+[connection signal="pressed" from="Container_Config/Botao_Static" to="ConfigManager" method="_on_botao_static_pressed"]
+[connection signal="pressed" from="Container_Config/Botao_Static" to="Container_Config/Botao_Static" method="_on_pressed"]
+[connection signal="value_changed" from="Container_Config/BoxFonte/SliderFonte" to="ConfigManager" method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="Container_Config/Botao_Retornar" to="ConfigManager" method="_on_botao_retornar_pressed"]
