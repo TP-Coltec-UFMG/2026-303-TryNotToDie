@@ -11,9 +11,9 @@ class Comodo:
 	var altura_base: float;
 
 
-@export var amplitude_graus: float = 0.4;
+@export var amplitude_graus: float = 0.8;
 @export var periodo_segundos: float = 30.0;
-@export_range(0.0, 3.0) var ganho_por_altura: float = 0.0;
+@export_range(0.0, 3.0) var ganho_por_altura: float = 0.3;
 @export var distorcao_maxima: Vector2 = Vector2(0.035, 0.045);
 @export_range(1.0, 5.0) var distorcao_teto: float = 2.0;
 @export var periodo_tremor: float = 0.28;

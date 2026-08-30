@@ -7,6 +7,19 @@ extends CharacterBody2D
 @export var altura_para_pular: float = 40.0;
 @export var mostrar_marcador: bool = true;
 
+@export_group("Modo automatico")
+@export var modo_automatico: bool = false;
+@export var velocidade_auto: float = 260.0;
+@export var alcance_frente: float = 78.0;
+@export var alcance_buraco: float = 150.0;
+@export var avanco_do_raio: float = 62.0;
+@export var espera_entre_pulos: float = 0.22;
+
+@export_group("Animacao")
+@export var anim_parado: String = "parado";
+@export var anim_andando: String = "andando";
+@export var escala_animacao: float = 2.4;
+
 @onready var sprite: AnimatedSprite2D = $Sprite;
 
 signal morreu;
@@ -15,10 +28,85 @@ var _destino_x: float = 0.0;
 var _tem_destino: bool = false;
 var _ao_chegar: Callable = Callable();
 var _morrendo: bool = false;
+var _andando: bool = false;
+var _raio_frente: RayCast2D = null;
+var _raio_buraco: RayCast2D = null;
+var _descanso_pulo: float = 0.0;
 
 
 func _ready() -> void:
 	add_to_group("jogador");
+	Configuracoes.config_alterada.connect(_ao_mudar_config);
+	_aplicar_animacao(true);
+
+	if modo_automatico:
+		_montar_raios();
+
+
+func _montar_raios() -> void:
+	_raio_frente = RayCast2D.new();
+	_raio_frente.position = Vector2(0.0, -18.0);
+	_raio_frente.target_position = Vector2(alcance_frente, 0.0);
+	_raio_frente.collide_with_areas = false;
+	add_child(_raio_frente);
+
+	_raio_buraco = RayCast2D.new();
+	_raio_buraco.position = Vector2(avanco_do_raio, 0.0);
+	_raio_buraco.target_position = Vector2(0.0, alcance_buraco);
+	_raio_buraco.collide_with_areas = false;
+	add_child(_raio_buraco);
+
+
+func _correr_sozinho(delta: float) -> float:
+	_descanso_pulo = maxf(0.0, _descanso_pulo - delta);
+
+	if not is_on_floor() or _descanso_pulo > 0.0:
+		return 1.0;
+
+	var barrado := _raio_frente != null and _raio_frente.is_colliding();
+	var buraco := _raio_buraco != null and not _raio_buraco.is_colliding();
+
+	if barrado or buraco or is_on_wall():
+		velocity.y = jump_force;
+		_descanso_pulo = espera_entre_pulos;
+
+	return 1.0;
+
+
+func _ao_mudar_config(chave: String, _valor: bool) -> void:
+	if chave == Configuracoes.REMOVER_ANIMACAO:
+		_aplicar_animacao(true);
+
+
+func _animar(andando: bool) -> void:
+	if andando == _andando:
+		return;
+	_andando = andando;
+	_aplicar_animacao(false);
+
+
+func _aplicar_animacao(forcar: bool) -> void:
+	if sprite == null or sprite.sprite_frames == null or _morrendo:
+		return;
+
+	var alvo := anim_parado if (_sem_animacao() or not _andando) else anim_andando;
+	if not sprite.sprite_frames.has_animation(alvo):
+		return;
+
+	sprite.speed_scale = maxf(0.05, escala_animacao);
+
+	if forcar or sprite.animation != alvo:
+		sprite.animation = alvo;
+		sprite.frame = 0;
+
+	if _sem_animacao():
+		sprite.stop();
+	elif not sprite.is_playing():
+		sprite.play();
+
+
+func _sem_animacao() -> bool:
+	return Configuracoes.config_ativa(Configuracoes.REMOVER_ANIMACAO);
 
 
 func esta_morrendo() -> bool:
@@ -64,7 +152,7 @@ func morrer() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _morrendo:
+	if _morrendo or modo_automatico:
 		return;
 	if event is InputEventMouseButton \
 			and event.pressed \
@@ -100,9 +188,14 @@ func ir_ate(destino_global_x: float, ao_chegar: Callable = Callable()) -> void:
 		_chegou();
 
 
-func cancelar_destino() -> void:
+func _limpar_destino() -> void:
 	_tem_destino = false;
 	_ao_chegar = Callable();
+
+
+func cancelar_destino() -> void:
+	_limpar_destino();
+	_animar(false);
 
 
 func _chegou() -> void:
@@ -117,13 +210,23 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta;
 
+	var direcao := 0.0;
+
+	if modo_automatico:
+		direcao = _correr_sozinho(delta);
+		velocity.x = direcao * velocidade_auto;
+		sprite.flip_h = false;
+		_animar(true);
+		move_and_slide();
+		return;
+
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = jump_force;
 
-	var direcao := Input.get_axis("Left", "Right");
+	direcao = Input.get_axis("Left", "Right");
 
 	if direcao != 0.0:
-		cancelar_destino();
+		_limpar_destino();
 	elif _tem_destino:
 		var restante := _destino_x - global_position.x;
 		if absf(restante) <= tolerancia_destino:
@@ -136,6 +239,8 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = direcao < 0.0;
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, speed);
+
+	_animar(direcao != 0.0);
 
 	move_and_slide();
 

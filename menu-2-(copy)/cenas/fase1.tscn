@@ -1,266 +1,523 @@
-[gd_scene load_steps=22 format=3 uid="uid://blpotubl7kya2"]
+[gd_scene load_steps=29 format=3 uid="uid://dhkc5d1m1h8ah"]
 
-[ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="3_32upe"]
-[ext_resource type="Texture2D" uid="uid://bnptog8ilxd68" path="res://sprites/pixelart2-removebg-preview.png" id="4_i8r7k"]
-[ext_resource type="Texture2D" uid="uid://b8c63t8n7rmkq" path="res://sprites/background_1.png" id="10_myhk0"]
-[ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="11_cqpis"]
-[ext_resource type="Script" uid="uid://cbysfuj5q44sl" path="res://scripts/casa_balanco.gd" id="12_casa0"]
-[ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="13_porta"]
-[ext_resource type="Script" uid="uid://dtyokuw3yklts" path="res://scripts/fase.gd" id="14_fase0"]
-[ext_resource type="Script" uid="uid://bxa2nvmqga03g" path="res://scripts/evento_zoom.gd" id="15_zoom0"]
-[ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="16_pers"]
-[ext_resource type="Script" uid="uid://d1nssb8iun54s" path="res://scripts/geladeira.gd" id="17_gela"]
-[ext_resource type="Script" uid="uid://d22m6vhuwjqgd" path="res://scripts/desabamento.gd" id="18_desab"]
-[ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="20_narr"]
+[ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_tex"]
+[ext_resource type="Texture2D" uid="uid://bnptog8ilxd68" path="res://sprites/pixelart2-removebg-preview.png" id="2_grama"]
+[ext_resource type="Texture2D" uid="uid://b3fwos7if8sao" path="res://sprites/images.png" id="3_ceu"]
+[ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="4_nuvens"]
+[ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="5_pers"]
+[ext_resource type="Script" path="res://scripts/fase_corrida.gd" id="6_fase"]
+[ext_resource type="Script" path="res://scripts/planta.gd" id="7_planta"]
+[ext_resource type="Script" path="res://scripts/checkpoint.gd" id="8_check"]
+[ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="9_item"]
+[ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="10_porta"]
+[ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="11_narr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_chao0"]
-size = Vector2(3600, 400)
+[sub_resource type="RectangleShape2D" id="Shape_seg0"]
+size = Vector2(3500, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1qh0"]
-size = Vector2(129, 125)
+[sub_resource type="RectangleShape2D" id="Shape_seg1"]
+size = Vector2(1450, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gelarea"]
-size = Vector2(260, 220)
+[sub_resource type="RectangleShape2D" id="Shape_seg2"]
+size = Vector2(1740, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0mfe"]
-size = Vector2(527, 315)
+[sub_resource type="RectangleShape2D" id="Shape_seg3"]
+size = Vector2(1050, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5qqy"]
-size = Vector2(610, 314)
+[sub_resource type="RectangleShape2D" id="Shape_seg4"]
+size = Vector2(830, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_32upe"]
-size = Vector2(565, 345)
+[sub_resource type="RectangleShape2D" id="Shape_seg5"]
+size = Vector2(1450, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_porta0"]
-size = Vector2(110, 120)
+[sub_resource type="RectangleShape2D" id="Shape_pedra0"]
+size = Vector2(60, 90)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_zoom0"]
-size = Vector2(100, 500)
+[sub_resource type="RectangleShape2D" id="Shape_pedra1"]
+size = Vector2(60, 110)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgalpao"]
-size = Vector2(120, 130)
+[sub_resource type="RectangleShape2D" id="Shape_pedra2"]
+size = Vector2(60, 90)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra3"]
+size = Vector2(60, 100)
+
+[sub_resource type="RectangleShape2D" id="Shape_vinha"]
+size = Vector2(46, 300)
+
+[sub_resource type="RectangleShape2D" id="Shape_mutante"]
+size = Vector2(78, 78)
+
+[sub_resource type="RectangleShape2D" id="Shape_check"]
+size = Vector2(60, 460)
+
+[sub_resource type="RectangleShape2D" id="Shape_item"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_saida"]
+size = Vector2(60, 480)
 
 [node name="fase1" type="Node2D" node_paths=PackedStringArray("jogador")]
-script = ExtResource("14_fase0")
+script = ExtResource("6_fase")
 jogador = NodePath("PersonagemPrincipal")
-entrada_padrao = "VindoDeFora"
+entrada_padrao = "VindoDoTutorial"
+itens_garantidos = Array[String](["facao"])
 
 [node name="Fundo" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="Ceu" type="Parallax2D" parent="Fundo"]
-visible = false
-scroll_scale = Vector2(0.1, 0.1)
-repeat_size = Vector2(1224, 0)
-repeat_times = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="Fundo/Ceu"]
-texture_filter = 1
-scale = Vector2(9, 9)
-texture = ExtResource("10_myhk0")
-centered = false
+[node name="Ceu" type="TextureRect" parent="Fundo"]
+z_index = -4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ceu")
+expand_mode = 1
 
 [node name="Nuvens" type="Node2D" parent="Fundo"]
-script = ExtResource("11_cqpis")
+script = ExtResource("4_nuvens")
 faixa_y = Vector2(30, 300)
 
-[node name="Chao" type="StaticBody2D" parent="."]
-z_index = 2
-position = Vector2(576, 660)
+[node name="Chao" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Chao"]
+[node name="Seg0" type="StaticBody2D" parent="Chao"]
+position = Vector2(850, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg0"]
 z_index = 20
-texture_filter = 3
+texture_filter = 4
 texture_repeat = 2
-position = Vector2(-256.00003, -63)
-scale = Vector2(1.573889, 1.0624999)
-texture = ExtResource("4_i8r7k")
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
 region_enabled = true
-region_rect = Rect2(0, 0, 3600, 400)
+region_rect = Rect2(0, 0, 3500, 400)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao"]
-shape = SubResource("RectangleShape2D_chao0")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg0"]
+shape = SubResource("Shape_seg0")
 
-[node name="Inicio" type="Marker2D" parent="."]
-position = Vector2(-175, 296)
+[node name="Seg1" type="StaticBody2D" parent="Chao"]
+position = Vector2(3475, 660)
 
-[node name="VoltandoDoGalpao" type="Marker2D" parent="."]
-position = Vector2(1980, 380)
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg1"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 1450, 400)
 
-[node name="VoltandoDaCasa" type="Marker2D" parent="."]
-position = Vector2(1146, 380)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg1"]
+shape = SubResource("Shape_seg1")
 
-[node name="PersonagemPrincipal" parent="." instance=ExtResource("16_pers")]
+[node name="Seg2" type="StaticBody2D" parent="Chao"]
+position = Vector2(5230, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg2"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 1740, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg2"]
+shape = SubResource("Shape_seg2")
+
+[node name="Seg3" type="StaticBody2D" parent="Chao"]
+position = Vector2(6775, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg3"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 1050, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg3"]
+shape = SubResource("Shape_seg3")
+
+[node name="Seg4" type="StaticBody2D" parent="Chao"]
+position = Vector2(7885, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg4"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 830, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg4"]
+shape = SubResource("Shape_seg4")
+
+[node name="Seg5" type="StaticBody2D" parent="Chao"]
+position = Vector2(9175, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg5"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 1450, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg5"]
+shape = SubResource("Shape_seg5")
+
+[node name="Pedras" type="Node2D" parent="."]
+
+[node name="Pedra0" type="StaticBody2D" parent="Pedras"]
+position = Vector2(1500, 415)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra0"]
+modulate = Color(0.45, 0.42, 0.38, 1)
+texture_filter = 1
+scale = Vector2(0.46875, 0.703125)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra0"]
+shape = SubResource("Shape_pedra0")
+
+[node name="Pedra1" type="StaticBody2D" parent="Pedras"]
+position = Vector2(5000, 405)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra1"]
+modulate = Color(0.45, 0.42, 0.38, 1)
+texture_filter = 1
+scale = Vector2(0.46875, 0.859375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra1"]
+shape = SubResource("Shape_pedra1")
+
+[node name="Pedra2" type="StaticBody2D" parent="Pedras"]
+position = Vector2(7000, 415)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra2"]
+modulate = Color(0.45, 0.42, 0.38, 1)
+texture_filter = 1
+scale = Vector2(0.46875, 0.703125)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra2"]
+shape = SubResource("Shape_pedra2")
+
+[node name="Pedra3" type="StaticBody2D" parent="Pedras"]
+position = Vector2(8900, 410)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra3"]
+modulate = Color(0.45, 0.42, 0.38, 1)
+texture_filter = 1
+scale = Vector2(0.46875, 0.78125)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra3"]
+shape = SubResource("Shape_pedra3")
+
+[node name="Plantas" type="Node2D" parent="."]
+
+[node name="Vinha0" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(700, 310)
+script = ExtResource("7_planta")
+sprite_planta = NodePath("Sprite2D")
+resistencia = 110.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Vinha0"]
+modulate = Color(0.22, 0.55, 0.2, 1)
+texture_filter = 1
+scale = Vector2(0.359375, 2.34375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Vinha0"]
+shape = SubResource("Shape_vinha")
+
+[node name="Vinha1" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(1150, 310)
+script = ExtResource("7_planta")
+sprite_planta = NodePath("Sprite2D")
+resistencia = 110.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Vinha1"]
+modulate = Color(0.22, 0.55, 0.2, 1)
+texture_filter = 1
+scale = Vector2(0.359375, 2.34375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Vinha1"]
+shape = SubResource("Shape_vinha")
+
+[node name="Vinha2" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(1950, 310)
+script = ExtResource("7_planta")
+sprite_planta = NodePath("Sprite2D")
+resistencia = 110.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Vinha2"]
+modulate = Color(0.22, 0.55, 0.2, 1)
+texture_filter = 1
+scale = Vector2(0.359375, 2.34375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Vinha2"]
+shape = SubResource("Shape_vinha")
+
+[node name="Vinha3" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(2350, 310)
+script = ExtResource("7_planta")
+sprite_planta = NodePath("Sprite2D")
+resistencia = 110.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Vinha3"]
+modulate = Color(0.22, 0.55, 0.2, 1)
+texture_filter = 1
+scale = Vector2(0.359375, 2.34375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Vinha3"]
+shape = SubResource("Shape_vinha")
+
+[node name="Mutante4" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(3200, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+velocidade = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Mutante4"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+scale = Vector2(0.609375, 0.609375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante4"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante5" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(3700, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+velocidade = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Mutante5"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+scale = Vector2(0.609375, 0.609375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante5"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante6" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(4550, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+velocidade = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Mutante6"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+scale = Vector2(0.609375, 0.609375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante6"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante7" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(5350, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+velocidade = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Mutante7"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+scale = Vector2(0.609375, 0.609375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante7"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante8" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(5800, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+velocidade = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Mutante8"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+scale = Vector2(0.609375, 0.609375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante8"]
+shape = SubResource("Shape_mutante")
+
+[node name="Vinha9" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(6500, 310)
+script = ExtResource("7_planta")
+sprite_planta = NodePath("Sprite2D")
+resistencia = 110.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Vinha9"]
+modulate = Color(0.22, 0.55, 0.2, 1)
+texture_filter = 1
+scale = Vector2(0.359375, 2.34375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Vinha9"]
+shape = SubResource("Shape_vinha")
+
+[node name="Mutante10" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(6800, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+velocidade = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Mutante10"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+scale = Vector2(0.609375, 0.609375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante10"]
+shape = SubResource("Shape_mutante")
+
+[node name="Vinha11" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(7650, 310)
+script = ExtResource("7_planta")
+sprite_planta = NodePath("Sprite2D")
+resistencia = 110.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Vinha11"]
+modulate = Color(0.22, 0.55, 0.2, 1)
+texture_filter = 1
+scale = Vector2(0.359375, 2.34375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Vinha11"]
+shape = SubResource("Shape_vinha")
+
+[node name="Mutante12" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(7950, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+velocidade = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Mutante12"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+scale = Vector2(0.609375, 0.609375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante12"]
+shape = SubResource("Shape_mutante")
+
+[node name="Vinha13" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(8600, 310)
+script = ExtResource("7_planta")
+sprite_planta = NodePath("Sprite2D")
+resistencia = 110.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Vinha13"]
+modulate = Color(0.22, 0.55, 0.2, 1)
+texture_filter = 1
+scale = Vector2(0.359375, 2.34375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Vinha13"]
+shape = SubResource("Shape_vinha")
+
+[node name="Mutante14" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(9150, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+velocidade = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Plantas/Mutante14"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+scale = Vector2(0.609375, 0.609375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante14"]
+shape = SubResource("Shape_mutante")
+
+[node name="VindoDoTutorial" type="Marker2D" parent="."]
+position = Vector2(-700, 380)
+
+[node name="PersonagemPrincipal" parent="." instance=ExtResource("5_pers")]
 z_index = 999
-position = Vector2(-174, 384)
+position = Vector2(-700, 380)
+modo_automatico = true
+velocidade_auto = 340.0
 
-[node name="Geladeira" type="StaticBody2D" parent="." node_paths=PackedStringArray("alvo_arremesso", "desabamento")]
-position = Vector2(426, 442)
-rotation = -0.26098478
-scale = Vector2(1, 1.2421942)
-input_pickable = true
-script = ExtResource("17_gela")
-alvo_arremesso = NodePath("../Casa/PilarFragil")
-desabamento = NodePath("../Desabamento")
-metadata/_edit_group_ = true
+[node name="ProtetorSolar" type="Area2D" parent="." ]
+position = Vector2(9550, 380)
+script = ExtResource("9_item")
+id_item = "protetor_solar"
 
-[node name="SpriteGeladeira" type="Sprite2D" parent="Geladeira"]
-texture = ExtResource("3_32upe")
-
-[node name="HitboxGeladeira" type="CollisionShape2D" parent="Geladeira"]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_r1qh0")
-
-[node name="AreaInteracao" type="Area2D" parent="Geladeira"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geladeira/AreaInteracao"]
-shape = SubResource("RectangleShape2D_gelarea")
-
-[node name="Casa" type="Node2D" parent="."]
-z_index = -2
-position = Vector2(1056, 143)
-scale = Vector2(1.2, 1.2)
-script = ExtResource("12_casa0")
-metadata/_edit_group_ = true
-
-[node name="C1" type="AnimatableBody2D" parent="Casa"]
-position = Vector2(90.1, 263)
-
-[node name="Sprite" type="Sprite2D" parent="Casa/C1"]
-position = Vector2(0, -156)
-scale = Vector2(4.1390624, 2.4375)
-texture = ExtResource("3_32upe")
-
-[node name="Hitbox" type="CollisionShape2D" parent="Casa/C1"]
-position = Vector2(-2.6, -155.5)
-shape = SubResource("RectangleShape2D_x0mfe")
-disabled = true
-
-[node name="C2" type="AnimatableBody2D" parent="Casa"]
-position = Vector2(341.1, -49)
-
-[node name="Sprite" type="Sprite2D" parent="Casa/C2"]
-position = Vector2(0, -159)
-scale = Vector2(4.7796884, 2.484375)
-texture = ExtResource("3_32upe")
-
-[node name="Hitbox" type="CollisionShape2D" parent="Casa/C2"]
-position = Vector2(-0.1, -158)
-shape = SubResource("RectangleShape2D_l5qqy")
-disabled = true
-
-[node name="C3" type="AnimatableBody2D" parent="Casa"]
-position = Vector2(-75, -370)
-metadata/_edit_group_ = true
-
-[node name="Sprite" type="Sprite2D" parent="Casa/C3"]
-position = Vector2(-65.49999, -171)
-scale = Vector2(4.3515625, 2.7265625)
-texture = ExtResource("3_32upe")
-
-[node name="Hitbox" type="CollisionShape2D" parent="Casa/C3"]
-position = Vector2(-66.5, -175)
-shape = SubResource("RectangleShape2D_32upe")
-disabled = true
-
-[node name="ChaveNoTeto" type="Sprite2D" parent="Casa/C3"]
-modulate = Color(0.95, 0.85, 0.3, 1)
+[node name="Sprite2D" type="Sprite2D" parent="ProtetorSolar"]
+modulate = Color(1, 0.85, 0.35, 1)
 texture_filter = 1
-position = Vector2(0, -378)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_32upe")
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("1_tex")
 
-[node name="PilarFragil" type="Marker2D" parent="Casa"]
-position = Vector2(135, -367)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProtetorSolar"]
+shape = SubResource("Shape_item")
 
-[node name="Desabamento" type="Node2D" parent="." node_paths=PackedStringArray("casa", "pontos_queda", "chave_no_teto")]
-script = ExtResource("18_desab")
-casa = NodePath("../Casa")
-pontos_queda = NodePath("../PontosChave")
-chave_no_teto = NodePath("../Casa/C3/ChaveNoTeto")
-textura_chave = ExtResource("3_32upe")
-forca_tremor = 76.0
+[node name="SaidaFase2" type="Area2D" parent="."]
+position = Vector2(9720, 300)
+script = ExtResource("10_porta")
+cena_destino = "res://cenas/fase2.tscn"
+entrada_destino = "VindoDaFase1"
+entrar_ao_encostar = true
+dica = ""
+requer_item = "protetor_solar"
+abrir_porta = "fase1_concluida"
 
-[node name="PontosChave" type="Node2D" parent="."]
-
-[node name="P1" type="Marker2D" parent="PontosChave"]
-position = Vector2(-60, 431)
-
-[node name="P2" type="Marker2D" parent="PontosChave"]
-position = Vector2(620, 431)
-
-[node name="P3" type="Marker2D" parent="PontosChave"]
-position = Vector2(1250, 431)
-
-[node name="P4" type="Marker2D" parent="PontosChave"]
-position = Vector2(1650, 431)
-
-[node name="P5" type="Marker2D" parent="PontosChave"]
-position = Vector2(1930, 431)
-
-[node name="PortaDaCasa" type="Area2D" parent="."]
-position = Vector2(1146, 400)
-script = ExtResource("13_porta")
-cena_destino = "res://cenas/casa_interior.tscn"
-entrada_destino = "VindoDeFora"
-dica = "S ou clique para ele forcar a porta"
-dica_trancada = "Trancada. S ou clique para ele arrombar"
-trancada = true
-arrombar_com_qte = true
-
-[node name="Sprite2D" type="Sprite2D" parent="PortaDaCasa"]
-modulate = Color(0.45, 0.32, 0.22, 1)
-z_index = -1
-texture_filter = 1
-scale = Vector2(0.86, 0.94)
-texture = ExtResource("3_32upe")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PortaDaCasa"]
-shape = SubResource("RectangleShape2D_porta0")
-
-[node name="GatilhoZoomCasa" type="Area2D" parent="." node_paths=PackedStringArray("alvo", "camera")]
-position = Vector2(620, 380)
-script = ExtResource("15_zoom0")
-alvo = NodePath("../Casa")
-camera = NodePath("../PersonagemPrincipal/Camera2D")
-duracao_afastar = 1.8
-duracao_segurar = 2.2
-duracao_voltar = 1.5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GatilhoZoomCasa"]
-position = Vector2(-180, -51)
-shape = SubResource("RectangleShape2D_zoom0")
-
-[node name="Galpao" type="Node2D" parent="."]
-position = Vector2(2100, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Galpao"]
-z_index = -8
-texture_filter = 1
-position = Vector2(0, 357)
-scale = Vector2(3, 1.6)
-texture = ExtResource("3_32upe")
-
-[node name="PortaGalpao" type="Area2D" parent="Galpao"]
-position = Vector2(0, 395)
-script = ExtResource("13_porta")
-cena_destino = "res://cenas/galpao_interior.tscn"
-entrada_destino = "VindoDeFora"
-dica = "S ou clique para abrir o galpao"
-dica_sem_item = "Trancado. Falta a chave"
-requer_item = "chave_galpao"
-
-[node name="Sprite2D" type="Sprite2D" parent="Galpao/PortaGalpao"]
-modulate = Color(0.4, 0.3, 0.2, 1)
-texture_filter = 1
-scale = Vector2(0.94, 1.02)
-texture = ExtResource("3_32upe")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Galpao/PortaGalpao"]
-z_index = -7
-shape = SubResource("RectangleShape2D_pgalpao")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaFase2"]
+shape = SubResource("Shape_saida")
 
 [node name="Narracao" type="CanvasLayer" parent="."]
-script = ExtResource("20_narr")
-linhas = Array[String](["Voce eh o anjo da guarda que acompanha ele.", "Ele vai tentar morrer hoje. Sem querer, do jeito mais estranho possivel.", "Clique para onde deseja que ele vá. Ele seguirá sem questionar."])
+script = ExtResource("11_narr")
+linhas = Array[String](["Ele nao vai parar de correr. Voce nao consegue segurar ele.", "Segure o botao do mouse e passe por cima das plantas. Corte antes que ele chegue nelas.", "As roxas vem atras dele. Essas nao esperam."])
 id_evento = "intro_fase1"
+segundos_por_linha = 4.5

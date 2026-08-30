@@ -49,6 +49,12 @@ func esquecer_evento(id: String) -> void:
 	_eventos_vistos.erase(id);
 
 
+func marcar_ponto(entrada: String) -> void:
+	if fase_atual != "":
+		_retorno_cena = fase_atual;
+	_retorno_entrada = entrada;
+
+
 func voltar_ao_ponto() -> void:
 	if _retorno_cena.is_empty():
 		proxima_entrada = _retorno_entrada;

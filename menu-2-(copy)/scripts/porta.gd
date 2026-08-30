@@ -39,12 +39,21 @@ func _ready() -> void:
 	body_exited.connect(_ao_sair_corpo);
 	input_event.connect(_ao_clicar);
 
-	if destrancada != "" and Progresso.ligado(destrancada):
-		trancada = false;
+	if destrancada != "":
+		Progresso.flag_mudou.connect(_ao_mudar_flag);
+		if Progresso.ligado(destrancada):
+			trancada = false;
 
 	if not dica.is_empty():
 		_dica = DicaFlutuante.criar(_texto_da_dica(), Vector2(0.0, dica_altura));
 		add_child(_dica);
+
+
+func _ao_mudar_flag(id: String, valor: bool) -> void:
+	if id != destrancada or not valor:
+		return;
+	trancada = false;
+	_atualizar_dica(_jogador != null);
 
 
 func _unhandled_input(event: InputEvent) -> void:

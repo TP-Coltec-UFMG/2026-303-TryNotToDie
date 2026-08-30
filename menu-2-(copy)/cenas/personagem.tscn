@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0c77bosdaf3h"]
+[gd_scene load_steps=13 format=3 uid="uid://c0c77bosdaf3h"]
 
 [ext_resource type="Texture2D" uid="uid://bn61etk8d4vt3" path="res://sprites/isac_spreadsheet.png" id="1_isac"]
 [ext_resource type="Script" uid="uid://cgkjonmlrw48s" path="res://scripts/personagem_jogo.gd" id="2_pers"]
@@ -28,6 +28,10 @@ region = Rect2(145, 18, 27, 48)
 atlas = ExtResource("1_isac")
 region = Rect2(172, 18, 27, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgfoh"]
+atlas = ExtResource("1_isac")
+region = Rect2(0, 19, 33, 46)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_b071r"]
 animations = [{
 "frames": [{
@@ -50,7 +54,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_t320n")
 }],
 "loop": true,
-"name": &"default",
+"name": &"andando",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgfoh")
+}],
+"loop": true,
+"name": &"parado",
 "speed": 5.0
 }]
 
@@ -65,7 +77,8 @@ z_index = 4096
 texture_filter = 1
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_b071r")
-autoplay = "default"
+animation = &"parado"
+autoplay = "parado"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -2.5)

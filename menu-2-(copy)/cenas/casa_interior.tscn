@@ -226,7 +226,7 @@ position = Vector2(-250, 380)
 [node name="PortaSaida" type="Area2D" parent="."]
 position = Vector2(-420, 400)
 script = ExtResource("3_porta")
-cena_destino = "res://cenas/fase1.tscn"
+cena_destino = "res://cenas/tutorial.tscn"
 entrada_destino = "VoltandoDaCasa"
 dica = "S ou clique para sair"
 

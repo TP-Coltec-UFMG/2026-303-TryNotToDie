@@ -7,11 +7,14 @@ signal flag_mudou(id: String, valor: bool);
 const PA := "pa";
 const CHAVE_GALPAO := "chave_galpao";
 const FACAO := "facao";
+const PROTETOR_SOLAR := "protetor_solar";
 
 const PORTA_CASA_ARROMBADA := "porta_casa_arrombada";
 const GELADEIRA_DESENTERRADA := "geladeira_desenterrada";
 const C3_CAIU := "c3_caiu";
 const GALPAO_ABERTO := "galpao_aberto";
+const VINHAS_CORTADAS := "vinhas_cortadas";
+const TUTORIAL_CONCLUIDO := "tutorial_concluido";
 
 var _itens: Dictionary = {};
 var _flags: Dictionary = {};

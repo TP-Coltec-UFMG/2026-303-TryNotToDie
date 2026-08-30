@@ -172,7 +172,7 @@ func _montar_chave() -> ItemColetavel:
 	var item := ItemColetavel.new();
 	item.name = "Chave";
 	item.id_item = id_chave;
-	item.flutuar = false;
+	item.flutuar = true;
 	item.monitoring = false;
 
 	var sprite := Sprite2D.new();
