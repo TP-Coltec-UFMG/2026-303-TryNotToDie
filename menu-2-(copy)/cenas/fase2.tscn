@@ -1,0 +1,395 @@
+[gd_scene load_steps=26 format=3 uid="uid://b2vx423d6q8l1"]
+
+[ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_tex"]
+[ext_resource type="Texture2D" uid="uid://bnptog8ilxd68" path="res://sprites/pixelart2-removebg-preview.png" id="2_grama"]
+[ext_resource type="Texture2D" uid="uid://bvkq8n4alhuy" path="res://sprites/branco.png" id="3_ceu"]
+[ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="4_nuvens"]
+[ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="5_pers"]
+[ext_resource type="Script" path="res://scripts/fase_corrida.gd" id="6_fase"]
+[ext_resource type="Script" path="res://scripts/raio_solar.gd" id="7_raio"]
+[ext_resource type="Script" path="res://scripts/protetor.gd" id="8_prot"]
+[ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="9_item"]
+[ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="10_porta"]
+[ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="11_narr"]
+
+[sub_resource type="RectangleShape2D" id="Shape_seg0"]
+size = Vector2(2250, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg1"]
+size = Vector2(1750, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg2"]
+size = Vector2(1790, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg3"]
+size = Vector2(1740, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg4"]
+size = Vector2(2450, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra0"]
+size = Vector2(60, 90)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra1"]
+size = Vector2(60, 110)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra2"]
+size = Vector2(60, 90)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra3"]
+size = Vector2(60, 100)
+
+[sub_resource type="RectangleShape2D" id="Shape_raio"]
+size = Vector2(48, 700)
+
+[sub_resource type="RectangleShape2D" id="Shape_item"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_saida"]
+size = Vector2(60, 480)
+
+[node name="fase2" type="Node2D" node_paths=PackedStringArray("jogador")]
+script = ExtResource("6_fase")
+jogador = NodePath("PersonagemPrincipal")
+entrada_padrao = "VindoDaFase1"
+itens_garantidos = Array[String](["protetor_solar"])
+
+[node name="Fundo" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Ceu" type="TextureRect" parent="Fundo"]
+z_index = -4096
+modulate = Color(1, 0.66, 0.36, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ceu")
+expand_mode = 1
+
+[node name="Nuvens" type="Node2D" parent="Fundo"]
+script = ExtResource("4_nuvens")
+faixa_y = Vector2(20, 200)
+max_nuvens = 3
+
+[node name="Chao" type="Node2D" parent="."]
+
+[node name="Seg0" type="StaticBody2D" parent="Chao"]
+position = Vector2(225, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg0"]
+modulate = Color(1, 0.93, 0.78, 1)
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 2250, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg0"]
+shape = SubResource("Shape_seg0")
+
+[node name="Seg1" type="StaticBody2D" parent="Chao"]
+position = Vector2(2375, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg1"]
+modulate = Color(1, 0.93, 0.78, 1)
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 1750, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg1"]
+shape = SubResource("Shape_seg1")
+
+[node name="Seg2" type="StaticBody2D" parent="Chao"]
+position = Vector2(4305, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg2"]
+modulate = Color(1, 0.93, 0.78, 1)
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 1790, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg2"]
+shape = SubResource("Shape_seg2")
+
+[node name="Seg3" type="StaticBody2D" parent="Chao"]
+position = Vector2(6230, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg3"]
+modulate = Color(1, 0.93, 0.78, 1)
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 1740, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg3"]
+shape = SubResource("Shape_seg3")
+
+[node name="Seg4" type="StaticBody2D" parent="Chao"]
+position = Vector2(8475, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg4"]
+modulate = Color(1, 0.93, 0.78, 1)
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("2_grama")
+region_enabled = true
+region_rect = Rect2(0, 0, 2450, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg4"]
+shape = SubResource("Shape_seg4")
+
+[node name="Pedras" type="Node2D" parent="."]
+
+[node name="Pedra0" type="StaticBody2D" parent="Pedras"]
+position = Vector2(2300, 415)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra0"]
+modulate = Color(0.5, 0.45, 0.36, 1)
+texture_filter = 1
+scale = Vector2(0.46875, 0.703125)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra0"]
+shape = SubResource("Shape_pedra0")
+
+[node name="Pedra1" type="StaticBody2D" parent="Pedras"]
+position = Vector2(4200, 405)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra1"]
+modulate = Color(0.5, 0.45, 0.36, 1)
+texture_filter = 1
+scale = Vector2(0.46875, 0.859375)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra1"]
+shape = SubResource("Shape_pedra1")
+
+[node name="Pedra2" type="StaticBody2D" parent="Pedras"]
+position = Vector2(6100, 415)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra2"]
+modulate = Color(0.5, 0.45, 0.36, 1)
+texture_filter = 1
+scale = Vector2(0.46875, 0.703125)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra2"]
+shape = SubResource("Shape_pedra2")
+
+[node name="Pedra3" type="StaticBody2D" parent="Pedras"]
+position = Vector2(8000, 410)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra3"]
+modulate = Color(0.5, 0.45, 0.36, 1)
+texture_filter = 1
+scale = Vector2(0.46875, 0.78125)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra3"]
+shape = SubResource("Shape_pedra3")
+
+[node name="Raios" type="Node2D" parent="."]
+
+[node name="Raio0" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(900, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 867
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio0"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio0"]
+shape = SubResource("Shape_raio")
+
+[node name="Raio1" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(1850, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 782
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio1"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio1"]
+shape = SubResource("Shape_raio")
+
+[node name="Raio2" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(2800, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 1020
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio2"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio2"]
+shape = SubResource("Shape_raio")
+
+[node name="Raio3" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(3750, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 867
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio3"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio3"]
+shape = SubResource("Shape_raio")
+
+[node name="Raio4" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(4700, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 340
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio4"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio4"]
+shape = SubResource("Shape_raio")
+
+[node name="Raio5" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(5650, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 816
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio5"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio5"]
+shape = SubResource("Shape_raio")
+
+[node name="Raio6" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(6600, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 969
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio6"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio6"]
+shape = SubResource("Shape_raio")
+
+[node name="Raio7" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(7550, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 748
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio7"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio7"]
+shape = SubResource("Shape_raio")
+
+[node name="Raio8" type="Area2D" parent="Raios" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(8500, 110)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+distancia_de_ativacao = 884
+
+[node name="Sprite2D" type="Sprite2D" parent="Raios/Raio8"]
+modulate = Color(1, 0.95, 0.5, 0.14)
+texture_filter = 1
+scale = Vector2(6, 87.5)
+texture = ExtResource("3_ceu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Raios/Raio8"]
+shape = SubResource("Shape_raio")
+
+[node name="VindoDaFase1" type="Marker2D" parent="."]
+position = Vector2(-700, 380)
+
+[node name="PersonagemPrincipal" parent="." instance=ExtResource("5_pers")]
+z_index = 999
+position = Vector2(-700, 380)
+modo_automatico = true
+velocidade_auto = 340
+
+[node name="Protetor" type="Node2D" parent="." node_paths=PackedStringArray("jogador")]
+script = ExtResource("8_prot")
+jogador = NodePath("../PersonagemPrincipal")
+
+[node name="AspiradorDePo" type="Area2D" parent="."]
+position = Vector2(9200, 380)
+script = ExtResource("9_item")
+id_item = "aspirador"
+
+[node name="Sprite2D" type="Sprite2D" parent="AspiradorDePo"]
+modulate = Color(0.55, 0.75, 1, 1)
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AspiradorDePo"]
+shape = SubResource("Shape_item")
+
+[node name="SaidaMiniboss" type="Area2D" parent="."]
+position = Vector2(9420, 300)
+script = ExtResource("10_porta")
+cena_destino = "res://cenas/miniboss.tscn"
+entrada_destino = "VindoDaFase2"
+entrar_ao_encostar = true
+dica = ""
+requer_item = "aspirador"
+abrir_porta = "fase2_concluida"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaMiniboss"]
+shape = SubResource("Shape_saida")
+
+[node name="Narracao" type="CanvasLayer" parent="."]
+script = ExtResource("11_narr")
+linhas = Array[String](["O sol de hoje descasca tinta de carro. Ele nao vai notar.", "Quando um feixe piscar, clique nele para passar protetor.", "Passa cedo demais e o protetor acaba antes da hora. Espera demais e ja era."])
+id_evento = "intro_fase2"
+segundos_por_linha = 4.5

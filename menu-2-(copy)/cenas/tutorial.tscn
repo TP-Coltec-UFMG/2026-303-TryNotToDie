@@ -44,10 +44,10 @@ size = Vector2(100, 500)
 size = Vector2(120, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke6da"]
-size = Vector2(218, 280)
+size = Vector2(222.11206, 366.00677)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wkvgs"]
-size = Vector2(223, 194.5)
+size = Vector2(230.25998, 285.9381)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lalww"]
 size = Vector2(117, 396)
@@ -142,6 +142,7 @@ script = ExtResource("12_casa0")
 
 [node name="C1" type="AnimatableBody2D" parent="Casa"]
 position = Vector2(90.1, 263)
+metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Casa/C1"]
 position = Vector2(0, -156)
@@ -154,20 +155,22 @@ shape = SubResource("RectangleShape2D_x0mfe")
 disabled = true
 
 [node name="C2" type="AnimatableBody2D" parent="Casa"]
-position = Vector2(341.1, -49)
+position = Vector2(376.66663, -49.166664)
+metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Casa/C2"]
-position = Vector2(14.733276, -161)
+position = Vector2(55.56661, -158.5)
 scale = Vector2(4.7796884, 2.484375)
 texture = ExtResource("3_32upe")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Casa/C2"]
-position = Vector2(12.233269, -162.66666)
+position = Vector2(54.73327, -162.66666)
 shape = SubResource("RectangleShape2D_l5qqy")
 disabled = true
 
 [node name="C3" type="AnimatableBody2D" parent="Casa"]
-position = Vector2(-130, -370)
+position = Vector2(-28.333336, -369.99988)
+metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Casa/C3"]
 position = Vector2(-65.49999, -171)
@@ -295,11 +298,11 @@ position = Vector2(-754, -18)
 texture = ExtResource("13_1w6lh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="trator"]
-position = Vector2(-640, -8)
+position = Vector2(-642.056, 35.0036)
 shape = SubResource("RectangleShape2D_ke6da")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="trator"]
-position = Vector2(-863.5, 34.25)
+position = Vector2(-867.13, 79.96918)
 shape = SubResource("RectangleShape2D_wkvgs")
 
 [node name="vinhas" type="StaticBody2D" parent="." node_paths=PackedStringArray("sprite_vinhas")]

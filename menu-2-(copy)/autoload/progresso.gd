@@ -8,6 +8,7 @@ const PA := "pa";
 const CHAVE_GALPAO := "chave_galpao";
 const FACAO := "facao";
 const PROTETOR_SOLAR := "protetor_solar";
+const ASPIRADOR := "aspirador";
 
 const PORTA_CASA_ARROMBADA := "porta_casa_arrombada";
 const GELADEIRA_DESENTERRADA := "geladeira_desenterrada";
