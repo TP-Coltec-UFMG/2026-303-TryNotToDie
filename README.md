@@ -4,10 +4,10 @@
 <img src="imgs/Logo_TryNotToDie.png" alt="Logo">
 
 ## Menu Principal
-<img src="imgs/Menu_Principal.png" alt="MenuPrc"></img>
+<img src="imgs/menu_atualizado.png" alt="MenuPrc"></img>
 
-## Menu de Configurações
-<img src="imgs/Menu_Config.png" alt="MenuConf"></img>
+## Protagonista e geladeira
+<img src="imgs/arremessando_geladeira.png" alt="MenuConf"></img>
 
 ## Personagem Principal
 <img src="imgs/Protagonista.png" alt="Pers"></img>
@@ -50,5 +50,8 @@ https://docs.google.com/spreadsheets/d/1GiyK18HTgASGeXnQk3wk9FiT8cq6c4Ke-msIRLzg
 - Godot Engine (4.5 Stable)
 
 ## Links Importantes
-<a href="https://drive.google.com/drive/folders/1llBx95pg4eu_-IFZTqqcROQjQ9nTG5tp?usp=sharing">Versões Anteriores</a>
+## Menu
 <a href="https://canva.link/0e6h8cx1otgqhsm">Apresentação do Menu Canvas</a>
+
+## Protótipo Jogo
+<a href="[https://](https://canva.link/4uzujfzuyy6c3wp)>Apresentação Evoluindo Jogo</a>
