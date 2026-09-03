@@ -31,6 +31,10 @@ func _ready() -> void:
 		tocar();
 
 
+func esta_rodando() -> bool:
+	return _rodando;
+
+
 func tocar() -> void:
 	if _rodando or linhas.is_empty():
 		return;

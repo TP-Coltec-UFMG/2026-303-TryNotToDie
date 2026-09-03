@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 Configuracoes="*res://autoload/configuracoes.gd"
 Fases="*res://autoload/fases.gd"
 Progresso="*res://autoload/progresso.gd"
+Pausa="*res://autoload/pausa.gd"
 
 [gui]
 
@@ -44,6 +45,10 @@ Left={
 "events": []
 }
 Down={
+"deadzone": 0.2,
+"events": []
+}
+Pausa={
 "deadzone": 0.2,
 "events": []
 }

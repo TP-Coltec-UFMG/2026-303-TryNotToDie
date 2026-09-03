@@ -63,6 +63,14 @@ func voltar_ao_ponto() -> void:
 	ir_para(_retorno_cena, _retorno_entrada);
 
 
+func reiniciar() -> void:
+	proxima_entrada = "";
+	fase_atual = "";
+	_retorno_cena = "";
+	_retorno_entrada = "";
+	_eventos_vistos.clear();
+
+
 func esquecer_eventos() -> void:
 	_eventos_vistos.clear();
 

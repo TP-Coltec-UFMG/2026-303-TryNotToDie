@@ -1,11 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://blpotubl7kya2"]
+[gd_scene load_steps=39 format=3 uid="uid://blpotubl7kya2"]
 
 [ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="3_32upe"]
-[ext_resource type="Texture2D" uid="uid://bnptog8ilxd68" path="res://sprites/pixelart2-removebg-preview.png" id="4_i8r7k"]
+[ext_resource type="Texture2D" uid="uid://cmfw8l7l2fc7c" path="res://sprites/bordelesschaotntd.png" id="4_2eb1v"]
+[ext_resource type="Texture2D" uid="uid://bd8bmv1yv273e" path="res://sprites/geladerastntd.png" id="7_lb74p"]
+[ext_resource type="Texture2D" uid="uid://2jqsyqi7vce8" path="res://sprites/c1spt.png" id="9_2xpiv"]
 [ext_resource type="Texture2D" uid="uid://cih2ew2voxd6e" path="res://sprites/chave.png" id="9_nwfb3"]
+[ext_resource type="Texture2D" uid="uid://dohbxx3ijis5q" path="res://sprites/c2spt.png" id="10_64spd"]
+[ext_resource type="Texture2D" uid="uid://psvrb47bg25m" path="res://sprites/aac1spata.png" id="11_64spd"]
 [ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="11_cqpis"]
 [ext_resource type="Script" uid="uid://cbysfuj5q44sl" path="res://scripts/casa_balanco.gd" id="12_casa0"]
 [ext_resource type="Texture2D" uid="uid://odal1bmgf0mn" path="res://sprites/Adobe Express - file.png" id="13_1w6lh"]
+[ext_resource type="Texture2D" uid="uid://ctfoxw5i4x6wq" path="res://sprites/Door2_pipo.png" id="13_2eb1v"]
 [ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="13_porta"]
 [ext_resource type="Texture2D" uid="uid://b3fwos7if8sao" path="res://sprites/images.png" id="14_bhou2"]
 [ext_resource type="Script" uid="uid://dtyokuw3yklts" path="res://scripts/fase.gd" id="14_fase0"]
@@ -14,13 +19,14 @@
 [ext_resource type="Script" uid="uid://d1nssb8iun54s" path="res://scripts/geladeira.gd" id="17_gela"]
 [ext_resource type="Script" uid="uid://d22m6vhuwjqgd" path="res://scripts/desabamento.gd" id="18_desab"]
 [ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="20_narr"]
+[ext_resource type="Texture2D" uid="uid://8rcnxmmdury8" path="res://sprites/sprites_doidos_vinhas.png" id="21_o4jp7"]
 [ext_resource type="Script" uid="uid://bscyoxsy6yiih" path="res://scripts/vinhas.gd" id="21_vinha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chao0"]
 size = Vector2(7185, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1qh0"]
-size = Vector2(129, 125)
+size = Vector2(129, 199.54265)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gelarea"]
 size = Vector2(260, 220)
@@ -29,19 +35,27 @@ size = Vector2(260, 220)
 size = Vector2(527, 315)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5qqy"]
-size = Vector2(610, 314)
+size = Vector2(531.10004, 314)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32upe"]
 size = Vector2(565, 345)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3335"]
+atlas = ExtResource("13_2eb1v")
+region = Rect2(0.18180847, 226.63635, 32.72728, 60)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_porta0"]
-size = Vector2(110, 120)
+size = Vector2(76, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zoom0"]
 size = Vector2(100, 500)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xpiv"]
+atlas = ExtResource("13_2eb1v")
+region = Rect2(0, 324.75003, 31.8097, 57.07422)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgalpao"]
-size = Vector2(120, 130)
+size = Vector2(82, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke6da"]
 size = Vector2(222.11206, 366.00677)
@@ -57,6 +71,9 @@ size = Vector2(460, 420)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saidafase"]
 size = Vector2(172, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eb1v"]
+size = Vector2(128, 117)
 
 [node name="tutorial" type="Node2D" node_paths=PackedStringArray("jogador")]
 script = ExtResource("14_fase0")
@@ -87,16 +104,16 @@ position = Vector2(576, 660)
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao"]
 z_index = 20
-texture_filter = 4
+texture_filter = 1
 texture_repeat = 2
 position = Vector2(1554.5, -63)
 scale = Vector2(2.2513888, 1.0624999)
-texture = ExtResource("4_i8r7k")
+texture = ExtResource("4_2eb1v")
 region_enabled = true
 region_rect = Rect2(0, 0, 3600, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao"]
-position = Vector2(836.5, 0)
+position = Vector2(803, -5)
 shape = SubResource("RectangleShape2D_chao0")
 
 [node name="Inicio" type="Marker2D" parent="."]
@@ -123,10 +140,13 @@ desabamento = NodePath("../Desabamento")
 metadata/_edit_group_ = true
 
 [node name="SpriteGeladeira" type="Sprite2D" parent="Geladeira"]
-texture = ExtResource("3_32upe")
+texture_filter = 1
+position = Vector2(6.401484, -14.991362)
+scale = Vector2(2.1739206, 2.2459357)
+texture = ExtResource("7_lb74p")
 
 [node name="HitboxGeladeira" type="CollisionShape2D" parent="Geladeira"]
-position = Vector2(-0.5, 0.5)
+position = Vector2(-0.4998474, 25.202484)
 shape = SubResource("RectangleShape2D_r1qh0")
 
 [node name="AreaInteracao" type="Area2D" parent="Geladeira"]
@@ -145,9 +165,9 @@ position = Vector2(90.1, 263)
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Casa/C1"]
-position = Vector2(0, -156)
-scale = Vector2(4.1390624, 2.4375)
-texture = ExtResource("3_32upe")
+position = Vector2(-4.266632, -156)
+scale = Vector2(2.4270353, 2.4375)
+texture = ExtResource("9_2xpiv")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Casa/C1"]
 position = Vector2(-2.6, -155.5)
@@ -159,12 +179,12 @@ position = Vector2(376.66663, -49.166664)
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Casa/C2"]
-position = Vector2(55.56661, -158.5)
-scale = Vector2(4.7796884, 2.484375)
-texture = ExtResource("3_32upe")
+position = Vector2(14.583282, -158.5)
+scale = Vector2(2.4462361, 2.484375)
+texture = ExtResource("10_64spd")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Casa/C2"]
-position = Vector2(54.73327, -162.66666)
+position = Vector2(15.283447, -162.66666)
 shape = SubResource("RectangleShape2D_l5qqy")
 disabled = true
 
@@ -173,9 +193,9 @@ position = Vector2(-28.333336, -369.99988)
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Casa/C3"]
-position = Vector2(-65.49999, -171)
-scale = Vector2(4.3515625, 2.7265625)
-texture = ExtResource("3_32upe")
+position = Vector2(-68.33333, -171.91672)
+scale = Vector2(2.588325, 2.7122388)
+texture = ExtResource("11_64spd")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Casa/C3"]
 position = Vector2(-66.5, -175)
@@ -234,10 +254,12 @@ arrombar_com_qte = true
 modulate = Color(0.45, 0.32, 0.22, 1)
 z_index = -1
 texture_filter = 1
-scale = Vector2(0.86, 0.94)
-texture = ExtResource("3_32upe")
+position = Vector2(12.000002, 0.50000477)
+scale = Vector2(2.5625, 2.0166664)
+texture = SubResource("AtlasTexture_l3335")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortaDaCasa"]
+position = Vector2(12, 2)
 shape = SubResource("RectangleShape2D_porta0")
 
 [node name="GatilhoZoomCasa" type="Area2D" parent="." node_paths=PackedStringArray("alvo", "camera")]
@@ -276,11 +298,13 @@ abrir_porta = "galpao_aberto"
 [node name="Sprite2D" type="Sprite2D" parent="Galpao/PortaGalpao"]
 modulate = Color(0.4, 0.3, 0.2, 1)
 texture_filter = 1
-scale = Vector2(0.94, 1.02)
-texture = ExtResource("3_32upe")
+position = Vector2(16.999908, -1.9999847)
+scale = Vector2(2.64516, 2.3508778)
+texture = SubResource("AtlasTexture_2xpiv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Galpao/PortaGalpao"]
 z_index = -7
+position = Vector2(17, -5)
 shape = SubResource("RectangleShape2D_pgalpao")
 
 [node name="Narracao" type="CanvasLayer" parent="."]
@@ -305,25 +329,26 @@ shape = SubResource("RectangleShape2D_ke6da")
 position = Vector2(-867.13, 79.96918)
 shape = SubResource("RectangleShape2D_wkvgs")
 
-[node name="vinhas" type="StaticBody2D" parent="." node_paths=PackedStringArray("sprite_vinhas")]
+[node name="Vinhas" type="StaticBody2D" parent="." node_paths=PackedStringArray("sprite_vinhas")]
 position = Vector2(2747, 388)
 script = ExtResource("21_vinha")
 sprite_vinhas = NodePath("Sprite2D")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="vinhas"]
-position = Vector2(-25.500027, -128.49997)
-scale = Vector2(0.8984378, 3.0859375)
-texture = ExtResource("3_32upe")
+[node name="Sprite2D" type="Sprite2D" parent="Vinhas"]
+texture_filter = 1
+position = Vector2(-22.000082, -186.99997)
+scale = Vector2(3.5312505, 4.0000005)
+texture = ExtResource("21_o4jp7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="vinhas"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vinhas"]
 position = Vector2(-24.5, -129)
 shape = SubResource("RectangleShape2D_lalww")
 
-[node name="AreaInteracao" type="Area2D" parent="vinhas"]
+[node name="AreaInteracao" type="Area2D" parent="Vinhas"]
 position = Vector2(-120, -130)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="vinhas/AreaInteracao"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vinhas/AreaInteracao"]
 shape = SubResource("RectangleShape2D_vinharea")
 
 [node name="SaidaFase" type="Area2D" parent="."]
@@ -345,3 +370,16 @@ shape = SubResource("RectangleShape2D_saidafase")
 position = Vector2(-122.999756, 145)
 scale = Vector2(1.3671885, 0.93749994)
 texture = ExtResource("3_32upe")
+
+[node name="DicaTrator" type="Area2D" parent="."]
+position = Vector2(-884, 349)
+script = ExtResource("13_porta")
+apenas_sinaliza = true
+dica = "Meu Deus... Como ele fez isso? Por aqui nao..."
+dica_trancada = ""
+dica_sem_item = ""
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DicaTrator"]
+position = Vector2(5, -5.5)
+shape = SubResource("RectangleShape2D_2eb1v")

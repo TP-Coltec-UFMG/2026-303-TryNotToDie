@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cc28prlr6wke2"]
+[gd_scene load_steps=21 format=3 uid="uid://cc28prlr6wke2"]
 
 [ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_tex"]
-[ext_resource type="PackedScene" path="res://cenas/personagem.tscn" id="2_pers"]
+[ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="2_pers"]
+[ext_resource type="Texture2D" uid="uid://bvquu21r67ru3" path="res://sprites/Deco.png" id="3_lrqbf"]
 [ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="3_porta"]
 [ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="4_item"]
+[ext_resource type="Texture2D" uid="uid://ba64gicou0v3h" path="res://sprites/patntd.png" id="4_rou1x"]
 [ext_resource type="Script" uid="uid://d1lgovbeks3fy" path="res://scripts/casa_interior.gd" id="5_fase"]
+[ext_resource type="Texture2D" uid="uid://ctfoxw5i4x6wq" path="res://sprites/Door2_pipo.png" id="8_21it5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chao"]
 size = Vector2(3000, 400)
@@ -18,6 +21,10 @@ size = Vector2(350, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_com2"]
 size = Vector2(1000, 60)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_21it5"]
+atlas = ExtResource("3_lrqbf")
+region = Rect2(272.86963, 387.54364, 131.09558, 98.45636)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_deg3"]
 size = Vector2(300, 40)
 
@@ -27,11 +34,19 @@ size = Vector2(300, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_com3"]
 size = Vector2(1100, 60)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8sgc"]
+atlas = ExtResource("3_lrqbf")
+region = Rect2(22.249573, 26.448273, 200.8595, 122.39877)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pa"]
 size = Vector2(70, 70)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjs4n"]
+atlas = ExtResource("8_21it5")
+region = Rect2(0, 227.43156, 36.651855, 60.23311)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saida"]
-size = Vector2(110, 120)
+size = Vector2(67, 120)
 
 [node name="casa_interior" type="Node2D" node_paths=PackedStringArray("comodo_de_cima", "jogador")]
 script = ExtResource("5_fase")
@@ -51,6 +66,7 @@ color = Color(0.09, 0.08, 0.11, 1)
 
 [node name="Chao" type="StaticBody2D" parent="."]
 position = Vector2(900, 660)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao"]
 modulate = Color(0.32, 0.29, 0.34, 1)
@@ -77,6 +93,7 @@ region_rect = Rect2(0, 0, 1200, 320)
 
 [node name="Degrau1" type="StaticBody2D" parent="."]
 position = Vector2(750, 380)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Degrau1"]
 modulate = Color(0.62, 0.56, 0.5, 1)
@@ -92,6 +109,7 @@ one_way_collision = true
 
 [node name="Degrau2" type="StaticBody2D" parent="."]
 position = Vector2(975, 280)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Degrau2"]
 modulate = Color(0.62, 0.56, 0.5, 1)
@@ -119,6 +137,7 @@ region_rect = Rect2(0, 0, 1000, 320)
 
 [node name="Piso" type="StaticBody2D" parent="Comodo2"]
 position = Vector2(1500, 190)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Comodo2/Piso"]
 modulate = Color(0.5, 0.54, 0.58, 1)
@@ -133,14 +152,15 @@ shape = SubResource("RectangleShape2D_com2")
 one_way_collision = true
 
 [node name="Mesa" type="Sprite2D" parent="Comodo2"]
-modulate = Color(0.6, 0.45, 0.35, 1)
+modulate = Color(0.5125902, 0.47876358, 0.46834862, 1)
 texture_filter = 1
-position = Vector2(1750, 120)
-scale = Vector2(1.6, 0.62)
-texture = ExtResource("1_tex")
+position = Vector2(1750, 89.19001)
+scale = Vector2(1.6, 1.4324491)
+texture = SubResource("AtlasTexture_21it5")
 
 [node name="Degrau3" type="StaticBody2D" parent="."]
 position = Vector2(1000, 80)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Degrau3"]
 modulate = Color(0.62, 0.56, 0.5, 1)
@@ -156,6 +176,7 @@ one_way_collision = true
 
 [node name="Degrau4" type="StaticBody2D" parent="."]
 position = Vector2(800, -20)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Degrau4"]
 modulate = Color(0.62, 0.56, 0.5, 1)
@@ -183,6 +204,7 @@ region_rect = Rect2(0, 0, 1100, 320)
 
 [node name="Piso" type="StaticBody2D" parent="Comodo3"]
 position = Vector2(250, -110)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Comodo3/Piso"]
 modulate = Color(0.58, 0.5, 0.56, 1)
@@ -197,21 +219,22 @@ shape = SubResource("RectangleShape2D_com3")
 one_way_collision = true
 
 [node name="Cama" type="Sprite2D" parent="Comodo3"]
-modulate = Color(0.7, 0.4, 0.42, 1)
+modulate = Color(0.5546585, 0.4767844, 0.500352, 1)
 texture_filter = 1
-position = Vector2(0, -180)
-scale = Vector2(1.6, 0.62)
-texture = ExtResource("1_tex")
+position = Vector2(-6, -190.99995)
+scale = Vector2(0.9488513, 0.95418024)
+texture = SubResource("AtlasTexture_q8sgc")
 
 [node name="Pa" type="Area2D" parent="Comodo3"]
 position = Vector2(0, -250)
 script = ExtResource("4_item")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Comodo3/Pa"]
 modulate = Color(0.85, 0.85, 0.5, 1)
 texture_filter = 1
 scale = Vector2(0.45, 0.45)
-texture = ExtResource("1_tex")
+texture = ExtResource("4_rou1x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Comodo3/Pa"]
 shape = SubResource("RectangleShape2D_pa")
@@ -229,12 +252,15 @@ script = ExtResource("3_porta")
 cena_destino = "res://cenas/tutorial.tscn"
 entrada_destino = "VoltandoDaCasa"
 dica = "S ou clique para sair"
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="PortaSaida"]
 modulate = Color(0.45, 0.32, 0.22, 1)
 texture_filter = 1
-scale = Vector2(0.86, 0.94)
-texture = ExtResource("1_tex")
+position = Vector2(3.4999952, -2.193451e-05)
+scale = Vector2(2.0833344, 1.9999998)
+texture = SubResource("AtlasTexture_fjs4n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortaSaida"]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_saida")

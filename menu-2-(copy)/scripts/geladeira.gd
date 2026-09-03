@@ -152,7 +152,7 @@ func _levantar() -> void:
 
 	var destino := Vector2(
 		_jogador.global_position.x,
-		_jogador.global_position.y - altura_sobre_a_cabeca
+		_jogador.global_position.y - (1.25 * altura_sobre_a_cabeca)
 	);
 
 	if _sem_animacao():

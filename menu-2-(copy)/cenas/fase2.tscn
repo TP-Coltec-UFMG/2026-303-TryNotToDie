@@ -1,13 +1,17 @@
-[gd_scene load_steps=26 format=3 uid="uid://b2vx423d6q8l1"]
+[gd_scene load_steps=28 format=3 uid="uid://b2vx423d6q8l1"]
 
 [ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_tex"]
-[ext_resource type="Texture2D" uid="uid://bnptog8ilxd68" path="res://sprites/pixelart2-removebg-preview.png" id="2_grama"]
 [ext_resource type="Texture2D" uid="uid://bvkq8n4alhuy" path="res://sprites/branco.png" id="3_ceu"]
 [ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="4_nuvens"]
+[ext_resource type="Texture2D" uid="uid://cmfw8l7l2fc7c" path="res://sprites/bordelesschaotntd.png" id="4_omfrd"]
+[ext_resource type="Texture2D" uid="uid://cky8mq8fnb0o0" path="res://sprites/Rock Pile 13 - WHITE - BIG.PNG" id="5_o8iim"]
 [ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="5_pers"]
-[ext_resource type="Script" path="res://scripts/fase_corrida.gd" id="6_fase"]
-[ext_resource type="Script" path="res://scripts/raio_solar.gd" id="7_raio"]
-[ext_resource type="Script" path="res://scripts/protetor.gd" id="8_prot"]
+[ext_resource type="Script" uid="uid://p30ofy18qigv" path="res://scripts/fase_corrida.gd" id="6_fase"]
+[ext_resource type="Texture2D" uid="uid://beeqpk8sv0mrc" path="res://sprites/Rock Pile 14 - WHITE - BIG.PNG" id="6_uilhm"]
+[ext_resource type="Script" uid="uid://b0jtnlka03r5x" path="res://scripts/raio_solar.gd" id="7_raio"]
+[ext_resource type="Texture2D" uid="uid://um6movyo5176" path="res://sprites/Rock Pile 15 - WHITE - BIG.PNG" id="7_xlxc1"]
+[ext_resource type="Texture2D" uid="uid://b6o1ppr5q7br6" path="res://sprites/Rock Pile 15 - WHITE - small.PNG" id="8_a22pd"]
+[ext_resource type="Script" uid="uid://bjg2r82lffyna" path="res://scripts/protetor.gd" id="8_prot"]
 [ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="9_item"]
 [ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="10_porta"]
 [ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="11_narr"]
@@ -50,16 +54,16 @@ size = Vector2(60, 480)
 
 [node name="fase2" type="Node2D" node_paths=PackedStringArray("jogador")]
 script = ExtResource("6_fase")
+itens_garantidos = Array[String](["protetor_solar"])
 jogador = NodePath("PersonagemPrincipal")
 entrada_padrao = "VindoDaFase1"
-itens_garantidos = Array[String](["protetor_solar"])
 
 [node name="Fundo" type="CanvasLayer" parent="."]
 layer = -1
 
 [node name="Ceu" type="TextureRect" parent="Fundo"]
-z_index = -4096
 modulate = Color(1, 0.66, 0.36, 1)
+z_index = -4096
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -71,8 +75,8 @@ expand_mode = 1
 
 [node name="Nuvens" type="Node2D" parent="Fundo"]
 script = ExtResource("4_nuvens")
-faixa_y = Vector2(20, 200)
 max_nuvens = 3
+faixa_y = Vector2(20, 200)
 
 [node name="Chao" type="Node2D" parent="."]
 
@@ -86,12 +90,13 @@ texture_filter = 4
 texture_repeat = 2
 position = Vector2(0, -63)
 scale = Vector2(1, 1.0625)
-texture = ExtResource("2_grama")
+texture = ExtResource("4_omfrd")
 region_enabled = true
 region_rect = Rect2(0, 0, 2250, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg0"]
 shape = SubResource("Shape_seg0")
+metadata/_edit_lock_ = true
 
 [node name="Seg1" type="StaticBody2D" parent="Chao"]
 position = Vector2(2375, 660)
@@ -103,7 +108,7 @@ texture_filter = 4
 texture_repeat = 2
 position = Vector2(0, -63)
 scale = Vector2(1, 1.0625)
-texture = ExtResource("2_grama")
+texture = ExtResource("4_omfrd")
 region_enabled = true
 region_rect = Rect2(0, 0, 1750, 400)
 
@@ -120,7 +125,7 @@ texture_filter = 4
 texture_repeat = 2
 position = Vector2(0, -63)
 scale = Vector2(1, 1.0625)
-texture = ExtResource("2_grama")
+texture = ExtResource("4_omfrd")
 region_enabled = true
 region_rect = Rect2(0, 0, 1790, 400)
 
@@ -137,7 +142,7 @@ texture_filter = 4
 texture_repeat = 2
 position = Vector2(0, -63)
 scale = Vector2(1, 1.0625)
-texture = ExtResource("2_grama")
+texture = ExtResource("4_omfrd")
 region_enabled = true
 region_rect = Rect2(0, 0, 1740, 400)
 
@@ -154,7 +159,7 @@ texture_filter = 4
 texture_repeat = 2
 position = Vector2(0, -63)
 scale = Vector2(1, 1.0625)
-texture = ExtResource("2_grama")
+texture = ExtResource("4_omfrd")
 region_enabled = true
 region_rect = Rect2(0, 0, 2450, 400)
 
@@ -169,8 +174,9 @@ position = Vector2(2300, 415)
 [node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra0"]
 modulate = Color(0.5, 0.45, 0.36, 1)
 texture_filter = 1
-scale = Vector2(0.46875, 0.703125)
-texture = ExtResource("1_tex")
+position = Vector2(2.193451e-05, 3.5000095)
+scale = Vector2(1.5238092, 4.1200004)
+texture = ExtResource("5_o8iim")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra0"]
 shape = SubResource("Shape_pedra0")
@@ -181,8 +187,9 @@ position = Vector2(4200, 405)
 [node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra1"]
 modulate = Color(0.5, 0.45, 0.36, 1)
 texture_filter = 1
-scale = Vector2(0.46875, 0.859375)
-texture = ExtResource("1_tex")
+position = Vector2(1.5000792, 28.000008)
+scale = Vector2(1.1269847, 5.3939395)
+texture = ExtResource("6_uilhm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra1"]
 shape = SubResource("Shape_pedra1")
@@ -193,8 +200,9 @@ position = Vector2(6100, 415)
 [node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra2"]
 modulate = Color(0.5, 0.45, 0.36, 1)
 texture_filter = 1
-scale = Vector2(0.46875, 0.703125)
-texture = ExtResource("1_tex")
+position = Vector2(-1.9997501, 7.999998)
+scale = Vector2(1.3207523, 4.148148)
+texture = ExtResource("7_xlxc1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra2"]
 shape = SubResource("Shape_pedra2")
@@ -205,8 +213,9 @@ position = Vector2(8000, 410)
 [node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra3"]
 modulate = Color(0.5, 0.45, 0.36, 1)
 texture_filter = 1
-scale = Vector2(0.46875, 0.78125)
-texture = ExtResource("1_tex")
+position = Vector2(4.99967, 10.999992)
+scale = Vector2(1.8378333, 5.999999)
+texture = ExtResource("8_a22pd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra3"]
 shape = SubResource("Shape_pedra3")
@@ -378,7 +387,7 @@ shape = SubResource("Shape_item")
 [node name="SaidaMiniboss" type="Area2D" parent="."]
 position = Vector2(9420, 300)
 script = ExtResource("10_porta")
-cena_destino = "res://cenas/miniboss.tscn"
+cena_destino = "res://cenas/primer_boss.tscn"
 entrada_destino = "VindoDaFase2"
 entrar_ao_encostar = true
 dica = ""

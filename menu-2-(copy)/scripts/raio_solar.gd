@@ -8,6 +8,7 @@ signal queimou;
 
 @export var sprite_raio: Node2D;
 @export var distancia_de_ativacao: float = 870.0;
+@export var sempre_aceso: bool = false;
 
 @export_group("Ciclo")
 @export var duracao_apagado: float = 1.4;
@@ -34,10 +35,21 @@ func _ready() -> void:
 	body_entered.connect(_ao_encostar);
 	if sprite_raio != null and is_instance_valid(sprite_raio):
 		_escala_base = sprite_raio.scale;
+
+	if sempre_aceso:
+		_ligado = true;
+		_estado = Estado.ACESO;
+
 	_pintar(0.0);
 
 
 func _physics_process(delta: float) -> void:
+	if sempre_aceso:
+		_estado = Estado.ACESO;
+		_pintar(0.0);
+		_conferir_quem_esta_dentro();
+		return;
+
 	if _jogador == null or not is_instance_valid(_jogador):
 		_jogador = get_tree().get_first_node_in_group("jogador") as Node2D;
 		if _jogador == null:

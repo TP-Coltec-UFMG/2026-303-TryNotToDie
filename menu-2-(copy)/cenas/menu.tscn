@@ -416,7 +416,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -157.0
-offset_top = -119.0
+offset_top = -154.0
 offset_right = 157.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -547,6 +547,18 @@ nome_acao = "Left"
 layout_mode = 2
 
 [node name="BotaoTecla" type="Button" parent="Container_Config/BoxBindEsq"]
+layout_mode = 2
+
+[node name="BoxBindPausa" type="HBoxContainer" parent="Container_Config"]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("15_g1dcb")
+nome_acao = "Pausa"
+
+[node name="LabelAcao" type="Label" parent="Container_Config/BoxBindPausa"]
+layout_mode = 2
+
+[node name="BotaoTecla" type="Button" parent="Container_Config/BoxBindPausa"]
 layout_mode = 2
 
 [node name="Botao_Static" type="Button" parent="Container_Config"]

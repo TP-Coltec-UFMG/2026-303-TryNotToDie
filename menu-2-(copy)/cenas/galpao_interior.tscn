@@ -54,6 +54,7 @@ region_rect = Rect2(0, 0, 2000, 500)
 
 [node name="Chao" type="StaticBody2D" parent="."]
 position = Vector2(500, 660)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao"]
 modulate = Color(0.4, 0.34, 0.26, 1)
@@ -94,6 +95,7 @@ script = ExtResource("3_porta")
 cena_destino = "res://cenas/tutorial.tscn"
 entrada_destino = "VoltandoDoGalpao"
 dica = "S ou clique para sair do galpao"
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="PortaSaida"]
 modulate = Color(0.45, 0.32, 0.22, 1)
@@ -112,16 +114,17 @@ monitoring = false
 script = ExtResource("4_item")
 id_item = "facao"
 flutuar = false
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Facao"]
 modulate = Color(0.82, 0.84, 0.9, 1)
 texture_filter = 1
-position = Vector2(-19.250008, 17.000002)
+position = Vector2(-19.000008, 63)
 scale = Vector2(1.345, 1.2400001)
 texture = ExtResource("6_g4xgi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Facao"]
-position = Vector2(-16.875, 18)
+position = Vector2(-17, 55)
 shape = SubResource("RectangleShape2D_facao")
 
 [node name="ArmadilhaFacao" type="Area2D" parent="." node_paths=PackedStringArray("facao")]
@@ -130,6 +133,7 @@ script = ExtResource("6_facao")
 facao = NodePath("../Facao")
 altura_de_repouso = 420.0
 desvio_lateral = 250.0
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArmadilhaFacao"]
 position = Vector2(-4, 55)

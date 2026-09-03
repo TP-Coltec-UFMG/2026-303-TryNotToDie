@@ -1,0 +1,189 @@
+[gd_scene load_steps=16 format=3 uid="uid://bdac8ts0rj44y"]
+
+[ext_resource type="Texture2D" uid="uid://bvkq8n4alhuy" path="res://sprites/branco.png" id="3_branco"]
+[ext_resource type="Texture2D" uid="uid://cmfw8l7l2fc7c" path="res://sprites/bordelesschaotntd.png" id="4_cin3i"]
+[ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="4_nuvens"]
+[ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="5_pers"]
+[ext_resource type="Script" uid="uid://cicfjxm2iw2tg" path="res://scripts/arena_boss.gd" id="6_arena"]
+[ext_resource type="Script" uid="uid://b0jtnlka03r5x" path="res://scripts/raio_solar.gd" id="7_raio"]
+[ext_resource type="Texture2D" uid="uid://c2ycerkrgipeu" path="res://sprites/eye.png" id="7_shqu8"]
+[ext_resource type="Script" uid="uid://byag70qh7tfkg" path="res://scripts/primer_boss.gd" id="8_boss"]
+[ext_resource type="Script" uid="uid://b1dogoia6n3su" path="res://scripts/camera_jogo.gd" id="9_cam"]
+[ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="10_narr"]
+
+[sub_resource type="RectangleShape2D" id="Shape_chao"]
+size = Vector2(1640, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_borda"]
+size = Vector2(48, 760)
+
+[sub_resource type="SpriteFrames" id="Frames_boss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_shqu8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="Shape_boss"]
+size = Vector2(110, 110)
+
+[sub_resource type="RectangleShape2D" id="Shape_feixe"]
+size = Vector2(1700, 54)
+
+[node name="primer_boss" type="Node2D" node_paths=PackedStringArray("boss", "camera", "narracao", "jogador")]
+script = ExtResource("6_arena")
+boss = NodePath("Boss")
+camera = NodePath("CameraArena")
+narracao = NodePath("Narracao")
+jogador = NodePath("PersonagemPrincipal")
+entrada_padrao = "VindoDaFase2"
+
+[node name="Fundo" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Ceu" type="TextureRect" parent="Fundo"]
+modulate = Color(1, 0.66, 0.36, 1)
+z_index = -4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_branco")
+expand_mode = 1
+
+[node name="Nuvens" type="Node2D" parent="Fundo"]
+script = ExtResource("4_nuvens")
+max_nuvens = 3
+faixa_y = Vector2(20, 190)
+
+[node name="Chao" type="StaticBody2D" parent="."]
+position = Vector2(0, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao"]
+modulate = Color(1, 0.93, 0.78, 1)
+z_index = 20
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(53.999996, -42)
+scale = Vector2(1.0695122, 1.16875)
+texture = ExtResource("4_cin3i")
+region_enabled = true
+region_rect = Rect2(0, 0, 1640, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao"]
+shape = SubResource("Shape_chao")
+metadata/_edit_lock_ = true
+
+[node name="Bordas" type="Node2D" parent="."]
+
+[node name="BordaEsquerda" type="Area2D" parent="Bordas" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(-560, 80)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+sempre_aceso = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Bordas/BordaEsquerda"]
+modulate = Color(1, 1, 1, 0.95)
+texture_filter = 1
+position = Vector2(-214, 11)
+scale = Vector2(6, 95)
+texture = ExtResource("3_branco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bordas/BordaEsquerda"]
+position = Vector2(-214, 0)
+shape = SubResource("Shape_borda")
+
+[node name="BordaDireita" type="Area2D" parent="Bordas" node_paths=PackedStringArray("sprite_raio")]
+position = Vector2(560, 80)
+script = ExtResource("7_raio")
+sprite_raio = NodePath("Sprite2D")
+sempre_aceso = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Bordas/BordaDireita"]
+modulate = Color(1, 1, 1, 0.95)
+texture_filter = 1
+position = Vector2(228, 14)
+scale = Vector2(6, 95)
+texture = ExtResource("3_branco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bordas/BordaDireita"]
+position = Vector2(228, 14)
+shape = SubResource("Shape_borda")
+
+[node name="PontosBoss" type="Node2D" parent="."]
+
+[node name="P0" type="Marker2D" parent="PontosBoss"]
+position = Vector2(-400, 340)
+
+[node name="P1" type="Marker2D" parent="PontosBoss"]
+position = Vector2(330, 300)
+
+[node name="P2" type="Marker2D" parent="PontosBoss"]
+position = Vector2(-130, 375)
+
+[node name="P3" type="Marker2D" parent="PontosBoss"]
+position = Vector2(410, 335)
+
+[node name="P4" type="Marker2D" parent="PontosBoss"]
+position = Vector2(60, 300)
+
+[node name="P5" type="Marker2D" parent="PontosBoss"]
+position = Vector2(-430, 315)
+
+[node name="Boss" type="Area2D" parent="." node_paths=PackedStringArray("sprite_boss", "feixe", "sprite_feixe", "pontos")]
+z_index = 10
+position = Vector2(-400, 340)
+script = ExtResource("8_boss")
+sprite_boss = NodePath("Sprite2D")
+feixe = NodePath("Feixe")
+sprite_feixe = NodePath("Feixe/Sprite2D")
+pontos = NodePath("../PontosBoss")
+t_mirando = 0.8
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Boss"]
+texture_filter = 1
+position = Vector2(5.5000334, 11.499997)
+scale = Vector2(1.3515626, 1.4296875)
+sprite_frames = SubResource("Frames_boss")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss"]
+shape = SubResource("Shape_boss")
+
+[node name="Feixe" type="Area2D" parent="Boss"]
+visible = false
+monitoring = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Boss/Feixe"]
+modulate = Color(1, 1, 1, 0.9)
+texture_filter = 1
+position = Vector2(850, 0)
+scale = Vector2(212.5, 6.75)
+texture = ExtResource("3_branco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/Feixe"]
+position = Vector2(850, 0)
+shape = SubResource("Shape_feixe")
+
+[node name="VindoDaFase2" type="Marker2D" parent="."]
+position = Vector2(-380, 380)
+
+[node name="PersonagemPrincipal" parent="." instance=ExtResource("5_pers")]
+z_index = 999
+position = Vector2(180, 378)
+
+[node name="CameraArena" type="Camera2D" parent="."]
+position = Vector2(0, 250)
+script = ExtResource("9_cam")
+
+[node name="Narracao" type="CanvasLayer" parent="."]
+script = ExtResource("10_narr")
+linhas = Array[String](["Tem algo entre ele e o resto do dia. Aparece, atira e some.", "Clique no chao para mandar ele andar. Encoste na coisa tres vezes.", "As paredes de luz nao perdoam. Nao mande ele para os lados."])
+id_evento = "intro_primer_boss"
+segundos_por_linha = 4.0

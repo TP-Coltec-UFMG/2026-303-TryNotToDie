@@ -9,6 +9,8 @@ signal pegou_o_jogador;
 @export var tipo: Tipo = Tipo.VINHA;
 @export var sprite_planta: Node2D;
 @export var item_necessario: String = "facao";
+@export var animacao: String = "default";
+@export var virar_para_o_alvo: bool = true;
 
 @export_group("Corte")
 @export var resistencia: float = 190.0;
@@ -42,6 +44,9 @@ func _ready() -> void:
 		_cor_base = sprite_planta.modulate;
 		_escala_base = sprite_planta.scale;
 
+	Configuracoes.config_alterada.connect(_ao_mudar_config);
+	_tocar_animacao();
+
 	_tempo = randf() * TAU;
 
 
@@ -58,6 +63,7 @@ func _physics_process(delta: float) -> void:
 		var distancia := global_position.x - _jogador.global_position.x;
 		if absf(distancia) < alcance:
 			global_position.x -= signf(distancia) * velocidade * delta;
+			_virar(distancia > 0.0);
 
 	_balancar();
 
@@ -134,6 +140,33 @@ func _retangulo() -> Rect2:
 
 	var tamanho: Vector2 = (forma.shape as RectangleShape2D).size * forma.global_scale;
 	return Rect2(forma.global_position - tamanho * 0.5, tamanho).grow(margem_arrasto);
+
+
+func _tocar_animacao() -> void:
+	var animado := sprite_planta as AnimatedSprite2D;
+	if animado == null or animado.sprite_frames == null:
+		return;
+	if animacao != "" and animado.sprite_frames.has_animation(animacao):
+		animado.animation = animacao;
+	if _sem_animacao():
+		animado.stop();
+		animado.frame = 0;
+	else:
+		animado.play();
+
+
+func _virar(para_a_esquerda: bool) -> void:
+	if not virar_para_o_alvo or sprite_planta == null or not is_instance_valid(sprite_planta):
+		return;
+	if sprite_planta is AnimatedSprite2D:
+		(sprite_planta as AnimatedSprite2D).flip_h = para_a_esquerda;
+	elif sprite_planta is Sprite2D:
+		(sprite_planta as Sprite2D).flip_h = para_a_esquerda;
+
+
+func _ao_mudar_config(chave: String, _valor: bool) -> void:
+	if chave == Configuracoes.REMOVER_ANIMACAO:
+		_tocar_animacao();
 
 
 func _balancar() -> void:
