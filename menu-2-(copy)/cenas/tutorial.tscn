@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://dtyokuw3yklts" path="res://scripts/fase.gd" id="14_fase0"]
 [ext_resource type="Script" uid="uid://bxa2nvmqga03g" path="res://scripts/evento_zoom.gd" id="15_zoom0"]
 [ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="16_pers"]
-[ext_resource type="Texture2D" uid="uid://c32ywlbo2nbub" path="res://sprites/brick_by_brick.jpeg" id="17_c8lpy"]
+[ext_resource type="Texture2D" uid="uid://caf0fjr4ycrl7" path="res://sprites/pfr_godot_n_some_com_os_sprites.jpg" id="17_c8lpy"]
 [ext_resource type="Script" uid="uid://d1nssb8iun54s" path="res://scripts/geladeira.gd" id="17_gela"]
 [ext_resource type="Script" uid="uid://d22m6vhuwjqgd" path="res://scripts/desabamento.gd" id="18_desab"]
 [ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="20_narr"]
@@ -283,8 +283,8 @@ position = Vector2(2100, 0)
 modulate = Color(0.43137255, 0.27450982, 0.22352941, 1)
 z_index = -8
 texture_filter = 1
-position = Vector2(12.000004, 370.99997)
-scale = Vector2(0.7084839, 0.4747561)
+position = Vector2(21.49995, 411.68903)
+scale = Vector2(0.43899998, 0.3933781)
 texture = ExtResource("17_c8lpy")
 
 [node name="PortaGalpao" type="Area2D" parent="Galpao"]
