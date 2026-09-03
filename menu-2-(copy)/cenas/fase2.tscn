@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b2vx423d6q8l1"]
+[gd_scene load_steps=29 format=3 uid="uid://b2vx423d6q8l1"]
 
 [ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_tex"]
 [ext_resource type="Texture2D" uid="uid://bvkq8n4alhuy" path="res://sprites/branco.png" id="3_ceu"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="9_item"]
 [ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="10_porta"]
 [ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="11_narr"]
+[ext_resource type="Texture2D" uid="uid://3sbitbhtaprg" path="res://sprites/tp_pad.png" id="16_inxoc"]
 
 [sub_resource type="RectangleShape2D" id="Shape_seg0"]
 size = Vector2(2250, 400)
@@ -29,7 +30,7 @@ size = Vector2(1790, 400)
 size = Vector2(1740, 400)
 
 [sub_resource type="RectangleShape2D" id="Shape_seg4"]
-size = Vector2(2450, 400)
+size = Vector2(2566, 400)
 
 [sub_resource type="RectangleShape2D" id="Shape_pedra0"]
 size = Vector2(60, 90)
@@ -88,8 +89,8 @@ modulate = Color(1, 0.93, 0.78, 1)
 z_index = 20
 texture_filter = 4
 texture_repeat = 2
-position = Vector2(0, -63)
-scale = Vector2(1, 1.0625)
+position = Vector2(-755.5, -63)
+scale = Vector2(1.6715555, 1.0625)
 texture = ExtResource("4_omfrd")
 region_enabled = true
 region_rect = Rect2(0, 0, 2250, 400)
@@ -164,7 +165,19 @@ region_enabled = true
 region_rect = Rect2(0, 0, 2450, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg4"]
+position = Vector2(58, 0)
 shape = SubResource("Shape_seg4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Chao/Seg4"]
+modulate = Color(1, 0.93, 0.78, 1)
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(2450, -60)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("4_omfrd")
+region_enabled = true
+region_rect = Rect2(0, 0, 2450, 400)
 
 [node name="Pedras" type="Node2D" parent="."]
 
@@ -213,8 +226,8 @@ position = Vector2(8000, 410)
 [node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra3"]
 modulate = Color(0.5, 0.45, 0.36, 1)
 texture_filter = 1
-position = Vector2(4.99967, 10.999992)
-scale = Vector2(1.8378333, 5.999999)
+position = Vector2(3.999899, 9.500006)
+scale = Vector2(1.7837917, 5.8571434)
 texture = ExtResource("8_a22pd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra3"]
@@ -399,6 +412,12 @@ shape = SubResource("Shape_saida")
 
 [node name="Narracao" type="CanvasLayer" parent="."]
 script = ExtResource("11_narr")
-linhas = Array[String](["O sol de hoje descasca tinta de carro. Ele nao vai notar.", "Quando um feixe piscar, clique nele para passar protetor.", "Passa cedo demais e o protetor acaba antes da hora. Espera demais e ja era."])
+linhas = Array[String](["O sol hoje está escaldante, e ele não vai notar.", "Quando um feixe piscar, clique nele para passar protetor.", "Passe cedo demais e o protetor acaba antes da hora. 
+Se esperar demais, o protetor acaba."])
 id_evento = "intro_fase2"
 segundos_por_linha = 4.5
+
+[node name="TpPad" type="Sprite2D" parent="."]
+position = Vector2(9427.001, 351.00003)
+scale = Vector2(1.8515625, 1.6484375)
+texture = ExtResource("16_inxoc")

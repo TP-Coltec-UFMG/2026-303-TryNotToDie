@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="4_nuvens"]
 [ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="5_pers"]
 [ext_resource type="Script" uid="uid://cicfjxm2iw2tg" path="res://scripts/arena_boss.gd" id="6_arena"]
+[ext_resource type="Texture2D" uid="uid://dslaat2fm4gmm" path="res://sprites/mds_n_some_sprite.png" id="7_cin3i"]
 [ext_resource type="Script" uid="uid://b0jtnlka03r5x" path="res://scripts/raio_solar.gd" id="7_raio"]
-[ext_resource type="Texture2D" uid="uid://c2ycerkrgipeu" path="res://sprites/eye.png" id="7_shqu8"]
 [ext_resource type="Script" uid="uid://byag70qh7tfkg" path="res://scripts/primer_boss.gd" id="8_boss"]
 [ext_resource type="Script" uid="uid://b1dogoia6n3su" path="res://scripts/camera_jogo.gd" id="9_cam"]
 [ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="10_narr"]
@@ -21,7 +21,7 @@ size = Vector2(48, 760)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_shqu8")
+"texture": ExtResource("7_cin3i")
 }],
 "loop": true,
 "name": &"default",
@@ -144,7 +144,7 @@ sprite_boss = NodePath("Sprite2D")
 feixe = NodePath("Feixe")
 sprite_feixe = NodePath("Feixe/Sprite2D")
 pontos = NodePath("../PontosBoss")
-t_mirando = 0.8
+t_mirando = 1.25
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Boss"]
 texture_filter = 1
@@ -184,6 +184,6 @@ script = ExtResource("9_cam")
 
 [node name="Narracao" type="CanvasLayer" parent="."]
 script = ExtResource("10_narr")
-linhas = Array[String](["Tem algo entre ele e o resto do dia. Aparece, atira e some.", "Clique no chao para mandar ele andar. Encoste na coisa tres vezes.", "As paredes de luz nao perdoam. Nao mande ele para os lados."])
+linhas = Array[String](["O rei feiticeiro chamou um mago para derrotar o cavaleiro.", "Mande o personagem se mover para encostar e atacar o mago.", "Não mande o guerreiro para os lados!"])
 id_evento = "intro_primer_boss"
 segundos_por_linha = 4.0
