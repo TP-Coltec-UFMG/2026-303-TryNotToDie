@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://by3c4cqderf80"]
+
+[ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_hqq3m"]
+[ext_resource type="Script" path="res://scripts/anjo.gd" id="2_anjo"]
+[ext_resource type="AudioStream" uid="uid://w478q0xvfh2x" path="res://sons/bell.mp3" id="3_bell"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sobbr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hqq3m")
+}],
+"loop": true,
+"name": &"sino",
+"speed": 5.0
+}]
+
+[node name="Anjo" type="Node2D" node_paths=PackedStringArray("sprite", "som")]
+z_index = 60
+z_as_relative = false
+script = ExtResource("2_anjo")
+sprite = NodePath("AnimatedSprite2D")
+som = NodePath("Sino")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sobbr")
+animation = &"sino"
+
+[node name="Sino" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bell")
+max_distance = 4000.0
+panning_strength = 2.0

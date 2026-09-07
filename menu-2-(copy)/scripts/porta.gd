@@ -32,6 +32,7 @@ var _jogador: Node2D = null;
 var _ocupada: bool = false;
 var _dica: DicaFlutuante = null;
 
+## FAZER O FADE OUT kofpkpdoaksod bglho demoradodaodadwoa
 
 func _ready() -> void:
 	input_pickable = true;

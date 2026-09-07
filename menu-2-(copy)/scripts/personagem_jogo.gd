@@ -5,7 +5,11 @@ extends CharacterBody2D
 @export var jump_force: float = -500.0;
 @export var tolerancia_destino: float = 8.0;
 @export var altura_para_pular: float = 40.0;
-@export var mostrar_marcador: bool = true;
+
+@export_group("Anjo")
+@export var mostrar_anjo: bool = true;
+@export var distancia_do_sino: float = 360.0;
+@export var intervalo_do_sino: float = 0.22;
 
 @export_group("Modo automatico")
 @export var modo_automatico: bool = false;
@@ -32,6 +36,7 @@ var _andando: bool = false;
 var _raio_frente: RayCast2D = null;
 var _raio_buraco: RayCast2D = null;
 var _descanso_pulo: float = 0.0;
+var _descanso_sino: float = 0.0;
 
 
 func _ready() -> void:
@@ -42,10 +47,9 @@ func _ready() -> void:
 	if modo_automatico:
 		_montar_raios();
 
-
 func _montar_raios() -> void:
 	_raio_frente = RayCast2D.new();
-	_raio_frente.position = Vector2(0.0, -18.0);
+	_raio_frente.position = Vector2(0.0, -22.0);
 	_raio_frente.target_position = Vector2(alcance_frente, 0.0);
 	_raio_frente.collide_with_areas = false;
 	add_child(_raio_frente);
@@ -55,7 +59,9 @@ func _montar_raios() -> void:
 	_raio_buraco.target_position = Vector2(0.0, alcance_buraco);
 	_raio_buraco.collide_with_areas = false;
 	add_child(_raio_buraco);
-
+	
+	#queue_redraw();
+	
 
 func _correr_sozinho(delta: float) -> float:
 	_descanso_pulo = maxf(0.0, _descanso_pulo - delta);
@@ -165,18 +171,39 @@ func _definir_destino(ponto: Vector2) -> void:
 	_tem_destino = absf(_destino_x - global_position.x) > tolerancia_destino;
 	_ao_chegar = Callable();
 
-	if mostrar_marcador:
-		_marcar(ponto);
+	if mostrar_anjo:
+		_chamar_anjo(ponto);
 
 	if is_on_floor() and global_position.y - ponto.y > altura_para_pular:
 		velocity.y = jump_force;
 
 
-func _marcar(ponto: Vector2) -> void:
+func _chamar_anjo(ponto: Vector2) -> void:
 	var pai := get_parent();
 	if pai == null:
 		return;
-	pai.add_child(MarcadorDestino.criar(ponto));
+	_descanso_sino = intervalo_do_sino;
+	Anjo.aparecer(pai, ponto, ponto.x - global_position.x);
+
+
+func _sino_do_lado(lado: float) -> void:
+	var pai := get_parent();
+	if pai == null:
+		return;
+	_descanso_sino = intervalo_do_sino;
+	Anjo.tocar_sino(pai, global_position + Vector2(lado * distancia_do_sino, 0.0));
+
+
+func _conferir_teclado(delta: float) -> void:
+	_descanso_sino = maxf(0.0, _descanso_sino - delta);
+
+	if not mostrar_anjo or _descanso_sino > 0.0:
+		return;
+
+	if Input.is_action_just_pressed("Right"):
+		_sino_do_lado(1.0);
+	elif Input.is_action_just_pressed("Left"):
+		_sino_do_lado(-1.0);
 
 
 func ir_ate(destino_global_x: float, ao_chegar: Callable = Callable()) -> void:
@@ -222,6 +249,8 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = jump_force;
+
+	_conferir_teclado(delta);
 
 	direcao = Input.get_axis("Left", "Right");
 
