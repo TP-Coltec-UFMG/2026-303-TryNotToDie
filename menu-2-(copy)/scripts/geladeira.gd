@@ -27,6 +27,12 @@ signal esmagou;
 @export var segundos_segurando: float = 2.2;
 @export var limite_qte: float = 3.5;
 
+@export_group("Anjo do QTE")
+@export var anjo_no_qte: bool = true;
+@export var anjo_quadros: SpriteFrames;
+@export var anjo_animacao: String = "";
+@export var anjo_distancia: float = 95.0;
+
 @export_group("Arremesso")
 @export var duracao_voo: float = 0.9;
 @export var altura_arco: float = 320.0;
@@ -127,6 +133,10 @@ func interagir() -> void:
 
 	_qte = QTE.segurar(texto_qte, segundos_segurando, limite_qte);
 	_qte.dica_personalizada = dica_qte;
+	if anjo_no_qte:
+		_qte.lado_a_lado(anjo_quadros, anjo_animacao, anjo_distancia);
+	else:
+		_qte.sem_anjo();
 	add_child(_qte);
 	set_process(true);
 

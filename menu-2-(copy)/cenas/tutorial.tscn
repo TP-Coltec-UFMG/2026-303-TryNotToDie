@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://blpotubl7kya2"]
+[gd_scene load_steps=37 format=3 uid="uid://blpotubl7kya2"]
 
 [ext_resource type="Texture2D" uid="uid://cmfw8l7l2fc7c" path="res://sprites/bordelesschaotntd.png" id="4_2eb1v"]
 [ext_resource type="Texture2D" uid="uid://bd8bmv1yv273e" path="res://sprites/geladerastntd.png" id="7_lb74p"]
@@ -19,16 +19,15 @@
 [ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="20_narr"]
 [ext_resource type="Texture2D" uid="uid://8rcnxmmdury8" path="res://sprites/sprites_doidos_vinhas.png" id="21_o4jp7"]
 [ext_resource type="Script" uid="uid://bscyoxsy6yiih" path="res://scripts/vinhas.gd" id="21_vinha"]
-[ext_resource type="Texture2D" uid="uid://3sbitbhtaprg" path="res://sprites/tp_pad.png" id="22_c8lpy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chao0"]
 size = Vector2(7185, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1qh0"]
-size = Vector2(129, 199.54265)
+size = Vector2(128.55704, 199.54265)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gelarea"]
-size = Vector2(260, 220)
+size = Vector2(522.947, 78.18288)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0mfe"]
 size = Vector2(527, 315)
@@ -47,7 +46,7 @@ region = Rect2(0.18180847, 226.63635, 32.72728, 60)
 size = Vector2(76, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zoom0"]
-size = Vector2(100, 500)
+size = Vector2(94, 129.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2xpiv"]
 atlas = ExtResource("13_2eb1v")
@@ -129,14 +128,13 @@ z_index = 999
 position = Vector2(-174, 384)
 
 [node name="Geladeira" type="StaticBody2D" parent="." node_paths=PackedStringArray("alvo_arremesso", "desabamento")]
-position = Vector2(426, 442)
+position = Vector2(375, 422)
 rotation = -0.26098478
 scale = Vector2(1, 1.2421942)
 input_pickable = true
 script = ExtResource("17_gela")
 alvo_arremesso = NodePath("../Casa/PilarFragil")
 desabamento = NodePath("../Desabamento")
-metadata/_edit_group_ = true
 
 [node name="SpriteGeladeira" type="Sprite2D" parent="Geladeira"]
 texture_filter = 1
@@ -145,12 +143,15 @@ scale = Vector2(2.1739206, 2.2459357)
 texture = ExtResource("7_lb74p")
 
 [node name="HitboxGeladeira" type="CollisionShape2D" parent="Geladeira"]
-position = Vector2(-0.4998474, 25.202484)
+position = Vector2(-0.2783203, 25.202545)
 shape = SubResource("RectangleShape2D_r1qh0")
 
 [node name="AreaInteracao" type="Area2D" parent="Geladeira"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Geladeira/AreaInteracao"]
+position = Vector2(-34.962067, 28.838501)
+rotation = 0.21075526
+scale = Vector2(0.99999994, 0.99999946)
 shape = SubResource("RectangleShape2D_gelarea")
 
 [node name="Casa" type="Node2D" parent="."]
@@ -158,10 +159,6 @@ z_index = -2
 position = Vector2(1056, 143)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("12_casa0")
-amplitude_graus = 0.0
-periodo_segundos = 0.0
-ganho_por_altura = 0.0
-distorcao_teto = 1.0
 
 [node name="C1" type="AnimatableBody2D" parent="Casa"]
 position = Vector2(90.1, 263)
@@ -266,7 +263,7 @@ position = Vector2(12, 2)
 shape = SubResource("RectangleShape2D_porta0")
 
 [node name="GatilhoZoomCasa" type="Area2D" parent="." node_paths=PackedStringArray("alvo", "camera")]
-position = Vector2(620, 380)
+position = Vector2(668, 366)
 script = ExtResource("15_zoom0")
 alvo = NodePath("../Casa")
 camera = NodePath("../PersonagemPrincipal/Camera2D")
@@ -275,7 +272,7 @@ duracao_segurar = 2.2
 duracao_voltar = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GatilhoZoomCasa"]
-position = Vector2(-180, -51)
+position = Vector2(-314, -132)
 shape = SubResource("RectangleShape2D_zoom0")
 
 [node name="Galpao" type="Node2D" parent="."]
@@ -367,13 +364,8 @@ destrancada = "vinhas_cortadas"
 abrir_porta = "tutorial_concluido"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaFase"]
-position = Vector2(-125, -15)
+position = Vector2(84, -23)
 shape = SubResource("RectangleShape2D_saidafase")
-
-[node name="tpPad" type="Sprite2D" parent="SaidaFase"]
-position = Vector2(-117.00004, 33.000008)
-scale = Vector2(2.2851527, 1.9375)
-texture = ExtResource("22_c8lpy")
 
 [node name="DicaTrator" type="Area2D" parent="."]
 position = Vector2(-912, 380)

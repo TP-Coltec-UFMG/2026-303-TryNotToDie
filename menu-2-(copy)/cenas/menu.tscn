@@ -591,6 +591,23 @@ value = 22.0
 rounded = true
 script = ExtResource("15_2ed3s")
 
+[node name="BoxVolume" type="VBoxContainer" parent="Container_Config"]
+layout_mode = 2
+
+[node name="VolumeTitulo" type="Label" parent="Container_Config/BoxVolume"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_h7at5")
+text = "SOUND"
+horizontal_alignment = 1
+
+[node name="SliderVolume" type="HSlider" parent="Container_Config/BoxVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.0
+value = 70.0
+rounded = true
+
 [node name="Botao_Retornar" type="Button" parent="Container_Config"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -606,4 +623,5 @@ script = ExtResource("16_kg0qb")
 [connection signal="pressed" from="Container_Botoes_Menu/Botao_Configuracoes" to="ConfigManager" method="_on_botao_configuracoes_pressed"]
 [connection signal="pressed" from="Container_Botoes_Menu/Botao_Sair" to="Container_Botoes_Menu/Botao_Sair" method="_on_pressed"]
 [connection signal="value_changed" from="Container_Config/BoxFonte/SliderFonte" to="ConfigManager" method="_on_slider_fonte_value_changed"]
+[connection signal="value_changed" from="Container_Config/BoxVolume/SliderVolume" to="ConfigManager" method="_on_slider_volume_value_changed"]
 [connection signal="pressed" from="Container_Config/Botao_Retornar" to="ConfigManager" method="_on_botao_retornar_pressed"]

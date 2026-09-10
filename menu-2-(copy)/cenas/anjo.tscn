@@ -1,14 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://by3c4cqderf80"]
+[gd_scene load_steps=6 format=3 uid="uid://by3c4cqderf80"]
 
-[ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_hqq3m"]
-[ext_resource type="Script" path="res://scripts/anjo.gd" id="2_anjo"]
+[ext_resource type="Script" uid="uid://cimoqsymraa1v" path="res://scripts/anjo.gd" id="2_anjo"]
 [ext_resource type="AudioStream" uid="uid://w478q0xvfh2x" path="res://sons/bell.mp3" id="3_bell"]
+[ext_resource type="Texture2D" uid="uid://c58pw1vpt7cpm" path="res://sprites/angel_front.png" id="3_fuvdh"]
+[ext_resource type="Texture2D" uid="uid://dntfulelcbjc7" path="res://sprites/triangulo.png" id="4_tri"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sobbr"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_hqq3m")
+"texture": ExtResource("4_tri")
+}],
+"loop": true,
+"name": &"pegar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fuvdh")
 }],
 "loop": true,
 "name": &"sino",
@@ -23,6 +32,9 @@ sprite = NodePath("AnimatedSprite2D")
 som = NodePath("Sino")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -1)
+scale = Vector2(1.5166665, 1.6916665)
 sprite_frames = SubResource("SpriteFrames_sobbr")
 animation = &"sino"
 

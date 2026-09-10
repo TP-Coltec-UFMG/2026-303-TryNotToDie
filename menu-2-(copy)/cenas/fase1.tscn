@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dhkc5d1m1h8ah"]
+[gd_scene load_steps=35 format=3 uid="uid://dhkc5d1m1h8ah"]
 
 [ext_resource type="Texture2D" uid="uid://b3fwos7if8sao" path="res://sprites/images.png" id="3_ceu"]
 [ext_resource type="Texture2D" uid="uid://cmfw8l7l2fc7c" path="res://sprites/bordelesschaotntd.png" id="4_20lmj"]
@@ -16,26 +16,24 @@
 [ext_resource type="Texture2D" uid="uid://cn8u1ibpcn1i2" path="res://sprites/batatamaligna.png" id="11_jo41y"]
 [ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="11_narr"]
 [ext_resource type="Texture2D" uid="uid://b50aditu68a22" path="res://sprites/le_sun_protector.png" id="14_uqgj4"]
-[ext_resource type="Texture2D" uid="uid://d2hgxm5qrulaa" path="res://sprites/rainbow-504x504.png" id="17_c08on"]
-[ext_resource type="Texture2D" uid="uid://3sbitbhtaprg" path="res://sprites/tp_pad.png" id="18_d83nb"]
 
 [sub_resource type="RectangleShape2D" id="Shape_seg0"]
-size = Vector2(3837, 400)
+size = Vector2(2599, 400)
 
 [sub_resource type="RectangleShape2D" id="Shape_seg1"]
-size = Vector2(1450, 400)
+size = Vector2(3498, 400)
 
 [sub_resource type="RectangleShape2D" id="Shape_seg2"]
-size = Vector2(1740, 400)
+size = Vector2(1963, 400)
 
 [sub_resource type="RectangleShape2D" id="Shape_seg3"]
-size = Vector2(1050, 400)
+size = Vector2(70, 400)
 
 [sub_resource type="RectangleShape2D" id="Shape_seg4"]
-size = Vector2(830, 400)
+size = Vector2(1914, 400)
 
 [sub_resource type="RectangleShape2D" id="Shape_seg5"]
-size = Vector2(1450, 400)
+size = Vector2(1135, 400)
 
 [sub_resource type="RectangleShape2D" id="Shape_pedra0"]
 size = Vector2(60, 90)
@@ -117,7 +115,8 @@ faixa_y = Vector2(30, 300)
 [node name="Chao" type="Node2D" parent="."]
 
 [node name="Seg0" type="StaticBody2D" parent="Chao"]
-position = Vector2(850, 660)
+position = Vector2(852, 660)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao/Seg0"]
 z_index = 20
@@ -130,11 +129,12 @@ region_enabled = true
 region_rect = Rect2(0, 0, 3500, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg0"]
-position = Vector2(-168.5, 0)
+position = Vector2(-787.5, 0)
 shape = SubResource("Shape_seg0")
 
 [node name="Seg1" type="StaticBody2D" parent="Chao"]
-position = Vector2(3475, 660)
+position = Vector2(3327, 660)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao/Seg1"]
 z_index = 20
@@ -147,10 +147,12 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1450, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg1"]
+position = Vector2(-207, 0)
 shape = SubResource("Shape_seg1")
 
 [node name="Seg2" type="StaticBody2D" parent="Chao"]
-position = Vector2(5230, 660)
+position = Vector2(4922, 659)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao/Seg2"]
 z_index = 20
@@ -163,10 +165,12 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1740, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg2"]
+position = Vector2(928.5, 0)
 shape = SubResource("Shape_seg2")
 
 [node name="Seg3" type="StaticBody2D" parent="Chao"]
-position = Vector2(6775, 660)
+position = Vector2(6317, 658)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao/Seg3"]
 z_index = 20
@@ -179,38 +183,43 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1050, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg3"]
+position = Vector2(545, 0)
 shape = SubResource("Shape_seg3")
 
 [node name="Seg4" type="StaticBody2D" parent="Chao"]
-position = Vector2(7885, 660)
+position = Vector2(7260, 655)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao/Seg4"]
 z_index = 20
 texture_filter = 4
 texture_repeat = 2
-position = Vector2(0, -63)
+position = Vector2(-3, -61)
 scale = Vector2(1, 1.0625)
 texture = ExtResource("4_20lmj")
 region_enabled = true
 region_rect = Rect2(0, 0, 830, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg4"]
+position = Vector2(542, 0)
 shape = SubResource("Shape_seg4")
 
 [node name="Seg5" type="StaticBody2D" parent="Chao"]
-position = Vector2(9175, 660)
+position = Vector2(8401, 655)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao/Seg5"]
 z_index = 20
 texture_filter = 4
 texture_repeat = 2
-position = Vector2(201.50014, -63)
+position = Vector2(196.50024, -60)
 scale = Vector2(1.2779312, 1.0625)
 texture = ExtResource("4_20lmj")
 region_enabled = true
 region_rect = Rect2(0, 0, 1450, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg5"]
+position = Vector2(925.5, 1)
 shape = SubResource("Shape_seg5")
 
 [node name="Pedras" type="Node2D" parent="."]
@@ -547,17 +556,19 @@ modo_automatico = true
 velocidade_auto = 340.0
 
 [node name="ProtetorSolar" type="Area2D" parent="."]
-position = Vector2(9550, 380)
+position = Vector2(9589, 351)
 script = ExtResource("9_item")
 id_item = "protetor_solar"
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ProtetorSolar"]
 texture_filter = 1
-position = Vector2(-2.4996507, -1.000006)
+position = Vector2(-274.9997, -11.000007)
 scale = Vector2(0.6640695, 0.65624994)
 texture = ExtResource("14_uqgj4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProtetorSolar"]
+position = Vector2(-270, -6)
 shape = SubResource("Shape_item")
 
 [node name="SaidaFase2" type="Area2D" parent="."]
@@ -571,6 +582,7 @@ requer_item = "protetor_solar"
 abrir_porta = "fase1_concluida"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaFase2"]
+position = Vector2(-283, 7)
 shape = SubResource("Shape_saida")
 
 [node name="Narracao" type="CanvasLayer" parent="."]
@@ -579,23 +591,12 @@ linhas = Array[String](["Ele viu um arco íris no final e nao vai parar de corre
 id_evento = "intro_fase1"
 segundos_por_linha = 4.5
 
-[node name="Rainbow504x504" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.49019608)
-position = Vector2(10137, -338)
-scale = Vector2(6.3928576, 3.8392854)
-texture = ExtResource("17_c08on")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 20
 texture_filter = 4
 texture_repeat = 2
-position = Vector2(11229, 598.00006)
+position = Vector2(10451, 599)
 scale = Vector2(1.2779312, 1.0625)
 texture = ExtResource("4_20lmj")
 region_enabled = true
 region_rect = Rect2(0, 0, 1450, 400)
-
-[node name="TpPad" type="Sprite2D" parent="."]
-position = Vector2(9743.001, 357)
-scale = Vector2(2.15625, 1.609375)
-texture = ExtResource("18_d83nb")

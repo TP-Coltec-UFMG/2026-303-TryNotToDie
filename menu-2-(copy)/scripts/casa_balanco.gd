@@ -11,18 +11,12 @@ class Comodo:
 	var altura_base: float;
 
 
-@export var amplitude_graus: float = 0.8;
-@export var periodo_segundos: float = 30.0;
-@export_range(0.0, 3.0) var ganho_por_altura: float = 0.3;
-@export var distorcao_maxima: Vector2 = Vector2(0.035, 0.045);
-@export_range(1.0, 5.0) var distorcao_teto: float = 2.0;
 @export var periodo_tremor: float = 0.28;
 
 var _comodos: Array[Comodo] = [];
 var _tempo: float = 0.0;
 var _tempo_tremor: float = 0.0;
 var _impulso: float = 0.0;
-var _decaimento_impulso: float = 1.6;
 
 
 func _ready() -> void:
@@ -38,51 +32,6 @@ func _physics_process(delta: float) -> void:
 		return;
 
 	_tempo += delta;
-
-	if _impulso > 0.0:
-		_impulso = move_toward(_impulso, 0.0, _decaimento_impulso * delta);
-		_tempo_tremor += delta;
-	else:
-		_tempo_tremor = 0.0;
-
-	var frequencia := TAU / maxf(0.05, periodo_segundos);
-	var graus := amplitude_graus * sin(_tempo * frequencia);
-
-	if _impulso > 0.0:
-		var frequencia_tremor := TAU / maxf(0.02, periodo_tremor);
-		graus += amplitude_graus * _impulso * sin(_tempo_tremor * frequencia_tremor);
-
-	for comodo in _comodos:
-		if not is_instance_valid(comodo.no):
-			continue;
-		var inclinacao := graus * comodo.peso;
-		comodo.no.rotation = comodo.rotacao_base + deg_to_rad(inclinacao);
-		_distorcer(comodo, inclinacao);
-
-
-func _distorcer(comodo: Comodo, inclinacao: float) -> void:
-	if comodo.sprite == null or not is_instance_valid(comodo.sprite):
-		return;
-
-	var fracao := clampf(absf(inclinacao) / maxf(0.01, amplitude_graus), 0.0, distorcao_teto);
-	var fator := Vector2.ONE + distorcao_maxima * fracao;
-
-	comodo.sprite.scale = comodo.escala_base * fator;
-
-	var altura := comodo.altura_base * fator.y;
-	comodo.sprite.position = Vector2(
-		comodo.pos_base.x,
-		comodo.pos_base.y + (altura - comodo.altura_base) * 0.5
-	);
-
-func soltar_comodo(nome: String) -> Node2D:
-	for i in _comodos.size():
-		var comodo := _comodos[i];
-		if is_instance_valid(comodo.no) and comodo.no.name == nome:
-			_restaurar_sprite(comodo);
-			_comodos.remove_at(i);
-			return comodo.no;
-	return null;
 
 
 func mapear_comodos() -> void:
@@ -109,12 +58,6 @@ func mapear_comodos() -> void:
 		var comodo := Comodo.new();
 		comodo.no = no;
 		comodo.rotacao_base = no.rotation;
-
-		var altura_rel := 0.0;
-		if not is_equal_approx(y_max, y_min):
-			altura_rel = (y_max - no.position.y) / (y_max - y_min);
-
-		comodo.peso = 1.0 + ganho_por_altura * altura_rel;
 
 		var sprite := _sprite_de(no);
 		comodo.sprite = sprite;

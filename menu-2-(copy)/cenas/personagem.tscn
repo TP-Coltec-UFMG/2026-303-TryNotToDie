@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0c77bosdaf3h"]
+[gd_scene load_steps=14 format=3 uid="uid://c0c77bosdaf3h"]
 
 [ext_resource type="Texture2D" uid="uid://bn61etk8d4vt3" path="res://sprites/isac_spreadsheet.png" id="1_isac"]
 [ext_resource type="Script" uid="uid://cgkjonmlrw48s" path="res://scripts/personagem_jogo.gd" id="2_pers"]
 [ext_resource type="Script" uid="uid://b1dogoia6n3su" path="res://scripts/camera_jogo.gd" id="3_cam"]
+[ext_resource type="Texture2D" uid="uid://hv7628o7kwfs" path="res://sprites/amen.png" id="4_tyg5f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lenm3"]
 atlas = ExtResource("1_isac")
@@ -89,3 +90,10 @@ position = Vector2(0, -90)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 script = ExtResource("3_cam")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(1.0000005, -102)
+scale = Vector2(2.6953123, 2.5390625)
+texture = ExtResource("4_tyg5f")

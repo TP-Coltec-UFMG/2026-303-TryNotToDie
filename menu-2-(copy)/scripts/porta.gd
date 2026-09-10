@@ -25,6 +25,12 @@ extends Area2D
 @export var toques_qte: int = 9;
 @export var limite_qte: float = 3.3;
 
+@export_group("Anjo do QTE")
+@export var anjo_no_qte: bool = true;
+@export var anjo_quadros: SpriteFrames;
+@export var anjo_animacao: String = "";
+@export var anjo_distancia: float = 90.0;
+
 signal recusada(motivo: String);
 signal entrou;
 
@@ -109,6 +115,10 @@ func abrir() -> void:
 
 		_ocupada = true;
 		var qte := QTE.martelar(texto_qte, limite_qte, toques_qte);
+		if anjo_no_qte:
+			qte.lado_a_lado(anjo_quadros, anjo_animacao, anjo_distancia);
+		else:
+			qte.sem_anjo();
 		add_child(qte);
 		var venceu: bool = await qte.terminou;
 		_ocupada = false;
@@ -121,6 +131,26 @@ func abrir() -> void:
 		_atualizar_dica(_jogador != null);
 
 	_entrar();
+
+func _fade_out() -> void:
+	print("fade_out chamada");
+	if Configuracoes.config_ativa(Configuracoes.REMOVER_ANIMACAO):
+		return;
+	
+	var layer := CanvasLayer.new();
+	layer.layer = 100;
+	add_child(layer);
+
+	var fade := ColorRect.new();
+	fade.color = Color.BLACK;
+	fade.modulate.a = 0.0;
+	fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);
+	layer.add_child(fade);
+
+	var tween := create_tween();
+	tween.tween_property(fade, "modulate:a", 1.0, 1.0);
+
+	await tween.finished;
 
 
 func _entrar() -> void:
@@ -141,7 +171,13 @@ func _entrar() -> void:
 		return;
 
 	_ocupada = true;
+	
+	# await _fade_out();
+	
+	await Transicao.fade_out();
 	Fases.ir_para(cena_destino, entrada_destino);
+	await get_tree().process_frame;
+	await Transicao.fade_in();
 
 
 func _texto_da_dica() -> String:

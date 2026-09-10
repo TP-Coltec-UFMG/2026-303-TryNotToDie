@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b2vx423d6q8l1"]
+[gd_scene load_steps=28 format=3 uid="uid://b2vx423d6q8l1"]
 
 [ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_tex"]
 [ext_resource type="Texture2D" uid="uid://bvkq8n4alhuy" path="res://sprites/branco.png" id="3_ceu"]
@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="9_item"]
 [ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="10_porta"]
 [ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="11_narr"]
-[ext_resource type="Texture2D" uid="uid://3sbitbhtaprg" path="res://sprites/tp_pad.png" id="16_inxoc"]
 
 [sub_resource type="RectangleShape2D" id="Shape_seg0"]
 size = Vector2(2250, 400)
@@ -377,13 +376,13 @@ position = Vector2(-700, 380)
 z_index = 999
 position = Vector2(-700, 380)
 modo_automatico = true
-velocidade_auto = 340
 
 [node name="Protetor" type="Node2D" parent="." node_paths=PackedStringArray("jogador")]
 script = ExtResource("8_prot")
 jogador = NodePath("../PersonagemPrincipal")
 
 [node name="AspiradorDePo" type="Area2D" parent="."]
+visible = false
 position = Vector2(9200, 380)
 script = ExtResource("9_item")
 id_item = "aspirador"
@@ -416,8 +415,3 @@ linhas = Array[String](["O sol hoje está escaldante, e ele não vai notar.", "Q
 Se esperar demais, o protetor acaba."])
 id_evento = "intro_fase2"
 segundos_por_linha = 4.5
-
-[node name="TpPad" type="Sprite2D" parent="."]
-position = Vector2(9427.001, 351.00003)
-scale = Vector2(1.8515625, 1.6484375)
-texture = ExtResource("16_inxoc")

@@ -16,6 +16,22 @@ signal acertou;
 @export var duracao_queda: float = 2.6;
 @export var toques: int = 1;
 
+@export_group("Anjo do QTE")
+@export var anjo_no_qte: bool = true;
+@export var anjo_quadros: SpriteFrames;
+@export var anjo_animacao: String = "";
+@export var anjo_deslocamento: Vector2 = Vector2(-180.0, -70.0);
+
+@export_group("O anjo pega o facao")
+@export var anjo_pega_o_facao: bool = true;
+@export var anjo_quadros_pegar: SpriteFrames;
+@export var anjo_animacao_pegar: String = "pegar";
+@export var deslocamento_da_pega: Vector2 = Vector2(120.0, -80.0);
+@export var duracao_da_pega: float = 0.6;
+@export var espera_na_mao: float = 0.4;
+@export var giro_da_pega: float = 260.0;
+@export var item_do_facao: String = "facao";
+
 @export_group("Uma vez so")
 @export var id_evento: String = "facao_galpao";
 
@@ -28,7 +44,8 @@ func _ready() -> void:
 	if Fases.evento_visto(id_evento):
 		_rodou = true;
 		set_deferred("monitoring", false);
-		_assentar_no_chao();
+		if not Progresso.tem(_id_do_item()):
+			_assentar_no_chao();
 
 
 func _ao_entrar_corpo(corpo: Node2D) -> void:
@@ -53,6 +70,10 @@ func _executar() -> void:
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN);
 
 	var qte := QTE.tecla(texto_qte, acao_desviar, duracao_queda, toques, dica_qte);
+	if anjo_no_qte:
+		qte.com_anjo(anjo_quadros, anjo_animacao, anjo_deslocamento);
+	else:
+		qte.sem_anjo();
 	add_child(qte);
 	var venceu: bool = await qte.terminou;
 
@@ -67,6 +88,11 @@ func _executar() -> void:
 
 func _desviar(x0: float) -> void:
 	Fases.marcar_evento(id_evento);
+
+	if anjo_pega_o_facao:
+		await _o_anjo_pega();
+		desviou.emit();
+		return;
 
 	if not _sem_animacao():
 		var t := create_tween();
@@ -85,6 +111,65 @@ func _desviar(x0: float) -> void:
 	desviou.emit();
 
 
+func _o_anjo_pega() -> void:
+	var id := _id_do_item();
+
+	if facao == null or not is_instance_valid(facao):
+		Progresso.pegar(id);
+		return;
+
+	var pai := facao.get_parent();
+	if pai == null:
+		pai = self;
+
+	var mao := facao.global_position + deslocamento_da_pega;
+	var rumo := facao.global_position.x - mao.x;
+	var anjo := Anjo.acompanhar(pai, mao, rumo,
+		anjo_quadros_pegar, anjo_animacao_pegar, true);
+
+	if _sem_animacao():
+		Progresso.pegar(id);
+		facao.queue_free();
+		if anjo != null and is_instance_valid(anjo):
+			anjo.despedir();
+		return;
+
+	var voo := create_tween().set_parallel();
+	voo.tween_property(facao, "global_position", mao, duracao_da_pega)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT);
+	voo.tween_property(facao, "rotation_degrees",
+		facao.rotation_degrees + giro_da_pega, duracao_da_pega)\
+		.set_trans(Tween.TRANS_SINE);
+	await voo.finished;
+
+	if not is_instance_valid(facao):
+		Progresso.pegar(id);
+		return;
+
+	await get_tree().create_timer(espera_na_mao).timeout;
+
+	Progresso.pegar(id);
+
+	if is_instance_valid(facao):
+		var some := create_tween().set_parallel();
+		some.tween_property(facao, "modulate:a", 0.0, 0.3);
+		some.tween_property(facao, "scale", facao.scale * 0.6, 0.3)\
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN);
+		await some.finished;
+		if is_instance_valid(facao):
+			facao.queue_free();
+
+	if anjo != null and is_instance_valid(anjo):
+		anjo.despedir();
+
+
+func _id_do_item() -> String:
+	var item := facao as ItemColetavel;
+	if item != null and is_instance_valid(item):
+		return item.id_item;
+	return item_do_facao;
+
+
 func _acertar(_y0: float) -> void:
 	acertou.emit();
 
@@ -99,7 +184,7 @@ func _acertar(_y0: float) -> void:
 
 
 func _assentar_no_chao() -> void:
-	if facao == null:
+	if facao == null or not is_instance_valid(facao):
 		return;
 	facao.global_position = Vector2(
 		facao.global_position.x + desvio_lateral,

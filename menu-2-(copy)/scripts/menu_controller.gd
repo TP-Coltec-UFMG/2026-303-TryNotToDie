@@ -27,6 +27,12 @@ func _ready() -> void:
 	slider.max_value = Configuracoes.FONTE_MAX;
 	slider.set_value_no_signal(Configuracoes.tamanho_fonte);
 
+	var volume := container_beta.get_node_or_null("BoxVolume/SliderVolume") as HSlider;
+	if volume != null:
+		volume.min_value = 0.0;
+		volume.max_value = 100.0;
+		volume.set_value_no_signal(roundf(Configuracoes.volume_sons * 100.0));
+
 	container_alpha.get_node("Botao_Jogar").grab_focus();
 
 func _on_botao_configuracoes_pressed() -> void:
@@ -69,6 +75,10 @@ func _caminhar_ate(destino_x: float, ao_terminar: Callable) -> void:
 
 func _on_slider_fonte_value_changed(value: float) -> void:
 	Configuracoes.definir_tamanho_fonte(int(value));
+
+
+func _on_slider_volume_value_changed(value: float) -> void:
+	Configuracoes.definir_volume_sons(value / 100.0);
 
 
 func _on_botao_static_pressed() -> void:

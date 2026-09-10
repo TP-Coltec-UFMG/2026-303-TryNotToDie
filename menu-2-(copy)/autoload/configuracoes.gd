@@ -16,9 +16,13 @@ const BINDS_PADRAO := {
 const FONTE_MIN := 12
 const FONTE_MAX := 48
 
+const BUS_SONS := "Sons"
+const VOLUME_PADRAO := 0.7
+
 signal config_alterada(chave: String, valor: bool)
 signal fonte_alterada(tamanho: int)
 signal bind_alterado(acao: String, keycode: int)
+signal volume_alterado(valor: float)
 
 var acessibilidade: Dictionary[String, bool] = {
 	REMOVER_ANIMACAO: false,
@@ -26,6 +30,7 @@ var acessibilidade: Dictionary[String, bool] = {
 }
 var tamanho_fonte: int = 22
 var tela_cheia: bool = false
+var volume_sons: float = VOLUME_PADRAO
 var binds: Dictionary[String, int] = {}
 
 var _tema: Theme
@@ -34,6 +39,7 @@ var _tema: Theme
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_garantir_tema()
+	_garantir_bus()
 	carregar()
 
 
@@ -65,6 +71,34 @@ func _garantir_tema() -> void:
 	if raiz.theme == null:
 		raiz.theme = Theme.new();
 	_tema = raiz.theme;
+
+func _garantir_bus() -> void:
+	if AudioServer.get_bus_index(BUS_SONS) >= 0:
+		return;
+	var indice := AudioServer.bus_count;
+	AudioServer.add_bus(indice);
+	AudioServer.set_bus_name(indice, BUS_SONS);
+	AudioServer.set_bus_send(indice, "Master");
+
+
+func definir_volume_sons(valor: float) -> void:
+	var novo := clampf(valor, 0.0, 1.0);
+	if is_equal_approx(novo, volume_sons):
+		return;
+	volume_sons = novo;
+	_aplicar_volume();
+	volume_alterado.emit(volume_sons);
+	salvar();
+
+
+func _aplicar_volume() -> void:
+	_garantir_bus();
+	var indice := AudioServer.get_bus_index(BUS_SONS);
+	if indice < 0:
+		return;
+	AudioServer.set_bus_mute(indice, volume_sons <= 0.001);
+	AudioServer.set_bus_volume_db(indice, linear_to_db(maxf(volume_sons, 0.001)));
+
 
 func definir_tela_cheia(valor: bool) -> void:
 	tela_cheia = valor;
@@ -119,6 +153,7 @@ func salvar() -> void:
 		"acessibilidade": acessibilidade,
 		"tamanho_fonte": tamanho_fonte,
 		"tela_cheia": tela_cheia,
+		"volume_sons": volume_sons,
 		"binds": binds,
 	};
 	var arquivo := FileAccess.open(CAMINHO_SAVE, FileAccess.WRITE);
@@ -145,6 +180,7 @@ func carregar() -> void:
 
 	_aplicar_todos_os_binds();
 	definir_tamanho_fonte(tamanho_fonte);
+	_aplicar_volume();
 
 	DisplayServer.window_set_mode(
 		DisplayServer.WINDOW_MODE_FULLSCREEN if tela_cheia else DisplayServer.WINDOW_MODE_WINDOWED
@@ -159,6 +195,7 @@ func _ler_dados(dados: Dictionary) -> void:
 
 	tamanho_fonte = clampi(int(dados.get("tamanho_fonte", tamanho_fonte)), FONTE_MIN, FONTE_MAX);
 	tela_cheia = bool(dados.get("tela_cheia", tela_cheia));
+	volume_sons = clampf(float(dados.get("volume_sons", volume_sons)), 0.0, 1.0);
 
 	var b: Variant = dados.get("binds");
 	if b is Dictionary:

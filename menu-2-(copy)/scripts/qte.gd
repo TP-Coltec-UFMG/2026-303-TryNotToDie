@@ -17,10 +17,19 @@ var acoes_validas: Array[String] = [];
 var aceita_mouse: bool = true;
 var dica_personalizada: String = "";
 
+var anjo_visivel: bool = true;
+var anjo_quadros: SpriteFrames = null;
+var anjo_animacao: String = "";
+var anjo_deslocamento: Vector2 = Vector2(-170.0, -60.0);
+var anjo_onde: Callable = Callable();
+var anjo_toca_sino: bool = true;
+var anjo_espelha_o_jogador: bool = false;
+
 var _progresso: float = 0.0;
 var _restante: float = 0.0;
 var _acabou: bool = false;
 var _jogador: Node2D = null;
+var _anjo: Anjo = null;
 
 var _barra: ProgressBar;
 var _rotulo: Label;
@@ -57,15 +66,86 @@ static func segurar(rotulo: String, segundos: float, limite: float) -> QTE:
 	return q;
 
 
+func com_anjo(quadros: SpriteFrames, anim: String = "",
+		deslocamento: Vector2 = Vector2.ZERO, toca_sino: bool = true) -> QTE:
+	anjo_visivel = true;
+	anjo_quadros = quadros;
+	anjo_animacao = anim;
+	anjo_toca_sino = toca_sino;
+	if deslocamento != Vector2.ZERO:
+		anjo_deslocamento = deslocamento;
+	return self;
+
+
+func lado_a_lado(quadros: SpriteFrames, anim: String = "",
+		distancia: float = 90.0) -> QTE:
+	anjo_visivel = true;
+	anjo_quadros = quadros;
+	anjo_animacao = anim;
+	anjo_deslocamento = Vector2(-absf(distancia), 0.0);
+	anjo_espelha_o_jogador = true;
+	return self;
+
+
+func com_anjo_em(onde: Callable) -> QTE:
+	anjo_visivel = true;
+	anjo_onde = onde;
+	return self;
+
+
+func sem_anjo() -> QTE:
+	anjo_visivel = false;
+	return self;
+
+
 func _ready() -> void:
 	layer = 100;
 	_montar_ui();
 
 	_restante = tempo_limite;
 
+	_jogador = get_tree().get_first_node_in_group("jogador") as Node2D;
+
 	if congelar_jogador:
-		_jogador = get_tree().get_first_node_in_group("jogador") as Node2D;
 		_travar(true);
+
+	_chamar_anjo();
+
+
+func _chamar_anjo() -> void:
+	if not anjo_visivel or _jogador == null or not is_instance_valid(_jogador):
+		return;
+
+	var pai := _jogador.get_parent();
+	if pai == null:
+		return;
+
+	var onde := _jogador.global_position + anjo_deslocamento;
+	if anjo_onde.is_valid():
+		var pedido: Variant = anjo_onde.call(_jogador);
+		if pedido is Vector2:
+			onde = pedido;
+
+	var rumo := _jogador.global_position.x - onde.x;
+	if anjo_espelha_o_jogador:
+		rumo = -1.0 if _flip_do_jogador() else 1.0;
+
+	_anjo = Anjo.acompanhar(pai, onde, rumo, anjo_quadros, anjo_animacao, anjo_toca_sino);
+
+
+func _flip_do_jogador() -> bool:
+	if _jogador == null or not is_instance_valid(_jogador):
+		return false;
+	for filho in _jogador.get_children():
+		if filho is AnimatedSprite2D or filho is Sprite2D:
+			return filho.flip_h;
+	return false;
+
+
+func _despedir_anjo() -> void:
+	if _anjo != null and is_instance_valid(_anjo):
+		_anjo.despedir();
+	_anjo = null;
 
 
 func _process(delta: float) -> void:
@@ -131,6 +211,8 @@ func _encerrar(venceu: bool) -> void:
 		return;
 	_acabou = true;
 	set_process(false);
+
+	_despedir_anjo();
 
 	if congelar_jogador:
 		_travar(false);

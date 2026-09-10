@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+# preciso fazer umas matematicas ainda para ajustar esse poulo
+#pulo
+# agff
 
 @export var speed: float = 300.0;
 @export var jump_force: float = -500.0;
@@ -23,6 +26,7 @@ extends CharacterBody2D
 @export var anim_parado: String = "parado";
 @export var anim_andando: String = "andando";
 @export var escala_animacao: float = 2.4;
+@export var min_interrogacao: int = 4;
 
 @onready var sprite: AnimatedSprite2D = $Sprite;
 
@@ -37,6 +41,7 @@ var _raio_frente: RayCast2D = null;
 var _raio_buraco: RayCast2D = null;
 var _descanso_pulo: float = 0.0;
 var _descanso_sino: float = 0.0;
+var _qnt_interrogacao : int;
 
 
 func _ready() -> void:
@@ -167,16 +172,31 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _definir_destino(ponto: Vector2) -> void:
+
+	
 	_destino_x = ponto.x;
 	_tem_destino = absf(_destino_x - global_position.x) > tolerancia_destino;
 	_ao_chegar = Callable();
 
 	if mostrar_anjo:
 		_chamar_anjo(ponto);
-
+	
 	if is_on_floor() and global_position.y - ponto.y > altura_para_pular:
 		velocity.y = jump_force;
-
+		
+	# Simula delay mental do personagem
+	if(_qnt_interrogacao == 0):
+		var tween = create_tween();
+		$Sprite2D.visible = true;
+		$Sprite2D.modulate.a = 1.0;
+		tween.tween_property($Sprite2D, "modulate:a", 1.0, 0.15);
+		tween.tween_interval(0.5);
+		tween.tween_property($Sprite2D, "modulate:a", 0.0, 0.15);
+		await tween.finished
+		$Sprite2D.visible = false
+		_qnt_interrogacao = (randi() % min_interrogacao) + 3;
+	else:
+		_qnt_interrogacao -= 1;
 
 func _chamar_anjo(ponto: Vector2) -> void:
 	var pai := get_parent();
