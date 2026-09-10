@@ -136,7 +136,7 @@ position = Vector2(60, 300)
 [node name="P5" type="Marker2D" parent="PontosBoss"]
 position = Vector2(-430, 315)
 
-[node name="Boss" type="Area2D" parent="." node_paths=PackedStringArray("sprite_boss", "feixe", "sprite_feixe", "pontos")]
+[node name="Boss" type="Area2D" parent="." node_paths=PackedStringArray("sprite_boss", "feixe", "sprite_feixe", "pontos", "camera")]
 z_index = 10
 position = Vector2(-400, 340)
 script = ExtResource("8_boss")
@@ -144,6 +144,7 @@ sprite_boss = NodePath("Sprite2D")
 feixe = NodePath("Feixe")
 sprite_feixe = NodePath("Feixe/Sprite2D")
 pontos = NodePath("../PontosBoss")
+camera = NodePath("../CameraArena")
 t_mirando = 1.25
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Boss"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://cc28prlr6wke2"]
+[gd_scene load_steps=23 format=3 uid="uid://cc28prlr6wke2"]
 
 [ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="1_tex"]
 [ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="2_pers"]
+[ext_resource type="Texture2D" uid="uid://b0lwbdkf8qf1q" path="res://sprites/abc.jpeg" id="2_q8sgc"]
 [ext_resource type="Texture2D" uid="uid://bvquu21r67ru3" path="res://sprites/Deco.png" id="3_lrqbf"]
 [ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="3_porta"]
 [ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="4_item"]
@@ -48,6 +49,9 @@ region = Rect2(0, 227.43156, 36.651855, 60.23311)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saida"]
 size = Vector2(67, 120)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8sgc"]
+size = Vector2(133, 129)
+
 [node name="casa_interior" type="Node2D" node_paths=PackedStringArray("comodo_de_cima", "jogador")]
 script = ExtResource("5_fase")
 comodo_de_cima = NodePath("Comodo3")
@@ -61,8 +65,11 @@ layer = -1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-color = Color(0.09, 0.08, 0.11, 1)
+color = Color(0.27522624, 0.27254722, 0.3150799, 1)
+metadata/_edit_lock_ = true
 
 [node name="Chao" type="StaticBody2D" parent="."]
 position = Vector2(900, 660)
@@ -72,9 +79,11 @@ metadata/_edit_group_ = true
 modulate = Color(0.32, 0.29, 0.34, 1)
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_tex")
+position = Vector2(4.500061, -2.4999962)
+scale = Vector2(1.8984228, 1.3168316)
+texture = ExtResource("2_q8sgc")
 region_enabled = true
-region_rect = Rect2(0, 0, 3000, 400)
+region_rect = Rect2(4.3354225, 984.43304, 1585.437, 303.2685)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao"]
 shape = SubResource("RectangleShape2D_chao")
@@ -86,17 +95,18 @@ modulate = Color(0.28, 0.26, 0.33, 1)
 z_index = -1
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(100, 300)
-texture = ExtResource("1_tex")
+position = Vector2(2, 219.00002)
+scale = Vector2(0.7181284, 0.7724638)
+texture = ExtResource("2_q8sgc")
 region_enabled = true
-region_rect = Rect2(0, 0, 1200, 320)
+region_rect = Rect2(-1.8233032, 368.70636, 1608.2415, 615.7267)
 
 [node name="Degrau1" type="StaticBody2D" parent="."]
 position = Vector2(750, 380)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Degrau1"]
-modulate = Color(0.62, 0.56, 0.5, 1)
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
 texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("1_tex")
@@ -112,7 +122,7 @@ position = Vector2(975, 280)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Degrau2"]
-modulate = Color(0.62, 0.56, 0.5, 1)
+modulate = Color(0.004315078, 0.0034571097, 0.002700078, 1)
 texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("1_tex")
@@ -130,10 +140,11 @@ modulate = Color(0.24, 0.27, 0.31, 1)
 z_index = -1
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(1500, 0)
-texture = ExtResource("1_tex")
+position = Vector2(1507.0001, -61.75)
+scale = Vector2(1.5216049, 0.6756966)
+texture = ExtResource("2_q8sgc")
 region_enabled = true
-region_rect = Rect2(0, 0, 1000, 320)
+region_rect = Rect2(0, 320, 648.5796, 646.2621)
 
 [node name="Piso" type="StaticBody2D" parent="Comodo2"]
 position = Vector2(1500, 190)
@@ -143,9 +154,9 @@ metadata/_edit_group_ = true
 modulate = Color(0.5, 0.54, 0.58, 1)
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_tex")
+texture = ExtResource("2_q8sgc")
 region_enabled = true
-region_rect = Rect2(0, 0, 1000, 60)
+region_rect = Rect2(0, 1240.2611, 1000, 57.684082)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Comodo2/Piso"]
 shape = SubResource("RectangleShape2D_com2")
@@ -163,7 +174,7 @@ position = Vector2(1000, 80)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Degrau3"]
-modulate = Color(0.62, 0.56, 0.5, 1)
+modulate = Color(0.004315078, 0.0034571097, 0.002700078, 1)
 texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("1_tex")
@@ -179,7 +190,7 @@ position = Vector2(800, -20)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Degrau4"]
-modulate = Color(0.62, 0.56, 0.5, 1)
+modulate = Color(0.004315078, 0.0034571097, 0.002700078, 1)
 texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("1_tex")
@@ -197,10 +208,11 @@ modulate = Color(0.31, 0.24, 0.3, 1)
 z_index = -1
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(250, -300)
-texture = ExtResource("1_tex")
+position = Vector2(245, -358.25)
+scale = Vector2(1.2060738, 0.8028765)
+texture = ExtResource("2_q8sgc")
 region_enabled = true
-region_rect = Rect2(0, 0, 1100, 320)
+region_rect = Rect2(634.1587, 389.422, 922.94434, 591.2612)
 
 [node name="Piso" type="StaticBody2D" parent="Comodo3"]
 position = Vector2(250, -110)
@@ -210,9 +222,11 @@ metadata/_edit_group_ = true
 modulate = Color(0.58, 0.5, 0.56, 1)
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_tex")
+position = Vector2(0, 7.5)
+scale = Vector2(1, 0.23552127)
+texture = ExtResource("2_q8sgc")
 region_enabled = true
-region_rect = Rect2(0, 0, 1100, 60)
+region_rect = Rect2(0, 995.1041, 1100, 259.57813)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Comodo3/Piso"]
 shape = SubResource("RectangleShape2D_com3")
@@ -264,3 +278,45 @@ texture = SubResource("AtlasTexture_fjs4n")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortaSaida"]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_saida")
+
+[node name="parede" type="StaticBody2D" parent="."]
+position = Vector2(-875.00006, 378)
+scale = Vector2(-5.847989, 35.39891)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="parede"]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="parede"]
+position = Vector2(-1.5, 1.5)
+shape = SubResource("RectangleShape2D_q8sgc")
+
+[node name="parede2" type="StaticBody2D" parent="."]
+position = Vector2(2382.0002, 26)
+scale = Vector2(-5.847989, 35.39891)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="parede2"]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+position = Vector2(1.1970215, 0)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="parede2"]
+position = Vector2(-1.5, 1.5)
+shape = SubResource("RectangleShape2D_q8sgc")
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-686, -2342.0002)
+scale = Vector2(-5.847989, 35.39891)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+position = Vector2(-1.1088257, 0.14654541)
+scale = Vector2(1.0173254, 1.0022898)
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-1.5, 1.5)
+shape = SubResource("RectangleShape2D_q8sgc")

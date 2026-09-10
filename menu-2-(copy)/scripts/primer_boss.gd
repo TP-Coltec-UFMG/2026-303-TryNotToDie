@@ -12,6 +12,7 @@ signal atirou;
 @export var sprite_feixe: Node2D;
 @export var pontos: Node;
 @export var vida: int = 3;
+@export var camera : Camera2D;
 
 @export_group("Tempos")
 @export var t_oculto: float = 0.6;
@@ -72,7 +73,6 @@ func esta_tocavel() -> bool:
 	return _estado == Estado.APARECENDO or _estado == Estado.MIRANDO \
 		or _estado == Estado.DISPARANDO or _estado == Estado.VULNERAVEL;
 
-
 func _physics_process(delta: float) -> void:
 	if not _vivo:
 		return;
@@ -99,6 +99,7 @@ func _physics_process(delta: float) -> void:
 				_disparar();
 				_ir_para(Estado.DISPARANDO);
 		Estado.DISPARANDO:
+			camera.sacudir(40);
 			_pintar_feixe(espessura_tiro, alpha_tiro);
 			_conferir_feixe();
 			if _tempo >= t_disparando:
