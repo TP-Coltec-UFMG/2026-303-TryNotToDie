@@ -5,7 +5,7 @@ signal fechou;
 
 const CENA_MENU := "res://cenas/menu.tscn";
 
-var acao: String = "Pausa";
+var acao: String = "Pause";
 
 var _aberto: bool = false;
 var _fundo: ColorRect;

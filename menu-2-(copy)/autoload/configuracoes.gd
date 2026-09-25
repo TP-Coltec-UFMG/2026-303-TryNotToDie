@@ -10,11 +10,11 @@ const BINDS_PADRAO := {
 	"Right": KEY_D,
 	"Jump": KEY_SPACE,
 	"Down": KEY_S,
-	"Pausa": KEY_TAB,
+	"Pause": KEY_ESCAPE,
 }
 
-const FONTE_MIN := 12
-const FONTE_MAX := 48
+const FONTE_MIN := 10
+const FONTE_MAX := 42
 
 const BUS_SONS := "Sons"
 const VOLUME_PADRAO := 0.7
