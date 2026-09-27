@@ -286,6 +286,50 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8uog0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su4y3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5x1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkpqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wriu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhgcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tnp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlonj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5jqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lmdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2id3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1fdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su4y3")
+}],
+"loop": false,
+"name": &"piscar_olho_panela_2",
+"speed": 22.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_c8pol")
 }, {
 "duration": 1.0,
@@ -320,6 +364,44 @@ animations = [{
 }],
 "loop": false,
 "name": &"piscar_olho_panela_roxo",
+"speed": 22.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8pol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xisss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5e35a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snj3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c770m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0s3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kqnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo2je")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28d1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhlom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5sqb")
+}],
+"loop": false,
+"name": &"piscar_olho_panela_roxo_2",
 "speed": 22.0
 }, {
 "frames": [{
@@ -403,7 +485,7 @@ texture_filter = 1
 position = Vector2(578, 450.99994)
 scale = Vector2(2.9032378, 2.6833587)
 sprite_frames = SubResource("SpriteFrames_g7jxm")
-animation = &"piscar_olho_panela"
+animation = &"piscar_olho_panela_roxo_2"
 script = ExtResource("5_we1rt")
 sprite = NodePath(".")
 camera_menu = NodePath("../Camera_Menu")
