@@ -90,7 +90,7 @@ position = Vector2(-398, 401)
 script = ExtResource("3_porta")
 cena_destino = "res://cenas/tutorial.tscn"
 entrada_destino = "VoltandoDoGalpao"
-dica = "S ou clique para sair do galpao"
+dica = "S ou clique para sair do galpão"
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="PortaSaida"]

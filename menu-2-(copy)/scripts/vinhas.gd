@@ -15,7 +15,7 @@ signal recusada;
 
 @export_group("Dica na tela")
 @export var dica_sem_item: String = "Emaranhado demais. Ele precisa de algo que corte";
-@export var dica_pronta: String = "Segure o botao e arraste sobre as vinhas";
+@export var dica_pronta: String = "Segure o botão e arraste sobre as vinhas";
 @export var dica_altura: float = -320.0;
 
 @export_group("Animacao")

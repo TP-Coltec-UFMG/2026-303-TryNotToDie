@@ -33,6 +33,7 @@ var _anjo: Anjo = null;
 
 var _barra: ProgressBar;
 var _rotulo: Label;
+var _dica: Label;
 var _tempo_rotulo: Label;
 
 
@@ -101,6 +102,7 @@ func sem_anjo() -> QTE:
 func _ready() -> void:
 	layer = 100;
 	_montar_ui();
+	Leitor.falar("%s %s" % [_rotulo.text, _dica.text]);
 
 	_restante = tempo_limite;
 
@@ -258,17 +260,17 @@ func _montar_ui() -> void:
 	_rotulo.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;
 	caixa.add_child(_rotulo);
 
-	var dica := Label.new();
-	dica.mouse_filter = Control.MOUSE_FILTER_IGNORE;
+	_dica = Label.new();
+	_dica.mouse_filter = Control.MOUSE_FILTER_IGNORE;
 	if not dica_personalizada.is_empty():
-		dica.text = dica_personalizada;
+		_dica.text = dica_personalizada;
 	elif modo == Modo.MARTELAR:
-		dica.text = "MARTELE as teclas ou clique!";
+		_dica.text = "MARTELE as teclas ou clique!";
 	else:
-		dica.text = "SEGURE uma tecla ou o botao do mouse!";
-	dica.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;
-	dica.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;
-	caixa.add_child(dica);
+		_dica.text = "SEGURE uma tecla ou o botão do mouse!";
+	_dica.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;
+	_dica.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;
+	caixa.add_child(_dica);
 
 	_barra = ProgressBar.new();
 	_barra.mouse_filter = Control.MOUSE_FILTER_IGNORE;

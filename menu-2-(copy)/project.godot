@@ -19,6 +19,10 @@ run/main_scene="res://cenas/menu.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+general/text_to_speech=true
+
 [autoload]
 
 Configuracoes="*res://autoload/configuracoes.gd"

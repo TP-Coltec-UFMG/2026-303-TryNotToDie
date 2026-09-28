@@ -13,7 +13,7 @@ signal esmagou;
 
 @export_group("Dica na tela")
 @export var dica: String = "S ou clique para ele cavar";
-@export var dica_sem_item: String = "Enterrada demais. Ele precisa de uma pa";
+@export var dica_sem_item: String = "Enterrada demais. Ele precisa de uma pá";
 @export var dica_altura: float = -140.0;
 
 @export_group("Cavar e levantar")
@@ -23,7 +23,7 @@ signal esmagou;
 
 @export_group("QTE")
 @export var texto_qte: String = "Ele vai se esmagar com a geladeira!";
-@export var dica_qte: String = "segure uma tecla ou o botao do mouse";
+@export var dica_qte: String = "segure uma tecla ou o botão do mouse";
 @export var segundos_segurando: float = 2.2;
 @export var limite_qte: float = 3.5;
 

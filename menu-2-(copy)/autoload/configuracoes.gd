@@ -54,12 +54,14 @@ const BUS_SONS := "Sons"
 const BUS_MUSICA := "Musica"
 const VOLUME_PADRAO := 0.7
 const VOLUME_MUSICA_PADRAO := 0.5
+const VOLUME_NARRACAO_PADRAO := 0.0
 
 signal config_alterada(chave: String, valor: bool)
 signal fonte_alterada(tamanho: int)
 signal bind_alterado(acao: String, keycode: int)
 signal volume_alterado(valor: float)
 signal volume_musica_alterado(valor: float)
+signal volume_narracao_alterado(valor: float)
 
 var acessibilidade: Dictionary[String, bool] = {
 	REMOVER_ANIMACAO: false,
@@ -69,6 +71,7 @@ var tamanho_fonte: int = 22
 var tela_cheia: bool = false
 var volume_sons: float = VOLUME_PADRAO
 var volume_musica: float = VOLUME_MUSICA_PADRAO
+var volume_narracao: float = VOLUME_NARRACAO_PADRAO
 var binds: Dictionary[String, int] = {}
 
 var _tema: Theme
@@ -81,6 +84,7 @@ func _ready() -> void:
 	_garantir_tema()
 	_garantir_bus()
 	carregar()
+	add_child(Leitor.new())
 
 
 func config_ativa(chave: String) -> bool:
@@ -146,6 +150,15 @@ func definir_volume_musica(valor: float) -> void:
 	volume_musica = novo;
 	_aplicar_volume();
 	volume_musica_alterado.emit(volume_musica);
+	salvar();
+
+
+func definir_volume_narracao(valor: float) -> void:
+	var novo := clampf(valor, 0.0, 1.0);
+	if is_equal_approx(novo, volume_narracao):
+		return;
+	volume_narracao = novo;
+	volume_narracao_alterado.emit(volume_narracao);
 	salvar();
 
 
@@ -235,6 +248,7 @@ func salvar() -> void:
 		"tela_cheia": tela_cheia,
 		"volume_sons": volume_sons,
 		"volume_musica": volume_musica,
+		"volume_narracao": volume_narracao,
 		"binds": binds,
 	};
 	var arquivo := FileAccess.open(CAMINHO_SAVE, FileAccess.WRITE);
@@ -278,6 +292,7 @@ func _ler_dados(dados: Dictionary) -> void:
 	tela_cheia = bool(dados.get("tela_cheia", tela_cheia));
 	volume_sons = clampf(float(dados.get("volume_sons", volume_sons)), 0.0, 1.0);
 	volume_musica = clampf(float(dados.get("volume_musica", volume_musica)), 0.0, 1.0);
+	volume_narracao = clampf(float(dados.get("volume_narracao", volume_narracao)), 0.0, 1.0);
 
 	var b: Variant = dados.get("binds");
 	if b is Dictionary:

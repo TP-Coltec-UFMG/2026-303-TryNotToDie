@@ -7,6 +7,7 @@ extends Node2D
 
 var _rotulo: Label;
 var _tween: Tween;
+var _mostrando: bool = false;
 
 
 func _ready() -> void:
@@ -37,14 +38,21 @@ static func criar(qual_texto: String, onde: Vector2 = Vector2(0.0, -120.0)) -> D
 
 
 func definir_texto(novo: String) -> void:
+	var mudou := novo != texto;
 	texto = novo;
 	if _rotulo != null:
 		_rotulo.text = novo;
+	if mudou and _mostrando:
+		Leitor.falar(novo);
 
 
 func mostrar(ligado: bool) -> void:
 	if _rotulo == null:
 		return;
+
+	if ligado and not _mostrando:
+		Leitor.falar(texto);
+	_mostrando = ligado;
 
 	var alvo := 1.0 if ligado else 0.0;
 

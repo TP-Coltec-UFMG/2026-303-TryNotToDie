@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 	if not _rodando:
 		return;
 	_tempo_restante -= delta;
-	if _tempo_restante <= 0.0:
+	if _tempo_restante <= 0.0 and not Leitor.esta_falando():
 		_avancar();
 
 
@@ -86,7 +86,8 @@ func _avancar() -> void:
 
 	_rotulo.text = linhas[_indice];
 	_tempo_restante = segundos_por_linha;
-	_dica.text = "clique ou qualquer tecla" if _indice < linhas.size() - 1 else "clique para comecar";
+	_dica.text = "clique ou qualquer tecla" if _indice < linhas.size() - 1 else "clique para começar";
+	Leitor.falar(linhas[_indice]);
 
 	if Configuracoes.config_ativa(Configuracoes.REMOVER_ANIMACAO):
 		_rotulo.modulate.a = 1.0;
@@ -100,6 +101,7 @@ func _encerrar() -> void:
 	_rodando = false;
 	visible = false;
 	set_process(false);
+	Leitor.calar();
 
 	if congelar_jogador:
 		_travar(false);

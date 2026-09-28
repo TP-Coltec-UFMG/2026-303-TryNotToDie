@@ -25,6 +25,7 @@ func _on_bind_alterado(acao: String, _keycode: int) -> void:
 func _on_botao_pressed() -> void:
 	_aguardando = true
 	botao_tecla.text = "..."
+	Leitor.falar("pressione a nova tecla para " + label_acao.text)
 
 func _input(evento: InputEvent) -> void:
 	if not _aguardando:
@@ -39,6 +40,7 @@ func _input(evento: InputEvent) -> void:
 
 	if keycode == KEY_ESCAPE:
 		_atualizar_label()
+		Leitor.falar(Leitor.descrever(botao_tecla))
 		return
 	var dona := Configuracoes.acao_do_keycode(keycode)
 	if dona != "" and dona != nome_acao:
@@ -46,3 +48,4 @@ func _input(evento: InputEvent) -> void:
 
 	Configuracoes.definir_bind(nome_acao, keycode)
 	_atualizar_label()
+	Leitor.falar(Leitor.descrever(botao_tecla))

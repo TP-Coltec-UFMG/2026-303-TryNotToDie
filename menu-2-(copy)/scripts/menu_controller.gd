@@ -43,8 +43,15 @@ func _ready() -> void:
 		musica.max_value = 100.0;
 		musica.set_value_no_signal(roundf(Configuracoes.volume_musica * 100.0));
 
+	var narracao := container_beta.get_node_or_null("BoxNarracao/SliderNarracao") as HSlider;
+	if narracao != null:
+		narracao.min_value = 0.0;
+		narracao.max_value = 100.0;
+		narracao.set_value_no_signal(roundf(Configuracoes.volume_narracao * 100.0));
+
 	_encadear_foco();
 
+	Leitor.anunciar("menu principal");
 	container_alpha.get_node("Botao_Jogar").grab_focus();
 
 func _on_botao_configuracoes_pressed() -> void:
@@ -55,6 +62,7 @@ func _on_botao_configuracoes_pressed() -> void:
 	_caminhar_ate(_largura(), func() -> void:
 		_mostrar_config(true)
 		_mostrar_pelicula(true)
+		Leitor.anunciar("configurações")
 		_focar(_painel(), "Botao_Retornar")
 	);
 
@@ -67,6 +75,7 @@ func _on_botao_retornar_pressed() -> void:
 
 	_caminhar_ate(_largura() / 2.0, func() -> void:
 		container_alpha.visible = true
+		Leitor.anunciar("menu principal")
 		_focar(container_alpha, "Botao_Jogar")
 	);
 
@@ -95,6 +104,10 @@ func _on_slider_volume_value_changed(value: float) -> void:
 
 func _on_slider_musica_value_changed(value: float) -> void:
 	Configuracoes.definir_volume_musica(value / 100.0);
+
+
+func _on_slider_narracao_value_changed(value: float) -> void:
+	Configuracoes.definir_volume_narracao(value / 100.0);
 
 
 func _on_botao_static_pressed() -> void:

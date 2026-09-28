@@ -11,7 +11,7 @@ signal acertou;
 
 @export_group("QTE")
 @export var acao_desviar: String = "Left";
-@export var texto_qte: String = "APERTE A! Empurre o facao pra longe dele!";
+@export var texto_qte: String = "APERTE A! Empurre o facão pra longe dele!";
 @export var dica_qte: String = "aperte A (ou clique) antes de encostar nele";
 @export var duracao_queda: float = 2.6;
 @export var toques: int = 1;

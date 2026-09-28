@@ -40,6 +40,8 @@ func _ready() -> void:
 
 	_atualizar_hud(_total);
 	await _esperar_a_narracao();
+	if not _acabou and _rotulo != null and is_instance_valid(_rotulo):
+		Leitor.falar(_rotulo.text);
 
 
 func _esperar_a_narracao() -> void:
@@ -76,6 +78,7 @@ func _ao_vencer() -> void:
 	_atualizar_hud(0);
 	if _rotulo != null and is_instance_valid(_rotulo):
 		_rotulo.text = texto_vitoria;
+	Leitor.falar(texto_vitoria);
 
 	venceu.emit();
 

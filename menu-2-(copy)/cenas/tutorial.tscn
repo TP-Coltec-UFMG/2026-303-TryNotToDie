@@ -245,7 +245,7 @@ position = Vector2(1146, 400)
 script = ExtResource("13_porta")
 cena_destino = "res://cenas/casa_interior.tscn"
 entrada_destino = "VindoDeFora"
-dica = "S ou clique para ele forcar a porta"
+dica = "S ou clique para ele forçar a porta"
 dica_trancada = "Trancada. S ou clique para ele arrombar"
 trancada = true
 destrancada = "porta_casa_arrombada"
@@ -293,7 +293,7 @@ position = Vector2(0, 395)
 script = ExtResource("13_porta")
 cena_destino = "res://cenas/galpao_interior.tscn"
 entrada_destino = "VindoDeFora"
-dica = "S ou clique para abrir o galpao"
+dica = "S ou clique para abrir o galpão"
 dica_sem_item = "Trancado. Falta a chave"
 requer_item = "chave_galpao"
 abrir_porta = "galpao_aberto"
@@ -312,7 +312,7 @@ shape = SubResource("RectangleShape2D_pgalpao")
 
 [node name="Narracao" type="CanvasLayer" parent="."]
 script = ExtResource("20_narr")
-linhas = Array[String](["Voce é o anjo da guarda que acompanha ele.", "Ele vai tentar morrer hoje. Sem querer, do jeito mais estranho possivel.", "Clique para onde deseja que ele vá. Ele seguirá sem questionar."])
+linhas = Array[String](["Você é o anjo da guarda que acompanha ele.", "Ele vai tentar morrer hoje. Sem querer, do jeito mais estranho possível.", "Clique para onde deseja que ele vá. Ele seguirá sem questionar."])
 id_evento = "intro_tutorial"
 
 [node name="trator" type="RigidBody2D" parent="."]
@@ -374,7 +374,7 @@ position = Vector2(-912, 380)
 scale = Vector2(1.3116173, 1.4506731)
 script = ExtResource("13_porta")
 apenas_sinaliza = true
-dica = "Meu Deus... Como ele fez isso? Por aqui nao..."
+dica = "Meu Deus... Como ele fez isso? Por aqui não..."
 dica_trancada = ""
 dica_sem_item = ""
 metadata/_edit_group_ = true

@@ -9,7 +9,7 @@ extends Area2D
 
 @export_group("Dica na tela")
 @export var dica: String = "S ou clique para entrar";
-@export var dica_trancada: String = "Trancada. S ou clique para forcar";
+@export var dica_trancada: String = "Trancada. S ou clique para forçar";
 @export var dica_sem_item: String = "Falta a chave";
 @export var dica_altura: float = -110.0;
 
