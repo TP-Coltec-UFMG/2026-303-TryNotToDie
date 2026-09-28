@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
 
 	_tempo += delta;
 	
-	if _jogador.position.x > $position.x:
+	if _jogador.position.x > position.x:
 		pass # implementar ele virar para o lado que o jogador esta
 
 	match _estado:

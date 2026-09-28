@@ -4,6 +4,7 @@ signal abriu;
 signal fechou;
 
 const CENA_MENU := "res://cenas/menu.tscn";
+const CENA_CREDITOS := "res://cenas/creditos.tscn";
 
 var acao: String = "Pause";
 
@@ -79,7 +80,7 @@ func _pode_pausar() -> bool:
 	var atual := get_tree().current_scene;
 	if atual == null:
 		return false;
-	return atual.scene_file_path != CENA_MENU;
+	return atual.scene_file_path != CENA_MENU and atual.scene_file_path != CENA_CREDITOS;
 
 
 func _ao_voltar_ao_menu() -> void:
@@ -91,7 +92,7 @@ func _ao_voltar_ao_menu() -> void:
 
 func _ao_sair() -> void:
 	get_tree().paused = false;
-	get_tree().quit();
+	Musica.sair();
 
 
 func _montar_ui() -> void:

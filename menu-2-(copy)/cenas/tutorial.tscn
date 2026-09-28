@@ -140,12 +140,12 @@ desabamento = NodePath("../Desabamento")
 
 [node name="SpriteGeladeira" type="Sprite2D" parent="Geladeira"]
 texture_filter = 1
-position = Vector2(6.401484, -14.991362)
+position = Vector2(2.3163648, 5.4974766)
 scale = Vector2(2.1739206, 2.2459357)
 texture = ExtResource("7_lb74p")
 
 [node name="HitboxGeladeira" type="CollisionShape2D" parent="Geladeira"]
-position = Vector2(-0.2783203, 25.202545)
+position = Vector2(-5.5625305, 47.965424)
 shape = SubResource("RectangleShape2D_r1qh0")
 
 [node name="AreaInteracao" type="Area2D" parent="Geladeira"]
@@ -312,7 +312,7 @@ shape = SubResource("RectangleShape2D_pgalpao")
 
 [node name="Narracao" type="CanvasLayer" parent="."]
 script = ExtResource("20_narr")
-linhas = Array[String](["Voce eh o anjo da guarda que acompanha ele.", "Ele vai tentar morrer hoje. Sem querer, do jeito mais estranho possivel.", "Clique para onde deseja que ele vá. Ele seguirá sem questionar."])
+linhas = Array[String](["Voce é o anjo da guarda que acompanha ele.", "Ele vai tentar morrer hoje. Sem querer, do jeito mais estranho possivel.", "Clique para onde deseja que ele vá. Ele seguirá sem questionar."])
 id_evento = "intro_tutorial"
 
 [node name="trator" type="RigidBody2D" parent="."]

@@ -485,7 +485,7 @@ texture_filter = 1
 position = Vector2(578, 450.99994)
 scale = Vector2(2.9032378, 2.6833587)
 sprite_frames = SubResource("SpriteFrames_g7jxm")
-animation = &"piscar_olho_panela_roxo_2"
+animation = &"piscar_olho_panela"
 script = ExtResource("5_we1rt")
 sprite = NodePath(".")
 camera_menu = NodePath("../Camera_Menu")
@@ -513,7 +513,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_ouk20")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_kk3ma")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_mae5d")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gd0jp")
-text = "PLAY"
+text = "JOGAR"
 script = ExtResource("7_kgems")
 
 [node name="Botao_Configuracoes" type="Button" parent="Container_Botoes_Menu"]
@@ -524,7 +524,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_nrnbx")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ytr4m")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4ndjb")
-text = "CONFIGURATIONS"
+text = "CONFIGURAÇÕES"
 
 [node name="Botao_Sair" type="Button" parent="Container_Botoes_Menu"]
 layout_mode = 2
@@ -534,7 +534,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_iqepy")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ecwwl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3ls4m")
-text = "EXIT"
+text = "SAIR"
 script = ExtResource("10_5ov2j")
 
 [node name="Camera_Menu" type="Camera2D" parent="."]
@@ -555,10 +555,12 @@ escala_min = 2.5
 escala_max = 5.0
 faixa_y = Vector2(40, 380)
 
-[node name="ConfigManager" type="Node" parent="." node_paths=PackedStringArray("container_alpha", "container_beta", "personagem_menu", "pelicula")]
+[node name="ConfigManager" type="Node" parent="." node_paths=PackedStringArray("container_alpha", "container_beta", "painel_config", "scroll_config", "personagem_menu", "pelicula")]
 script = ExtResource("13_jirf3")
 container_alpha = NodePath("../Container_Botoes_Menu")
-container_beta = NodePath("../Container_Config")
+container_beta = NodePath("../Painel_Config/Scroll_Config/Container_Config")
+painel_config = NodePath("../Painel_Config")
+scroll_config = NodePath("../Painel_Config/Scroll_Config")
 personagem_menu = NodePath("../pers_menu")
 pelicula = NodePath("../Pelicula")
 
@@ -573,96 +575,112 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.45)
 
-[node name="Container_Config" type="VBoxContainer" parent="."]
+[node name="Painel_Config" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchors_preset = 9
+anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -96.5
-offset_right = 266.0
-offset_bottom = 96.5
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = -20.0
 grow_vertical = 2
-theme_override_constants/separation = 22
+theme_override_constants/separation = 16
 
-[node name="BotaoTelaCheia" type="Button" parent="Container_Config"]
+[node name="Scroll_Config" type="ScrollContainer" parent="Painel_Config"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="Container_Config" type="VBoxContainer" parent="Painel_Config/Scroll_Config"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="BotaoTelaCheia" type="Button" parent="Painel_Config/Scroll_Config/Container_Config"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_g1dcb")
-text = "FULLSCREEN"
+text = "TELA CHEIA"
 script = ExtResource("12_dxv5o")
 tipo = 1
 
-[node name="BoxBindPular" type="HBoxContainer" parent="Container_Config"]
+[node name="BoxBindPular" type="HBoxContainer" parent="Painel_Config/Scroll_Config/Container_Config"]
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("15_g1dcb")
 nome_acao = "Jump"
+rotulo = "PULAR"
 
-[node name="LabelAcao" type="Label" parent="Container_Config/BoxBindPular"]
+[node name="LabelAcao" type="Label" parent="Painel_Config/Scroll_Config/Container_Config/BoxBindPular"]
 layout_mode = 2
 
-[node name="BotaoTecla" type="Button" parent="Container_Config/BoxBindPular"]
+[node name="BotaoTecla" type="Button" parent="Painel_Config/Scroll_Config/Container_Config/BoxBindPular"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="BoxBindDir" type="HBoxContainer" parent="Container_Config"]
+[node name="BoxBindDir" type="HBoxContainer" parent="Painel_Config/Scroll_Config/Container_Config"]
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("15_g1dcb")
 nome_acao = "Right"
+rotulo = "DIREITA"
 
-[node name="LabelAcao" type="Label" parent="Container_Config/BoxBindDir"]
+[node name="LabelAcao" type="Label" parent="Painel_Config/Scroll_Config/Container_Config/BoxBindDir"]
 layout_mode = 2
 
-[node name="BotaoTecla" type="Button" parent="Container_Config/BoxBindDir"]
+[node name="BotaoTecla" type="Button" parent="Painel_Config/Scroll_Config/Container_Config/BoxBindDir"]
 layout_mode = 2
 
-[node name="BoxBindEsq" type="HBoxContainer" parent="Container_Config"]
+[node name="BoxBindEsq" type="HBoxContainer" parent="Painel_Config/Scroll_Config/Container_Config"]
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("15_g1dcb")
 nome_acao = "Left"
+rotulo = "ESQUERDA"
 
-[node name="LabelAcao" type="Label" parent="Container_Config/BoxBindEsq"]
+[node name="LabelAcao" type="Label" parent="Painel_Config/Scroll_Config/Container_Config/BoxBindEsq"]
 layout_mode = 2
 
-[node name="BotaoTecla" type="Button" parent="Container_Config/BoxBindEsq"]
+[node name="BotaoTecla" type="Button" parent="Painel_Config/Scroll_Config/Container_Config/BoxBindEsq"]
 layout_mode = 2
 
-[node name="BoxBindPausa" type="HBoxContainer" parent="Container_Config"]
+[node name="BoxBindPausa" type="HBoxContainer" parent="Painel_Config/Scroll_Config/Container_Config"]
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("15_g1dcb")
 nome_acao = "Pause"
+rotulo = "PAUSAR"
 
-[node name="LabelAcao" type="Label" parent="Container_Config/BoxBindPausa"]
+[node name="LabelAcao" type="Label" parent="Painel_Config/Scroll_Config/Container_Config/BoxBindPausa"]
 layout_mode = 2
 
-[node name="BotaoTecla" type="Button" parent="Container_Config/BoxBindPausa"]
+[node name="BotaoTecla" type="Button" parent="Painel_Config/Scroll_Config/Container_Config/BoxBindPausa"]
 layout_mode = 2
 
-[node name="Botao_Static" type="Button" parent="Container_Config"]
+[node name="Botao_Static" type="Button" parent="Painel_Config/Scroll_Config/Container_Config"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_h7at5")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_iqepy")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ecwwl")
-text = "REMOVE ANIMATIONS"
+text = "REMOVER ANIMAÇÕES"
 script = ExtResource("12_dxv5o")
 
-[node name="BoxFonte" type="VBoxContainer" parent="Container_Config"]
+[node name="BoxFonte" type="VBoxContainer" parent="Painel_Config/Scroll_Config/Container_Config"]
 layout_mode = 2
 
-[node name="FonteTamanho" type="Label" parent="Container_Config/BoxFonte"]
+[node name="FonteTamanho" type="Label" parent="Painel_Config/Scroll_Config/Container_Config/BoxFonte"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_h7at5")
-text = "FONT-SIZE"
+text = "TAMANHO DA FONTE"
 horizontal_alignment = 1
 
-[node name="SliderFonte" type="HSlider" parent="Container_Config/BoxFonte"]
+[node name="SliderFonte" type="HSlider" parent="Painel_Config/Scroll_Config/Container_Config/BoxFonte"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -671,26 +689,46 @@ min_value = 22.0
 max_value = 33.0
 value = 22.0
 rounded = true
+scrollable = false
 script = ExtResource("15_2ed3s")
 
-[node name="BoxVolume" type="VBoxContainer" parent="Container_Config"]
+[node name="BoxVolume" type="VBoxContainer" parent="Painel_Config/Scroll_Config/Container_Config"]
 layout_mode = 2
 
-[node name="VolumeTitulo" type="Label" parent="Container_Config/BoxVolume"]
+[node name="VolumeTitulo" type="Label" parent="Painel_Config/Scroll_Config/Container_Config/BoxVolume"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_h7at5")
-text = "SOUND"
+text = "EFEITOS SONOROS"
 horizontal_alignment = 1
 
-[node name="SliderVolume" type="HSlider" parent="Container_Config/BoxVolume"]
+[node name="SliderVolume" type="HSlider" parent="Painel_Config/Scroll_Config/Container_Config/BoxVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.0
 value = 70.0
 rounded = true
+scrollable = false
 
-[node name="Botao_Retornar" type="Button" parent="Container_Config"]
+[node name="BoxMusica" type="VBoxContainer" parent="Painel_Config/Scroll_Config/Container_Config"]
+layout_mode = 2
+
+[node name="MusicaTitulo" type="Label" parent="Painel_Config/Scroll_Config/Container_Config/BoxMusica"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_h7at5")
+text = "MÚSICA"
+horizontal_alignment = 1
+
+[node name="SliderMusica" type="HSlider" parent="Painel_Config/Scroll_Config/Container_Config/BoxMusica"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.0
+value = 50.0
+rounded = true
+scrollable = false
+
+[node name="Botao_Retornar" type="Button" parent="Painel_Config"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.45452422, 0.45452428, 0.45452422, 1)
@@ -698,12 +736,13 @@ theme_override_fonts/font = ExtResource("6_h7at5")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_iqepy")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ecwwl")
-text = "RETURN"
+text = "VOLTAR"
 script = ExtResource("16_kg0qb")
 
 [connection signal="pressed" from="Container_Botoes_Menu/Botao_Jogar" to="Container_Botoes_Menu/Botao_Jogar" method="_on_pressed"]
 [connection signal="pressed" from="Container_Botoes_Menu/Botao_Configuracoes" to="ConfigManager" method="_on_botao_configuracoes_pressed"]
 [connection signal="pressed" from="Container_Botoes_Menu/Botao_Sair" to="Container_Botoes_Menu/Botao_Sair" method="_on_pressed"]
-[connection signal="value_changed" from="Container_Config/BoxFonte/SliderFonte" to="ConfigManager" method="_on_slider_fonte_value_changed"]
-[connection signal="value_changed" from="Container_Config/BoxVolume/SliderVolume" to="ConfigManager" method="_on_slider_volume_value_changed"]
-[connection signal="pressed" from="Container_Config/Botao_Retornar" to="ConfigManager" method="_on_botao_retornar_pressed"]
+[connection signal="value_changed" from="Painel_Config/Scroll_Config/Container_Config/BoxFonte/SliderFonte" to="ConfigManager" method="_on_slider_fonte_value_changed"]
+[connection signal="value_changed" from="Painel_Config/Scroll_Config/Container_Config/BoxVolume/SliderVolume" to="ConfigManager" method="_on_slider_volume_value_changed"]
+[connection signal="value_changed" from="Painel_Config/Scroll_Config/Container_Config/BoxMusica/SliderMusica" to="ConfigManager" method="_on_slider_musica_value_changed"]
+[connection signal="pressed" from="Painel_Config/Botao_Retornar" to="ConfigManager" method="_on_botao_retornar_pressed"]

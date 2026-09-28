@@ -6,7 +6,7 @@ signal venceu;
 @export var boss: Node;
 @export var camera: Camera2D;
 @export var narracao: Node;
-@export var cena_apos_vitoria: String = "res://cenas/menu.tscn";
+@export var cena_apos_vitoria: String = "res://cenas/creditos.tscn";
 
 @export_group("Vitoria")
 @export var espera_apos_vitoria: float = 2.0;
@@ -90,7 +90,7 @@ func _ao_vencer() -> void:
 		Progresso.zerar();
 		Fases.reiniciar();
 
-	get_tree().call_deferred("change_scene_to_file", cena_apos_vitoria);
+	Transicao.trocar_cena(cena_apos_vitoria);
 
 
 func _ao_mudar_fonte(_tamanho: int) -> void:

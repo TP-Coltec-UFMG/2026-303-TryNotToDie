@@ -31,18 +31,20 @@ func piscar_olho() -> void:
 
 func _ready() -> void:
 	add_child(animacao_configs.piscar_olho_timer);
-
+	
+	sprite.play("piscar_olho_panela");
+	
 	animacao_configs.piscar_olho_timer.start(randf() * 1.5 + 1);
-
+	
 	animacao_configs.piscar_olho_timer.timeout.connect(piscar_olho);
-
+	
 	animacao_configs.min_trigger = (randi() % 3) + 1;
-
+	
 	position.x = get_viewport_rect().size.x / 2;
-
+	
 	animacao_configs.escala_inicial = sprite.scale;
 	animacao_configs.posicao_inicial = sprite.position;
-
+	
 	Configuracoes.config_alterada.connect(_ao_mudar_config);
 	_sincronizar_animacao();
 

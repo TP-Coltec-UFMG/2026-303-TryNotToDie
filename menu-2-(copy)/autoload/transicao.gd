@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var fade: ColorRect;
+var _trocando: bool = false;
 
 func _ready() -> void:
 	layer = 64 * 64;
@@ -28,3 +29,14 @@ func fade_in() -> void:
 	var tween := create_tween();
 	tween.tween_property(fade, "modulate:a", 0.0, 0.5);
 	await tween.finished;
+
+func trocar_cena(caminho: String) -> void:
+	if _trocando:
+		return;
+	_trocando = true;
+	await fade_out();
+	get_tree().call_deferred("change_scene_to_file", caminho);
+	await get_tree().process_frame;
+	await get_tree().process_frame;
+	await fade_in();
+	_trocando = false;

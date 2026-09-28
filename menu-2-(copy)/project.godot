@@ -26,6 +26,7 @@ Fases="*res://autoload/fases.gd"
 Progresso="*res://autoload/progresso.gd"
 Pausa="*res://autoload/pausa.gd"
 Transicao="*res://autoload/transicao.gd"
+Musica="*res://autoload/musica.gd"
 
 [gui]
 

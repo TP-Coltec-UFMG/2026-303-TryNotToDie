@@ -1,6 +1,7 @@
 extends HBoxContainer
 
 @export var nome_acao: String;
+@export var rotulo: String;
 
 @onready var label_acao: Label = $LabelAcao
 @onready var botao_tecla: Button = $BotaoTecla
@@ -8,7 +9,7 @@ extends HBoxContainer
 var _aguardando: bool = false
 
 func _ready() -> void:
-	label_acao.text = nome_acao
+	label_acao.text = rotulo if not rotulo.is_empty() else nome_acao
 	botao_tecla.pressed.connect(_on_botao_pressed)
 	Configuracoes.bind_alterado.connect(_on_bind_alterado)
 	_atualizar_label()

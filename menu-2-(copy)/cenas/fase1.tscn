@@ -587,7 +587,7 @@ shape = SubResource("Shape_saida")
 
 [node name="Narracao" type="CanvasLayer" parent="."]
 script = ExtResource("11_narr")
-linhas = Array[String](["Ele viu um arco íris no final e nao vai parar de correr. ", "Segure o botao do mouse e passe por cima das plantas. Corte antes que ele chegue nelas.", "As batatas malignas vão atrás dele. Corte-as também."])
+linhas = Array[String](["Segure o botão do mouse e passe por cima das plantas. Corte antes que ele chegue nelas.", "As batatas malignas vão atrás dele. Corte-as também."])
 id_evento = "intro_fase1"
 segundos_por_linha = 4.5
 
