@@ -1,0 +1,494 @@
+[gd_scene load_steps=35 format=3 uid="uid://dhkc5d1m1h8ah"]
+
+[ext_resource type="Texture2D" uid="uid://b3fwos7if8sao" path="res://sprites/images.png" id="3_ceu"]
+[ext_resource type="Texture2D" uid="uid://cmfw8l7l2fc7c" path="res://sprites/bordelesschaotntd.png" id="4_20lmj"]
+[ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="4_nuvens"]
+[ext_resource type="PackedScene" uid="uid://c0c77bosdaf3h" path="res://cenas/personagem.tscn" id="5_pers"]
+[ext_resource type="Texture2D" uid="uid://cky8mq8fnb0o0" path="res://sprites/Rock Pile 13 - WHITE - BIG.PNG" id="5_wkvgs"]
+[ext_resource type="Script" uid="uid://p30ofy18qigv" path="res://scripts/fase_corrida.gd" id="6_fase"]
+[ext_resource type="Texture2D" uid="uid://cipi88cw5f5mg" path="res://sprites/Rock Pile 13 - WHITE - small.PNG" id="6_uqgj4"]
+[ext_resource type="Texture2D" uid="uid://beeqpk8sv0mrc" path="res://sprites/Rock Pile 14 - WHITE - BIG.PNG" id="7_c08on"]
+[ext_resource type="Script" uid="uid://c5mun0ghlnbe7" path="res://scripts/planta.gd" id="7_planta"]
+[ext_resource type="Texture2D" uid="uid://cxpklyyjs6q67" path="res://sprites/Rock Pile 14 - WHITE - small.PNG" id="8_d83nb"]
+[ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="9_item"]
+[ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="10_porta"]
+[ext_resource type="Texture2D" uid="uid://cn8u1ibpcn1i2" path="res://sprites/batatamaligna.png" id="11_jo41y"]
+[ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="11_narr"]
+[ext_resource type="Texture2D" uid="uid://b50aditu68a22" path="res://sprites/le_sun_protector.png" id="14_uqgj4"]
+[ext_resource type="Script" uid="uid://bwkivi71qdk82" path="res://scripts/gerador_vinhas.gd" id="15_gerador"]
+[ext_resource type="PackedScene" uid="uid://cmgwbhgtvfs7j" path="res://cenas/vinha.tscn" id="16_vinha"]
+
+[sub_resource type="RectangleShape2D" id="Shape_seg0"]
+size = Vector2(2599, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg1"]
+size = Vector2(3498, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg2"]
+size = Vector2(1963, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg3"]
+size = Vector2(70, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg4"]
+size = Vector2(1914, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_seg5"]
+size = Vector2(1135, 400)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra0"]
+size = Vector2(60, 90)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra1"]
+size = Vector2(60, 110)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra2"]
+size = Vector2(60, 90)
+
+[sub_resource type="RectangleShape2D" id="Shape_pedra3"]
+size = Vector2(60, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgsqf"]
+atlas = ExtResource("11_jo41y")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6tgt"]
+atlas = ExtResource("11_jo41y")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xwtr"]
+atlas = ExtResource("11_jo41y")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="Frames_mutante"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgsqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6tgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xwtr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="Shape_mutante"]
+size = Vector2(78, 78)
+
+[sub_resource type="RectangleShape2D" id="Shape_item"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_saida"]
+size = Vector2(60, 480)
+
+[node name="fase1" type="Node2D" node_paths=PackedStringArray("jogador")]
+script = ExtResource("6_fase")
+itens_garantidos = Array[String](["facao"])
+jogador = NodePath("PersonagemPrincipal")
+entrada_padrao = "VindoDoTutorial"
+
+[node name="Fundo" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Ceu" type="TextureRect" parent="Fundo"]
+z_index = -4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ceu")
+expand_mode = 1
+
+[node name="Nuvens" type="Node2D" parent="Fundo"]
+script = ExtResource("4_nuvens")
+faixa_y = Vector2(30, 300)
+
+[node name="Chao" type="Node2D" parent="."]
+
+[node name="Seg0" type="StaticBody2D" parent="Chao"]
+position = Vector2(852, 660)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg0"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(-889.5, -63)
+scale = Vector2(1.5082858, 1.0625)
+texture = ExtResource("4_20lmj")
+region_enabled = true
+region_rect = Rect2(0, 0, 3500, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg0"]
+position = Vector2(-787.5, 0)
+shape = SubResource("Shape_seg0")
+
+[node name="Seg1" type="StaticBody2D" parent="Chao"]
+position = Vector2(3327, 660)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg1"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("4_20lmj")
+region_enabled = true
+region_rect = Rect2(0, 0, 1450, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg1"]
+position = Vector2(-207, 0)
+shape = SubResource("Shape_seg1")
+
+[node name="Seg2" type="StaticBody2D" parent="Chao"]
+position = Vector2(4922, 659)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg2"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("4_20lmj")
+region_enabled = true
+region_rect = Rect2(0, 0, 1740, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg2"]
+position = Vector2(928.5, 0)
+shape = SubResource("Shape_seg2")
+
+[node name="Seg3" type="StaticBody2D" parent="Chao"]
+position = Vector2(6317, 658)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg3"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(0, -63)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("4_20lmj")
+region_enabled = true
+region_rect = Rect2(0, 0, 1050, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg3"]
+position = Vector2(545, 0)
+shape = SubResource("Shape_seg3")
+
+[node name="Seg4" type="StaticBody2D" parent="Chao"]
+position = Vector2(7260, 655)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg4"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(-3, -61)
+scale = Vector2(1, 1.0625)
+texture = ExtResource("4_20lmj")
+region_enabled = true
+region_rect = Rect2(0, 0, 830, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg4"]
+position = Vector2(542, 0)
+shape = SubResource("Shape_seg4")
+
+[node name="Seg5" type="StaticBody2D" parent="Chao"]
+position = Vector2(8401, 655)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao/Seg5"]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(196.50024, -60)
+scale = Vector2(1.2779312, 1.0625)
+texture = ExtResource("4_20lmj")
+region_enabled = true
+region_rect = Rect2(0, 0, 1450, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao/Seg5"]
+position = Vector2(925.5, 1)
+shape = SubResource("Shape_seg5")
+
+[node name="Pedras" type="Node2D" parent="."]
+
+[node name="Pedra0" type="StaticBody2D" parent="Pedras"]
+position = Vector2(1500, 415)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra0"]
+modulate = Color(0.45, 0.42, 0.38, 1)
+texture_filter = 1
+position = Vector2(-0.49996948, 5.5)
+scale = Vector2(1.4047631, 3.4000006)
+texture = ExtResource("5_wkvgs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra0"]
+position = Vector2(0, 3)
+shape = SubResource("Shape_pedra0")
+
+[node name="Pedra1" type="StaticBody2D" parent="Pedras"]
+position = Vector2(5000, 405)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra1"]
+modulate = Color(0.45, 0.42, 0.38, 1)
+texture_filter = 1
+position = Vector2(0.50013065, -0.4999981)
+scale = Vector2(1.7352892, 5.571429)
+texture = ExtResource("6_uqgj4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra1"]
+position = Vector2(0, 3)
+shape = SubResource("Shape_pedra1")
+
+[node name="Pedra2" type="StaticBody2D" parent="Pedras"]
+position = Vector2(7000, 415)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra2"]
+modulate = Color(0.45, 0.42, 0.38, 1)
+texture_filter = 1
+position = Vector2(0.5004153, 10.500002)
+scale = Vector2(0.9365143, 3.3636365)
+texture = ExtResource("7_c08on")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra2"]
+position = Vector2(0, 2)
+shape = SubResource("Shape_pedra2")
+
+[node name="Pedra3" type="StaticBody2D" parent="Pedras"]
+position = Vector2(8900, 410)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pedras/Pedra3"]
+modulate = Color(0.45, 0.42, 0.38, 1)
+texture_filter = 1
+position = Vector2(2.0000458, 12.000006)
+scale = Vector2(1.163638, 4.551724)
+texture = ExtResource("8_d83nb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedras/Pedra3"]
+position = Vector2(0, 2)
+shape = SubResource("Shape_pedra3")
+
+[node name="Plantas" type="Node2D" parent="."]
+
+[node name="Mutante4" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(3200, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Plantas/Mutante4"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+position = Vector2(1.5001726, 9.536743e-06)
+scale = Vector2(2.4687574, 2.4375005)
+sprite_frames = SubResource("Frames_mutante")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante4"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante5" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(3700, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Plantas/Mutante5"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+position = Vector2(1.0002022, -0.50000095)
+scale = Vector2(2.437492, 2.3437502)
+sprite_frames = SubResource("Frames_mutante")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante5"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante6" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(4550, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Plantas/Mutante6"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+position = Vector2(0.5000267, 0.49996376)
+scale = Vector2(2.4687517, 2.406249)
+sprite_frames = SubResource("Frames_mutante")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante6"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante7" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(5350, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Plantas/Mutante7"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+position = Vector2(0.49973774, 1.4999723)
+scale = Vector2(2.4062488, 2.34375)
+sprite_frames = SubResource("Frames_mutante")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante7"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante8" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(5800, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Plantas/Mutante8"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+position = Vector2(-3.71933e-05, -0.5000076)
+scale = Vector2(2.4374976, 2.4062495)
+sprite_frames = SubResource("Frames_mutante")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante8"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante10" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(6800, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Plantas/Mutante10"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+position = Vector2(-0.5000553, -1.0000162)
+scale = Vector2(2.65626, 2.4375)
+sprite_frames = SubResource("Frames_mutante")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante10"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante12" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(7950, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Plantas/Mutante12"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+position = Vector2(-2.0001955, -1.0000114)
+scale = Vector2(2.3750098, 2.3125007)
+sprite_frames = SubResource("Frames_mutante")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante12"]
+shape = SubResource("Shape_mutante")
+
+[node name="Mutante14" type="Area2D" parent="Plantas" node_paths=PackedStringArray("sprite_planta")]
+position = Vector2(9150, 416)
+script = ExtResource("7_planta")
+tipo = 1
+sprite_planta = NodePath("Sprite2D")
+resistencia = 70.0
+margem_arrasto = 46.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Plantas/Mutante14"]
+modulate = Color(0.62, 0.24, 0.55, 1)
+texture_filter = 1
+position = Vector2(0.00022888184, 0.9999933)
+scale = Vector2(2.499999, 2.437501)
+sprite_frames = SubResource("Frames_mutante")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantas/Mutante14"]
+shape = SubResource("Shape_mutante")
+
+[node name="GeradorVinhas" type="Node2D" parent="." node_paths=PackedStringArray("jogador", "pai_das_plantas")]
+script = ExtResource("15_gerador")
+jogador = NodePath("../PersonagemPrincipal")
+pai_das_plantas = NodePath("../Plantas")
+cena_vinha = ExtResource("16_vinha")
+
+[node name="VindoDoTutorial" type="Marker2D" parent="."]
+position = Vector2(-700, 380)
+
+[node name="PersonagemPrincipal" parent="." instance=ExtResource("5_pers")]
+z_index = 999
+position = Vector2(-700, 380)
+modo_automatico = true
+velocidade_auto = 340.0
+
+[node name="ProtetorSolar" type="Area2D" parent="."]
+position = Vector2(9589, 351)
+script = ExtResource("9_item")
+id_item = "protetor_solar"
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ProtetorSolar"]
+texture_filter = 1
+position = Vector2(-274.9997, -11.000007)
+scale = Vector2(0.6640695, 0.65624994)
+texture = ExtResource("14_uqgj4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProtetorSolar"]
+position = Vector2(-270, -6)
+shape = SubResource("Shape_item")
+
+[node name="SaidaFase2" type="Area2D" parent="."]
+position = Vector2(9720, 300)
+script = ExtResource("10_porta")
+cena_destino = "res://cenas/fase2.tscn"
+entrada_destino = "VindoDaFase1"
+entrar_ao_encostar = true
+dica = ""
+requer_item = "protetor_solar"
+abrir_porta = "fase1_concluida"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaFase2"]
+position = Vector2(-283, 7)
+shape = SubResource("Shape_saida")
+
+[node name="Narracao" type="CanvasLayer" parent="."]
+script = ExtResource("11_narr")
+linhas = Array[String](["Segure o botão do mouse e passe por cima das plantas. Corte antes que ele chegue nelas.", "As batatas malignas vão atrás dele. Corte-as também."])
+id_evento = "intro_fase1"
+segundos_por_linha = 4.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 20
+texture_filter = 4
+texture_repeat = 2
+position = Vector2(10451, 599)
+scale = Vector2(1.2779312, 1.0625)
+texture = ExtResource("4_20lmj")
+region_enabled = true
+region_rect = Rect2(0, 0, 1450, 400)

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://88ws72h7deyi"]
+
+[ext_resource type="Texture2D" uid="uid://clu4x8dbjxlc1" path="res://sprites/aba.png" id="1_osbtl"]
+
+[node name="Aba" type="Sprite2D" unique_id=1441862379]
+position = Vector2(1, -1)
+scale = Vector2(0.08723956, 0.095052086)
+texture = ExtResource("1_osbtl")

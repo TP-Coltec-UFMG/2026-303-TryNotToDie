@@ -1,0 +1,272 @@
+[gd_scene load_steps=23 format=3 uid="uid://blpotubl7kya2"]
+
+[ext_resource type="Texture2D" uid="uid://bmwb70vi1afbu" path="res://sprites/unknown_texture.jpeg" id="3_32upe"]
+[ext_resource type="Texture2D" uid="uid://b8c63t8n7rmkq" path="res://sprites/background_1.png" id="10_myhk0"]
+[ext_resource type="Script" uid="uid://ol5i2u5q8suu" path="res://scripts/gerenciador_nuvens.gd" id="11_cqpis"]
+[ext_resource type="Script" uid="uid://cbysfuj5q44sl" path="res://scripts/casa_balanco.gd" id="12_casa0"]
+[ext_resource type="Script" uid="uid://drnrjsm8ur1j0" path="res://scripts/porta.gd" id="13_porta"]
+[ext_resource type="Script" uid="uid://dtyokuw3yklts" path="res://scripts/fase.gd" id="14_fase0"]
+[ext_resource type="Script" uid="uid://bxa2nvmqga03g" path="res://scripts/evento_zoom.gd" id="15_zoom0"]
+[ext_resource type="PackedScene" path="res://cenas/personagem.tscn" id="16_pers"]
+[ext_resource type="Script" uid="uid://d1nssb8iun54s" path="res://scripts/geladeira.gd" id="17_gela"]
+[ext_resource type="Script" uid="uid://d22m6vhuwjqgd" path="res://scripts/desabamento.gd" id="18_desab"]
+[ext_resource type="Script" uid="uid://c6bm8vjvuygn5" path="res://scripts/item_coletavel.gd" id="19_item"]
+[ext_resource type="Script" uid="uid://dilvpi40ngd0a" path="res://scripts/narracao.gd" id="20_narr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chao0"]
+size = Vector2(3600, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1qh0"]
+size = Vector2(129, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gelarea"]
+size = Vector2(260, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0mfe"]
+size = Vector2(527, 315)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5qqy"]
+size = Vector2(610, 314)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32upe"]
+size = Vector2(565, 345)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_porta0"]
+size = Vector2(110, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_zoom0"]
+size = Vector2(100, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgalpao"]
+size = Vector2(120, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_facao"]
+size = Vector2(70, 70)
+
+[node name="fase1" type="Node2D" node_paths=PackedStringArray("jogador")]
+script = ExtResource("14_fase0")
+jogador = NodePath("PersonagemPrincipal")
+
+[node name="Fundo" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Ceu" type="Parallax2D" parent="Fundo"]
+visible = false
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1224, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Fundo/Ceu"]
+texture_filter = 1
+scale = Vector2(9, 9)
+texture = ExtResource("10_myhk0")
+centered = false
+
+[node name="Nuvens" type="Node2D" parent="Fundo"]
+script = ExtResource("11_cqpis")
+faixa_y = Vector2(30, 300)
+
+[node name="Chao" type="StaticBody2D" parent="."]
+position = Vector2(576, 660)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("3_32upe")
+region_enabled = true
+region_rect = Rect2(0, 0, 3600, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao"]
+shape = SubResource("RectangleShape2D_chao0")
+
+[node name="Inicio" type="Marker2D" parent="."]
+position = Vector2(-175, 296)
+
+[node name="VoltandoDaCasa" type="Marker2D" parent="."]
+position = Vector2(1146, 380)
+
+[node name="PersonagemPrincipal" parent="." instance=ExtResource("16_pers")]
+position = Vector2(-174, 384)
+
+[node name="Geladeira" type="StaticBody2D" parent="." node_paths=PackedStringArray("alvo_arremesso", "desabamento")]
+position = Vector2(426, 442)
+rotation = -0.26098478
+scale = Vector2(1, 1.2421942)
+input_pickable = true
+script = ExtResource("17_gela")
+alvo_arremesso = NodePath("../Casa/PilarFragil")
+desabamento = NodePath("../Desabamento")
+metadata/_edit_group_ = true
+
+[node name="SpriteGeladeira" type="Sprite2D" parent="Geladeira"]
+texture = ExtResource("3_32upe")
+
+[node name="HitboxGeladeira" type="CollisionShape2D" parent="Geladeira"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_r1qh0")
+
+[node name="AreaInteracao" type="Area2D" parent="Geladeira"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geladeira/AreaInteracao"]
+shape = SubResource("RectangleShape2D_gelarea")
+
+[node name="Casa" type="Node2D" parent="."]
+z_index = -2
+position = Vector2(1056, 199)
+script = ExtResource("12_casa0")
+metadata/_edit_group_ = true
+
+[node name="C1" type="AnimatableBody2D" parent="Casa"]
+position = Vector2(90.1, 263)
+
+[node name="Sprite" type="Sprite2D" parent="Casa/C1"]
+position = Vector2(0, -156)
+scale = Vector2(4.1390624, 2.4375)
+texture = ExtResource("3_32upe")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Casa/C1"]
+position = Vector2(-2.6, -155.5)
+shape = SubResource("RectangleShape2D_x0mfe")
+disabled = true
+
+[node name="C2" type="AnimatableBody2D" parent="Casa"]
+position = Vector2(341.1, -49)
+
+[node name="Sprite" type="Sprite2D" parent="Casa/C2"]
+position = Vector2(0, -159)
+scale = Vector2(4.7796884, 2.484375)
+texture = ExtResource("3_32upe")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Casa/C2"]
+position = Vector2(-0.1, -158)
+shape = SubResource("RectangleShape2D_l5qqy")
+disabled = true
+
+[node name="C3" type="AnimatableBody2D" parent="Casa"]
+position = Vector2(-43.5, -367)
+
+[node name="Sprite" type="Sprite2D" parent="Casa/C3"]
+position = Vector2(0, -174.5)
+scale = Vector2(4.3515625, 2.7265625)
+texture = ExtResource("3_32upe")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Casa/C3"]
+position = Vector2(-1, -175.5)
+shape = SubResource("RectangleShape2D_32upe")
+disabled = true
+
+[node name="ChaveNoTeto" type="Sprite2D" parent="Casa/C3"]
+modulate = Color(0.95, 0.85, 0.3, 1)
+texture_filter = 1
+position = Vector2(0, -378)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_32upe")
+
+[node name="PilarFragil" type="Marker2D" parent="Casa"]
+position = Vector2(135, -367)
+
+[node name="Desabamento" type="Node2D" parent="." node_paths=PackedStringArray("casa", "pontos_queda", "chave_no_teto")]
+script = ExtResource("18_desab")
+casa = NodePath("../Casa")
+pontos_queda = NodePath("../PontosChave")
+chave_no_teto = NodePath("../Casa/C3/ChaveNoTeto")
+textura_chave = ExtResource("3_32upe")
+
+[node name="PontosChave" type="Node2D" parent="."]
+
+[node name="P1" type="Marker2D" parent="PontosChave"]
+position = Vector2(-60, 420)
+
+[node name="P2" type="Marker2D" parent="PontosChave"]
+position = Vector2(620, 420)
+
+[node name="P3" type="Marker2D" parent="PontosChave"]
+position = Vector2(1250, 420)
+
+[node name="P4" type="Marker2D" parent="PontosChave"]
+position = Vector2(1650, 420)
+
+[node name="P5" type="Marker2D" parent="PontosChave"]
+position = Vector2(1930, 420)
+
+[node name="PortaDaCasa" type="Area2D" parent="."]
+position = Vector2(1146, 400)
+script = ExtResource("13_porta")
+cena_destino = "res://cenas/casa_interior.tscn"
+entrada_destino = &"VindoDeFora"
+dica = "S ou clique para ele forcar a porta"
+dica_trancada = "Trancada. S ou clique para ele arrombar"
+trancada = true
+flag_destrancada = &"porta_casa_arrombada"
+flag_ao_abrir = &"porta_casa_arrombada"
+arrombar_com_qte = true
+texto_qte = "Ele se trancou para fora. MARTELE — arrombe por ele!"
+
+[node name="Sprite2D" type="Sprite2D" parent="PortaDaCasa"]
+modulate = Color(0.45, 0.32, 0.22, 1)
+texture_filter = 1
+scale = Vector2(0.86, 0.94)
+texture = ExtResource("3_32upe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PortaDaCasa"]
+shape = SubResource("RectangleShape2D_porta0")
+
+[node name="GatilhoZoomCasa" type="Area2D" parent="." node_paths=PackedStringArray("alvo", "camera")]
+position = Vector2(620, 380)
+script = ExtResource("15_zoom0")
+alvo = NodePath("../Casa")
+camera = NodePath("../PersonagemPrincipal/Camera2D")
+duracao_afastar = 1.8
+duracao_segurar = 2.2
+duracao_voltar = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GatilhoZoomCasa"]
+position = Vector2(-180, -51)
+shape = SubResource("RectangleShape2D_zoom0")
+
+[node name="Galpao" type="Node2D" parent="."]
+position = Vector2(2100, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Galpao"]
+texture_filter = 1
+position = Vector2(0, 357)
+scale = Vector2(3, 1.6)
+texture = ExtResource("3_32upe")
+
+[node name="PortaGalpao" type="Area2D" parent="Galpao"]
+position = Vector2(0, 395)
+script = ExtResource("13_porta")
+apenas_sinaliza = true
+dica = "S ou clique para abrir o galpao"
+dica_sem_item = "Trancado. Falta a chave"
+requer_item = &"chave_galpao"
+flag_ao_abrir = &"galpao_aberto"
+
+[node name="Sprite2D" type="Sprite2D" parent="Galpao/PortaGalpao"]
+modulate = Color(0.4, 0.3, 0.2, 1)
+texture_filter = 1
+scale = Vector2(0.94, 1.02)
+texture = ExtResource("3_32upe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Galpao/PortaGalpao"]
+shape = SubResource("RectangleShape2D_pgalpao")
+
+[node name="Facao" type="Area2D" parent="Galpao"]
+visible = false
+position = Vector2(0, 380)
+script = ExtResource("19_item")
+id_item = &"facao"
+requer_flag = &"galpao_aberto"
+
+[node name="Sprite2D" type="Sprite2D" parent="Galpao/Facao"]
+texture_filter = 1
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("3_32upe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Galpao/Facao"]
+shape = SubResource("RectangleShape2D_facao")
+
+[node name="Narracao" type="CanvasLayer" parent="."]
+script = ExtResource("20_narr")
+linhas = Array[String](["Voce nao e ele.", "Voce e o que anda junto: sem corpo, sem voz, sem maos.", "Ele vai tentar morrer hoje. Sem querer, do jeito mais idiota possivel.", "Aponte, e ele vai. Quando o mundo cair em cima dele, segure firme."])
+id_evento = &"intro_fase1"

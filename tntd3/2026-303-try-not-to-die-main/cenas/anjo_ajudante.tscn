@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4hhjkm4kxach"]
+
+[ext_resource type="Script" uid="uid://cs3bb2qkwp1as" path="res://scripts/anjo_ajudante.gd" id="1_ajudante"]
+[ext_resource type="Texture2D" uid="uid://c58pw1vpt7cpm" path="res://sprites/angel_front.png" id="2_anjo"]
+[ext_resource type="Texture2D" uid="uid://chdppw32iacqt" path="res://sprites/facao.png" id="3_facao"]
+[ext_resource type="Texture2D" uid="uid://b50aditu68a22" path="res://sprites/le_sun_protector.png" id="4_protetor"]
+
+[node name="AnjoAjudante" type="Node2D" node_paths=PackedStringArray("visual", "mao", "facao", "protetor")]
+z_index = 4096
+z_as_relative = false
+script = ExtResource("1_ajudante")
+visual = NodePath("Visual")
+mao = NodePath("Visual/Mao")
+facao = NodePath("Visual/Mao/Facao")
+protetor = NodePath("Visual/Mao/Protetor")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Corpo" type="Sprite2D" parent="Visual"]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_anjo")
+
+[node name="Mao" type="Node2D" parent="Visual"]
+position = Vector2(15, 13)
+rotation = -0.6981317
+
+[node name="Facao" type="Sprite2D" parent="Visual/Mao"]
+texture_filter = 1
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_facao")
+offset = Vector2(-1, 32)
+
+[node name="Protetor" type="Sprite2D" parent="Visual/Mao"]
+visible = false
+texture_filter = 1
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("4_protetor")
+offset = Vector2(0, -3)
