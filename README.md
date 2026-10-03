@@ -54,4 +54,4 @@ https://docs.google.com/spreadsheets/d/1GiyK18HTgASGeXnQk3wk9FiT8cq6c4Ke-msIRLzg
 <a href="https://canva.link/0e6h8cx1otgqhsm">Apresentação do Menu Canvas</a>
 
 ## Protótipo Jogo
-<a href="[https://](https://canva.link/4uzujfzuyy6c3wp)>Apresentação Evoluindo Jogo</a>
+<a href="https://canva.link/4uzujfzuyy6c3wp">Apresentação Evoluindo Jogo</a>
